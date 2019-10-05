@@ -101,8 +101,13 @@ namespace TornMainForm
                     YourLabal.Text = String.Format(Convert.ToString(TimeTick), "MM:ss");
                 }
             }
-
-             public  static void AddJsonDataToDictionary(Dictionary<string,string> DictToStore,string FromWhatParent,string TheChildYouWant) 
+            /// <summary>
+            /// Function limited to one parent hierarchy. FromwhatParent should equal the top hierarchy name inside the API called. The child can only be one step away from parent.  
+            /// </summary>
+            /// <param name="DictToStore"></param>
+            /// <param name="FromWhatParent"></param>
+            /// <param name="TheChildYouWant"></param>
+            public static void AddJsonDataToDictionary(Dictionary<string,string> DictToStore,string FromWhatParent,string TheChildYouWant) // get values from parent and add them to dictionary.
                  {
 
                 string datacollected = MyFunctions.FetchUserData(6, FromWhatParent); // fetching api url data
@@ -121,30 +126,28 @@ namespace TornMainForm
                     {
                         continue;
                     }                                     
-
                 }
 
-
-            } //failed func atm
+            } 
         }
 
         public  class UserData
         {
-             public static Dictionary<string, string> StocksIDandNames = new Dictionary<string, string> (); 
-           
+             public static Dictionary<string, string> StocksIDandNames = new Dictionary<string, string> (); // value to store stock ID and Names for ID value.
+            public static Dictionary<string, string> StockIDandCurrentPrice = new Dictionary<string, string>(); // value to store stock ID and CurrentPrice.
             public static string Basic = null; // value to become json string
             public  static JObject User = null; // contain feteched user data from json string
             public static  string level = null;
             public static string gender = null;
             public static string name = null;
             public static string player_id = null;
-            public static string status = null;
-            public static JToken Chainjson = null;
-            public static JToken Lifejson = null;
-            public static JToken Nervejson = null;
-            public static JToken Energyjson = null;
-            public static JToken Happyjson = null;
-            public static JToken factionjson = null;
+            public static string status = null; // Value will be based on the status from the profile API 
+            public static JToken Chainjson = null; // will contain all details about the Chain bar
+            public static JToken Lifejson = null; // will contain all details about the life bar
+            public static JToken Nervejson = null; // will contain all details about the nerve bar
+            public static JToken Energyjson = null; // will contain all details about the energy bar
+            public static JToken Happyjson = null; // will contain all details about the happy bar
+            public static JToken factionjson = null; // will contain details of the users faction name. Value is fetched from profile API
             public static JToken companyJson = null;
             public static JToken money = null;
             public static JToken DBMCooldowns = null;
@@ -312,15 +315,14 @@ namespace TornMainForm
         {
             System.Diagnostics.Process.Start(UserData.StatusLink);
         }
+        ///////////////////////////////////////////////////Tab 2 Start////////////////////////////////////////////////////////////////
 
         private void StockGetDatabtn_Click(object sender, EventArgs e)
         {
             MyFunctions.AddJsonDataToDictionary(UserData.StocksIDandNames, "stocks","name");
         }
-        ///////////////////////////////////////////////////Tab 2 Start////////////////////////////////////////////////////////////////
-
-
-
+        
+        
 
 
     }
