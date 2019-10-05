@@ -41,9 +41,38 @@ namespace TornMainForm
         
         public static class MyFunctions
         {
-            public static string FetchUserData(string feilds) // function to request and receive API data.
+     /// <summary>
+     /// switch options: 1 = user , 2 = property , 3 = faction , 4 = company , 5 = market , 6 = torn. fields = The api options (children) from the switch description option.
+     /// </summary>
+     /// <param name="switchOption"></param>
+     /// <param name="feilds"></param>
+     /// <returns></returns>
+     public static string FetchUserData(int switchOption,string feilds) // function to request and receive API data.
             {
-                string test = string.Format("https://api.torn.com/user/?selections=" + feilds +"&key=" + MainForm.APIKey);
+            string  test = null;
+                switch (switchOption)
+                {
+                    case 1:
+                         test = string.Format("https://api.torn.com/user/?selections=" + feilds + "&key=" + MainForm.APIKey);
+                        break;
+                    case 2: 
+                         test = string.Format("https://api.torn.com/property/?selections=" + feilds + "&key=" + MainForm.APIKey);
+                        break;
+                    case 3:
+                        test = test = string.Format("https://api.torn.com/faction/?selections=" + feilds + "&key=" + MainForm.APIKey);
+                        break;
+                    case 4:
+                        test = string.Format("https://api.torn.com/company/?selections=" + feilds + "&key=" + MainForm.APIKey);
+                        break;
+                    case 5:
+                         test = string.Format("https://api.torn.com/market/?selections=" + feilds + "&key=" + MainForm.APIKey);
+                        break;
+                    case 6:
+                        test = test = string.Format("https://api.torn.com/torn/?selections=" + feilds + "&key=" + MainForm.APIKey);
+                        break;
+
+                }                               
+
                 WebRequest RequestBasic = WebRequest.Create(test);
                 RequestBasic.Method = "GET";
                 HttpWebResponse ResponseBasic = null;
@@ -72,10 +101,37 @@ namespace TornMainForm
                     YourLabal.Text = String.Format(Convert.ToString(TimeTick), "MM:ss");
                 }
             }
+
+             public  static void AddJsonDataToDictionary(Dictionary<string,string> DictToStore,string FromWhatParent,string TheChildYouWant) 
+                 {
+
+                string datacollected = MyFunctions.FetchUserData(6, FromWhatParent); // fetching api url data
+                var readabledata = JObject.Parse(datacollected);
+                var Id = JObject.Parse(Convert.ToString(readabledata));
+                var f = JObject.Parse(Convert.ToString(Id[FromWhatParent]));
+                
+                for (int i = 0; i < 33; i++)
+                {
+                    try
+                    {
+                        var j = JObject.Parse(Convert.ToString(f[Convert.ToString(i)]));
+                        DictToStore.Add(Convert.ToString(i), (Convert.ToString(j[TheChildYouWant])));
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }                                     
+
+                }
+
+
+            } //failed func atm
         }
-        
+
         public  class UserData
         {
+             public static Dictionary<string, string> StocksIDandNames = new Dictionary<string, string> (); 
+           
             public static string Basic = null; // value to become json string
             public  static JObject User = null; // contain feteched user data from json string
             public static  string level = null;
@@ -99,6 +155,8 @@ namespace TornMainForm
             public static string StatusLink = null;
             public static TimeSpan ts = TimeSpan.FromSeconds(0) ;
             public static string SetValue(string jsonString,string StoreVar,string FetchedValue) // fetch value for data you want and name to store it as. level/gender ect..
+
+
             {
               var Js =  JObject.Parse(jsonString); // make json an var array?
                 StoreVar = Convert.ToString(Js[FetchedValue]); // setvalue becomes the json feteched value
@@ -122,7 +180,7 @@ namespace TornMainForm
                 OneSecondtimer.Start();
                 GetDatabtn.Text = Convert.ToString(ButtonLimittimer.Interval / 1000);              
 
-                UserData.Basic = MyFunctions.FetchUserData("basic,profile,bars,money,cooldowns"); // Fields to fetch
+                UserData.Basic = MyFunctions.FetchUserData(1,"basic,profile,bars,money,cooldowns"); // Fields to fetch
                           
                 UserData.User = JObject.Parse(UserData.Basic); // parse to fetchable jtoken data.
                 var details = JObject.Parse(UserData.Basic); // makes json string data callable. 
@@ -148,9 +206,7 @@ namespace TornMainForm
                 MoneyOnHandlbl.Text = "Money on hand: " + Convert.ToString(String.Format("{0:n0}", UserData.User["money_onhand"]));
                 MoneyInVaultlbl.Text = "Money in Vault " + Convert.ToString(String.Format("{0:n0}", UserData.User["vault_amount"]));
                 CoolDownValuelbl.Text = Convert.ToString(UserData.Chainjson["cooldown"]);
-                UserData.DBMCooldowns = details["cooldowns"];
-                
-                
+                UserData.DBMCooldowns = details["cooldowns"];                               
 
                 ChainTimeOutValuelbl.Text =  Convert.ToString(UserData.Chainjson["timeout"]);                
 
@@ -162,7 +218,7 @@ namespace TornMainForm
                 int f = Refreshtimer.Interval / 1000; // value of refresh rate
 
                 RefreshValuelbl.Text = Convert.ToString(f);
-                OneSecondtimeTwo.Start();
+                OneSecondtimeTwo.Start(); // this timer should turn on last to prevent errors. the above code needs to run first.
                 if (UserData.TimerAble > 0)
                 {
                     Refreshtimer.Start();
@@ -219,8 +275,8 @@ namespace TornMainForm
             {
                 ChainTimeOutValuelbl.Text = Convert.ToString(Convert.ToInt32(ChainTimeOutValuelbl.Text) - 1) ;
             }
-
-            if (Statuslbl.Text.Contains('<'))
+            
+            if (Statuslbl.Text.Contains('<')) // shortens status attacking info to link to attackers profile.
             {
                 string statusBegin = Statuslbl.Text.Split('<')[0];
                 string statusend = Statuslbl.Text.Split('\\')[1];
@@ -231,7 +287,6 @@ namespace TornMainForm
               StatusLinkProfileValuelbl.Visible = true;               
 
             }
-
          
             RefreshValuelbl.Text = Convert.ToString( Convert.ToInt32(RefreshValuelbl.Text) -1); // decrease refresh value by 1 per timer tick which should be 1 second.
 
@@ -258,7 +313,12 @@ namespace TornMainForm
             System.Diagnostics.Process.Start(UserData.StatusLink);
         }
 
+        private void StockGetDatabtn_Click(object sender, EventArgs e)
+        {
+            MyFunctions.AddJsonDataToDictionary(UserData.StocksIDandNames, "stocks","name");
+        }
         ///////////////////////////////////////////////////Tab 2 Start////////////////////////////////////////////////////////////////
+
 
 
 

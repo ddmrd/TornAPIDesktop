@@ -35,6 +35,11 @@
             this.ApiKeyLockcbx = new System.Windows.Forms.CheckBox();
             this.MainTabBar = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.StatusLinkProfileValuelbl = new System.Windows.Forms.LinkLabel();
+            this.BoosterCdValuelbl = new System.Windows.Forms.Label();
+            this.BoosterCdlbl = new System.Windows.Forms.Label();
+            this.MedicalCooldownValue = new System.Windows.Forms.Label();
+            this.Medicallbl = new System.Windows.Forms.Label();
             this.DrugCdlbl = new System.Windows.Forms.Label();
             this.DrugCooldownValuelbl = new System.Windows.Forms.Label();
             this.HappyTickValuelbl = new System.Windows.Forms.Label();
@@ -76,18 +81,16 @@
             this.lvllbl = new System.Windows.Forms.Label();
             this.GetDatabtn = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.Refreshtimer = new System.Windows.Forms.Timer(this.components);
             this.ButtonLimittimer = new System.Windows.Forms.Timer(this.components);
             this.OneSecondtimer = new System.Windows.Forms.Timer(this.components);
             this.OneSecondtimeTwo = new System.Windows.Forms.Timer(this.components);
             this.TornCityTimelbl = new System.Windows.Forms.Label();
-            this.Medicallbl = new System.Windows.Forms.Label();
-            this.MedicalCooldownValue = new System.Windows.Forms.Label();
-            this.BoosterCdlbl = new System.Windows.Forms.Label();
-            this.BoosterCdValuelbl = new System.Windows.Forms.Label();
-            this.StatusLinkProfileValuelbl = new System.Windows.Forms.LinkLabel();
+            this.StockGetDatabtn = new System.Windows.Forms.Button();
             this.MainTabBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // TornAPIKey
@@ -123,6 +126,7 @@
             // 
             this.MainTabBar.Controls.Add(this.tabPage1);
             this.MainTabBar.Controls.Add(this.tabPage2);
+            this.MainTabBar.Controls.Add(this.tabPage3);
             this.MainTabBar.Location = new System.Drawing.Point(12, 12);
             this.MainTabBar.Name = "MainTabBar";
             this.MainTabBar.SelectedIndex = 0;
@@ -187,6 +191,56 @@
             this.tabPage1.Size = new System.Drawing.Size(537, 311);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "UserInfo";
+            // 
+            // StatusLinkProfileValuelbl
+            // 
+            this.StatusLinkProfileValuelbl.AutoSize = true;
+            this.StatusLinkProfileValuelbl.LinkColor = System.Drawing.Color.Blue;
+            this.StatusLinkProfileValuelbl.Location = new System.Drawing.Point(398, 82);
+            this.StatusLinkProfileValuelbl.Name = "StatusLinkProfileValuelbl";
+            this.StatusLinkProfileValuelbl.Size = new System.Drawing.Size(55, 13);
+            this.StatusLinkProfileValuelbl.TabIndex = 50;
+            this.StatusLinkProfileValuelbl.TabStop = true;
+            this.StatusLinkProfileValuelbl.Text = "linkLabel1";
+            this.StatusLinkProfileValuelbl.Visible = false;
+            this.StatusLinkProfileValuelbl.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.StatusLinkProfileValuelbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.StatusLinkProfileValuelbl_LinkClicked);
+            // 
+            // BoosterCdValuelbl
+            // 
+            this.BoosterCdValuelbl.AutoSize = true;
+            this.BoosterCdValuelbl.Location = new System.Drawing.Point(264, 198);
+            this.BoosterCdValuelbl.Name = "BoosterCdValuelbl";
+            this.BoosterCdValuelbl.Size = new System.Drawing.Size(24, 13);
+            this.BoosterCdValuelbl.TabIndex = 49;
+            this.BoosterCdValuelbl.Text = "n/a";
+            // 
+            // BoosterCdlbl
+            // 
+            this.BoosterCdlbl.AutoSize = true;
+            this.BoosterCdlbl.Location = new System.Drawing.Point(193, 198);
+            this.BoosterCdlbl.Name = "BoosterCdlbl";
+            this.BoosterCdlbl.Size = new System.Drawing.Size(64, 13);
+            this.BoosterCdlbl.TabIndex = 48;
+            this.BoosterCdlbl.Text = "Booster CD:";
+            // 
+            // MedicalCooldownValue
+            // 
+            this.MedicalCooldownValue.AutoSize = true;
+            this.MedicalCooldownValue.Location = new System.Drawing.Point(264, 168);
+            this.MedicalCooldownValue.Name = "MedicalCooldownValue";
+            this.MedicalCooldownValue.Size = new System.Drawing.Size(24, 13);
+            this.MedicalCooldownValue.TabIndex = 47;
+            this.MedicalCooldownValue.Text = "n/a";
+            // 
+            // Medicallbl
+            // 
+            this.Medicallbl.AutoSize = true;
+            this.Medicallbl.Location = new System.Drawing.Point(193, 168);
+            this.Medicallbl.Name = "Medicallbl";
+            this.Medicallbl.Size = new System.Drawing.Size(65, 13);
+            this.Medicallbl.TabIndex = 46;
+            this.Medicallbl.Text = "Medical CD:";
             // 
             // DrugCdlbl
             // 
@@ -382,40 +436,44 @@
             // ChainValuelbl
             // 
             this.ChainValuelbl.AutoSize = true;
+            this.ChainValuelbl.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChainValuelbl.ForeColor = System.Drawing.Color.SaddleBrown;
             this.ChainValuelbl.Location = new System.Drawing.Point(50, 258);
             this.ChainValuelbl.Name = "ChainValuelbl";
-            this.ChainValuelbl.Size = new System.Drawing.Size(27, 13);
+            this.ChainValuelbl.Size = new System.Drawing.Size(30, 16);
             this.ChainValuelbl.TabIndex = 24;
             this.ChainValuelbl.Text = "N/A";
             // 
             // Chainlbl
             // 
             this.Chainlbl.AutoSize = true;
+            this.Chainlbl.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Chainlbl.ForeColor = System.Drawing.Color.SaddleBrown;
             this.Chainlbl.Location = new System.Drawing.Point(6, 258);
             this.Chainlbl.Name = "Chainlbl";
-            this.Chainlbl.Size = new System.Drawing.Size(37, 13);
+            this.Chainlbl.Size = new System.Drawing.Size(41, 16);
             this.Chainlbl.TabIndex = 23;
             this.Chainlbl.Text = "Chain:";
             // 
             // HappyValuelbl
             // 
             this.HappyValuelbl.AutoSize = true;
+            this.HappyValuelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HappyValuelbl.ForeColor = System.Drawing.Color.DarkOrange;
             this.HappyValuelbl.Location = new System.Drawing.Point(50, 198);
             this.HappyValuelbl.Name = "HappyValuelbl";
-            this.HappyValuelbl.Size = new System.Drawing.Size(27, 13);
+            this.HappyValuelbl.Size = new System.Drawing.Size(30, 13);
             this.HappyValuelbl.TabIndex = 22;
             this.HappyValuelbl.Text = "N/A";
             // 
             // Happylbl
             // 
             this.Happylbl.AutoSize = true;
+            this.Happylbl.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Happylbl.ForeColor = System.Drawing.Color.DarkOrange;
             this.Happylbl.Location = new System.Drawing.Point(6, 198);
             this.Happylbl.Name = "Happylbl";
-            this.Happylbl.Size = new System.Drawing.Size(41, 13);
+            this.Happylbl.Size = new System.Drawing.Size(46, 16);
             this.Happylbl.TabIndex = 21;
             this.Happylbl.Text = "Happy:";
             // 
@@ -423,60 +481,66 @@
             // 
             this.NerveValuelbl.AutoSize = true;
             this.NerveValuelbl.BackColor = System.Drawing.Color.White;
+            this.NerveValuelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NerveValuelbl.ForeColor = System.Drawing.Color.Red;
             this.NerveValuelbl.Location = new System.Drawing.Point(50, 168);
             this.NerveValuelbl.Name = "NerveValuelbl";
-            this.NerveValuelbl.Size = new System.Drawing.Size(27, 13);
+            this.NerveValuelbl.Size = new System.Drawing.Size(30, 13);
             this.NerveValuelbl.TabIndex = 20;
             this.NerveValuelbl.Text = "N/A";
             // 
             // Nervelbl
             // 
             this.Nervelbl.AutoSize = true;
+            this.Nervelbl.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Nervelbl.ForeColor = System.Drawing.Color.Red;
             this.Nervelbl.Location = new System.Drawing.Point(6, 168);
             this.Nervelbl.Name = "Nervelbl";
-            this.Nervelbl.Size = new System.Drawing.Size(42, 13);
+            this.Nervelbl.Size = new System.Drawing.Size(46, 16);
             this.Nervelbl.TabIndex = 19;
             this.Nervelbl.Text = "Nerve: ";
             // 
             // EnergyValuelbl
             // 
             this.EnergyValuelbl.AutoSize = true;
+            this.EnergyValuelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EnergyValuelbl.ForeColor = System.Drawing.Color.Green;
             this.EnergyValuelbl.Location = new System.Drawing.Point(50, 138);
             this.EnergyValuelbl.Name = "EnergyValuelbl";
-            this.EnergyValuelbl.Size = new System.Drawing.Size(27, 13);
+            this.EnergyValuelbl.Size = new System.Drawing.Size(30, 13);
             this.EnergyValuelbl.TabIndex = 18;
             this.EnergyValuelbl.Text = "N/A";
             // 
             // Energylbl
             // 
             this.Energylbl.AutoSize = true;
+            this.Energylbl.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Energylbl.ForeColor = System.Drawing.Color.Green;
             this.Energylbl.Location = new System.Drawing.Point(6, 138);
             this.Energylbl.Name = "Energylbl";
-            this.Energylbl.Size = new System.Drawing.Size(46, 13);
+            this.Energylbl.Size = new System.Drawing.Size(51, 16);
             this.Energylbl.TabIndex = 17;
             this.Energylbl.Text = "Energy: ";
             // 
             // LifeValue
             // 
             this.LifeValue.AutoSize = true;
+            this.LifeValue.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LifeValue.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.LifeValue.Location = new System.Drawing.Point(50, 228);
             this.LifeValue.Name = "LifeValue";
-            this.LifeValue.Size = new System.Drawing.Size(27, 13);
+            this.LifeValue.Size = new System.Drawing.Size(30, 16);
             this.LifeValue.TabIndex = 16;
             this.LifeValue.Text = "N/A";
             // 
             // Hplbl
             // 
             this.Hplbl.AutoSize = true;
+            this.Hplbl.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Hplbl.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.Hplbl.Location = new System.Drawing.Point(6, 228);
             this.Hplbl.Name = "Hplbl";
-            this.Hplbl.Size = new System.Drawing.Size(27, 13);
+            this.Hplbl.Size = new System.Drawing.Size(30, 16);
             this.Hplbl.TabIndex = 15;
             this.Hplbl.Text = "Life:";
             // 
@@ -574,6 +638,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.StockGetDatabtn);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -581,6 +646,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(537, 311);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // Refreshtimer
             // 
@@ -611,55 +686,15 @@
             this.TornCityTimelbl.TabIndex = 40;
             this.TornCityTimelbl.Text = "N/a";
             // 
-            // Medicallbl
+            // StockGetDatabtn
             // 
-            this.Medicallbl.AutoSize = true;
-            this.Medicallbl.Location = new System.Drawing.Point(193, 168);
-            this.Medicallbl.Name = "Medicallbl";
-            this.Medicallbl.Size = new System.Drawing.Size(65, 13);
-            this.Medicallbl.TabIndex = 46;
-            this.Medicallbl.Text = "Medical CD:";
-            // 
-            // MedicalCooldownValue
-            // 
-            this.MedicalCooldownValue.AutoSize = true;
-            this.MedicalCooldownValue.Location = new System.Drawing.Point(264, 168);
-            this.MedicalCooldownValue.Name = "MedicalCooldownValue";
-            this.MedicalCooldownValue.Size = new System.Drawing.Size(24, 13);
-            this.MedicalCooldownValue.TabIndex = 47;
-            this.MedicalCooldownValue.Text = "n/a";
-            // 
-            // BoosterCdlbl
-            // 
-            this.BoosterCdlbl.AutoSize = true;
-            this.BoosterCdlbl.Location = new System.Drawing.Point(193, 198);
-            this.BoosterCdlbl.Name = "BoosterCdlbl";
-            this.BoosterCdlbl.Size = new System.Drawing.Size(64, 13);
-            this.BoosterCdlbl.TabIndex = 48;
-            this.BoosterCdlbl.Text = "Booster CD:";
-            // 
-            // BoosterCdValuelbl
-            // 
-            this.BoosterCdValuelbl.AutoSize = true;
-            this.BoosterCdValuelbl.Location = new System.Drawing.Point(264, 198);
-            this.BoosterCdValuelbl.Name = "BoosterCdValuelbl";
-            this.BoosterCdValuelbl.Size = new System.Drawing.Size(24, 13);
-            this.BoosterCdValuelbl.TabIndex = 49;
-            this.BoosterCdValuelbl.Text = "n/a";
-            // 
-            // StatusLinkProfileValuelbl
-            // 
-            this.StatusLinkProfileValuelbl.AutoSize = true;
-            this.StatusLinkProfileValuelbl.LinkColor = System.Drawing.Color.Blue;
-            this.StatusLinkProfileValuelbl.Location = new System.Drawing.Point(398, 82);
-            this.StatusLinkProfileValuelbl.Name = "StatusLinkProfileValuelbl";
-            this.StatusLinkProfileValuelbl.Size = new System.Drawing.Size(55, 13);
-            this.StatusLinkProfileValuelbl.TabIndex = 50;
-            this.StatusLinkProfileValuelbl.TabStop = true;
-            this.StatusLinkProfileValuelbl.Text = "linkLabel1";
-            this.StatusLinkProfileValuelbl.Visible = false;
-            this.StatusLinkProfileValuelbl.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.StatusLinkProfileValuelbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.StatusLinkProfileValuelbl_LinkClicked);
+            this.StockGetDatabtn.Location = new System.Drawing.Point(428, 274);
+            this.StockGetDatabtn.Name = "StockGetDatabtn";
+            this.StockGetDatabtn.Size = new System.Drawing.Size(92, 23);
+            this.StockGetDatabtn.TabIndex = 0;
+            this.StockGetDatabtn.Text = "Get Stock Info";
+            this.StockGetDatabtn.UseVisualStyleBackColor = true;
+            this.StockGetDatabtn.Click += new System.EventHandler(this.StockGetDatabtn_Click);
             // 
             // MainForm
             // 
@@ -675,6 +710,7 @@
             this.MainTabBar.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -738,6 +774,8 @@
         private System.Windows.Forms.Label BoosterCdValuelbl;
         private System.Windows.Forms.Label BoosterCdlbl;
         private System.Windows.Forms.LinkLabel StatusLinkProfileValuelbl;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button StockGetDatabtn;
     }
 }
 
