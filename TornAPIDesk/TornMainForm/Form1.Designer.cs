@@ -56,10 +56,6 @@
             this.refreshlbll = new System.Windows.Forms.Label();
             this.RefreshValuelbl = new System.Windows.Forms.Label();
             this.VisitTornlbl = new System.Windows.Forms.LinkLabel();
-            this.CompanyValuelbl = new System.Windows.Forms.Label();
-            this.FactionValuelbl = new System.Windows.Forms.Label();
-            this.Companylbl = new System.Windows.Forms.Label();
-            this.Factionlbl = new System.Windows.Forms.Label();
             this.ChainValuelbl = new System.Windows.Forms.Label();
             this.Chainlbl = new System.Windows.Forms.Label();
             this.HappyValuelbl = new System.Windows.Forms.Label();
@@ -81,13 +77,18 @@
             this.lvllbl = new System.Windows.Forms.Label();
             this.GetDatabtn = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.StockGetDatabtn = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.Refreshtimer = new System.Windows.Forms.Timer(this.components);
             this.ButtonLimittimer = new System.Windows.Forms.Timer(this.components);
             this.OneSecondtimer = new System.Windows.Forms.Timer(this.components);
             this.OneSecondtimeTwo = new System.Windows.Forms.Timer(this.components);
             this.TornCityTimelbl = new System.Windows.Forms.Label();
-            this.StockGetDatabtn = new System.Windows.Forms.Button();
+            this.CaymanbankValuelbl = new System.Windows.Forms.Label();
+            this.CityBankValuelbl = new System.Windows.Forms.Label();
+            this.BankTimeLeftValuelbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.APILengthWarning = new System.Windows.Forms.Label();
             this.MainTabBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -96,7 +97,7 @@
             // TornAPIKey
             // 
             this.TornAPIKey.Location = new System.Drawing.Point(79, 15);
-            this.TornAPIKey.MaxLength = 22;
+            this.TornAPIKey.MaxLength = 16;
             this.TornAPIKey.Name = "TornAPIKey";
             this.TornAPIKey.Size = new System.Drawing.Size(362, 20);
             this.TornAPIKey.TabIndex = 0;
@@ -136,6 +137,11 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.APILengthWarning);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.BankTimeLeftValuelbl);
+            this.tabPage1.Controls.Add(this.CityBankValuelbl);
+            this.tabPage1.Controls.Add(this.CaymanbankValuelbl);
             this.tabPage1.Controls.Add(this.StatusLinkProfileValuelbl);
             this.tabPage1.Controls.Add(this.BoosterCdValuelbl);
             this.tabPage1.Controls.Add(this.BoosterCdlbl);
@@ -157,10 +163,6 @@
             this.tabPage1.Controls.Add(this.refreshlbll);
             this.tabPage1.Controls.Add(this.RefreshValuelbl);
             this.tabPage1.Controls.Add(this.VisitTornlbl);
-            this.tabPage1.Controls.Add(this.CompanyValuelbl);
-            this.tabPage1.Controls.Add(this.FactionValuelbl);
-            this.tabPage1.Controls.Add(this.Companylbl);
-            this.tabPage1.Controls.Add(this.Factionlbl);
             this.tabPage1.Controls.Add(this.ChainValuelbl);
             this.tabPage1.Controls.Add(this.Chainlbl);
             this.tabPage1.Controls.Add(this.HappyValuelbl);
@@ -322,7 +324,7 @@
             // MoneyInVaultlbl
             // 
             this.MoneyInVaultlbl.AutoSize = true;
-            this.MoneyInVaultlbl.Location = new System.Drawing.Point(337, 158);
+            this.MoneyInVaultlbl.Location = new System.Drawing.Point(337, 160);
             this.MoneyInVaultlbl.Name = "MoneyInVaultlbl";
             this.MoneyInVaultlbl.Size = new System.Drawing.Size(77, 13);
             this.MoneyInVaultlbl.TabIndex = 37;
@@ -331,7 +333,7 @@
             // MoneyOnHandlbl
             // 
             this.MoneyOnHandlbl.AutoSize = true;
-            this.MoneyOnHandlbl.Location = new System.Drawing.Point(337, 136);
+            this.MoneyOnHandlbl.Location = new System.Drawing.Point(337, 130);
             this.MoneyOnHandlbl.Name = "MoneyOnHandlbl";
             this.MoneyOnHandlbl.Size = new System.Drawing.Size(84, 13);
             this.MoneyOnHandlbl.TabIndex = 36;
@@ -340,7 +342,7 @@
             // PointsValuelbl
             // 
             this.PointsValuelbl.AutoSize = true;
-            this.PointsValuelbl.Location = new System.Drawing.Point(337, 111);
+            this.PointsValuelbl.Location = new System.Drawing.Point(337, 102);
             this.PointsValuelbl.Name = "PointsValuelbl";
             this.PointsValuelbl.Size = new System.Drawing.Size(39, 13);
             this.PointsValuelbl.TabIndex = 35;
@@ -396,42 +398,6 @@
             this.VisitTornlbl.Text = "VisitTorn";
             this.VisitTornlbl.VisitedLinkColor = System.Drawing.Color.Blue;
             this.VisitTornlbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.VisitTornlbl_LinkClicked);
-            // 
-            // CompanyValuelbl
-            // 
-            this.CompanyValuelbl.AutoSize = true;
-            this.CompanyValuelbl.Location = new System.Drawing.Point(391, 245);
-            this.CompanyValuelbl.Name = "CompanyValuelbl";
-            this.CompanyValuelbl.Size = new System.Drawing.Size(27, 13);
-            this.CompanyValuelbl.TabIndex = 28;
-            this.CompanyValuelbl.Text = "N/A";
-            // 
-            // FactionValuelbl
-            // 
-            this.FactionValuelbl.AutoSize = true;
-            this.FactionValuelbl.Location = new System.Drawing.Point(392, 213);
-            this.FactionValuelbl.Name = "FactionValuelbl";
-            this.FactionValuelbl.Size = new System.Drawing.Size(27, 13);
-            this.FactionValuelbl.TabIndex = 27;
-            this.FactionValuelbl.Text = "N/A";
-            // 
-            // Companylbl
-            // 
-            this.Companylbl.AutoSize = true;
-            this.Companylbl.Location = new System.Drawing.Point(337, 245);
-            this.Companylbl.Name = "Companylbl";
-            this.Companylbl.Size = new System.Drawing.Size(57, 13);
-            this.Companylbl.TabIndex = 26;
-            this.Companylbl.Text = "Company: ";
-            // 
-            // Factionlbl
-            // 
-            this.Factionlbl.AutoSize = true;
-            this.Factionlbl.Location = new System.Drawing.Point(337, 213);
-            this.Factionlbl.Name = "Factionlbl";
-            this.Factionlbl.Size = new System.Drawing.Size(48, 13);
-            this.Factionlbl.TabIndex = 25;
-            this.Factionlbl.Text = "Faction: ";
             // 
             // ChainValuelbl
             // 
@@ -647,6 +613,16 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // StockGetDatabtn
+            // 
+            this.StockGetDatabtn.Location = new System.Drawing.Point(428, 274);
+            this.StockGetDatabtn.Name = "StockGetDatabtn";
+            this.StockGetDatabtn.Size = new System.Drawing.Size(92, 23);
+            this.StockGetDatabtn.TabIndex = 0;
+            this.StockGetDatabtn.Text = "Get Stock Info";
+            this.StockGetDatabtn.UseVisualStyleBackColor = true;
+            this.StockGetDatabtn.Click += new System.EventHandler(this.StockGetDatabtn_Click);
+            // 
             // tabPage3
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
@@ -686,15 +662,52 @@
             this.TornCityTimelbl.TabIndex = 40;
             this.TornCityTimelbl.Text = "N/a";
             // 
-            // StockGetDatabtn
+            // CaymanbankValuelbl
             // 
-            this.StockGetDatabtn.Location = new System.Drawing.Point(428, 274);
-            this.StockGetDatabtn.Name = "StockGetDatabtn";
-            this.StockGetDatabtn.Size = new System.Drawing.Size(92, 23);
-            this.StockGetDatabtn.TabIndex = 0;
-            this.StockGetDatabtn.Text = "Get Stock Info";
-            this.StockGetDatabtn.UseVisualStyleBackColor = true;
-            this.StockGetDatabtn.Click += new System.EventHandler(this.StockGetDatabtn_Click);
+            this.CaymanbankValuelbl.AutoSize = true;
+            this.CaymanbankValuelbl.Location = new System.Drawing.Point(337, 190);
+            this.CaymanbankValuelbl.Name = "CaymanbankValuelbl";
+            this.CaymanbankValuelbl.Size = new System.Drawing.Size(72, 13);
+            this.CaymanbankValuelbl.TabIndex = 51;
+            this.CaymanbankValuelbl.Text = "Cayman bank";
+            // 
+            // CityBankValuelbl
+            // 
+            this.CityBankValuelbl.AutoSize = true;
+            this.CityBankValuelbl.Location = new System.Drawing.Point(337, 220);
+            this.CityBankValuelbl.Name = "CityBankValuelbl";
+            this.CityBankValuelbl.Size = new System.Drawing.Size(52, 13);
+            this.CityBankValuelbl.TabIndex = 52;
+            this.CityBankValuelbl.Text = "City Bank";
+            // 
+            // BankTimeLeftValuelbl
+            // 
+            this.BankTimeLeftValuelbl.AutoSize = true;
+            this.BankTimeLeftValuelbl.Location = new System.Drawing.Point(427, 250);
+            this.BankTimeLeftValuelbl.Name = "BankTimeLeftValuelbl";
+            this.BankTimeLeftValuelbl.Size = new System.Drawing.Size(26, 13);
+            this.BankTimeLeftValuelbl.TabIndex = 53;
+            this.BankTimeLeftValuelbl.Text = "N/a";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(337, 250);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 13);
+            this.label1.TabIndex = 54;
+            this.label1.Text = "Bank Time left: ";
+            // 
+            // APILengthWarning
+            // 
+            this.APILengthWarning.AutoSize = true;
+            this.APILengthWarning.ForeColor = System.Drawing.Color.Red;
+            this.APILengthWarning.Location = new System.Drawing.Point(79, 42);
+            this.APILengthWarning.Name = "APILengthWarning";
+            this.APILengthWarning.Size = new System.Drawing.Size(218, 13);
+            this.APILengthWarning.TabIndex = 55;
+            this.APILengthWarning.Text = "API key should be atleast 16 characters long";
+            this.APILengthWarning.Visible = false;
             // 
             // MainForm
             // 
@@ -744,10 +757,6 @@
         private System.Windows.Forms.Label Happylbl;
         private System.Windows.Forms.Label ChainValuelbl;
         private System.Windows.Forms.Label Chainlbl;
-        private System.Windows.Forms.Label CompanyValuelbl;
-        private System.Windows.Forms.Label FactionValuelbl;
-        private System.Windows.Forms.Label Companylbl;
-        private System.Windows.Forms.Label Factionlbl;
         private System.Windows.Forms.LinkLabel VisitTornlbl;
         private System.Windows.Forms.Timer Refreshtimer;
         private System.Windows.Forms.Timer ButtonLimittimer;
@@ -776,6 +785,11 @@
         private System.Windows.Forms.LinkLabel StatusLinkProfileValuelbl;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button StockGetDatabtn;
+        private System.Windows.Forms.Label CaymanbankValuelbl;
+        private System.Windows.Forms.Label CityBankValuelbl;
+        private System.Windows.Forms.Label BankTimeLeftValuelbl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label APILengthWarning;
     }
 }
 

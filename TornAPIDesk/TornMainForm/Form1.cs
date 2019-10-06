@@ -102,7 +102,7 @@ namespace TornMainForm
                 }
             }
             /// <summary>
-            /// Function limited to one parent hierarchy. FromwhatParent should equal the top hierarchy name inside the API called. The child can only be one step away from parent.  
+            /// Function limited to one parent hierarchy. FromwhatParent should equal the top hierarchy name inside the API called. The child can only be one step away/down from parent.  
             /// </summary>
             /// <param name="DictToStore"></param>
             /// <param name="FromWhatParent"></param>
@@ -131,6 +131,7 @@ namespace TornMainForm
             } 
         }
 
+        
         public  class UserData
         {
              public static Dictionary<string, string> StocksIDandNames = new Dictionary<string, string> (); // value to store stock ID and Names for ID value.
@@ -140,6 +141,7 @@ namespace TornMainForm
             public static  string level = null;
             public static string gender = null;
             public static string name = null;
+            public static JToken Bank = null;
             public static string player_id = null;
             public static string status = null; // Value will be based on the status from the profile API 
             public static JToken Chainjson = null; // will contain all details about the Chain bar
@@ -158,14 +160,12 @@ namespace TornMainForm
             public static string StatusLink = null;
             public static TimeSpan ts = TimeSpan.FromSeconds(0) ;
             public static string SetValue(string jsonString,string StoreVar,string FetchedValue) // fetch value for data you want and name to store it as. level/gender ect..
-
-
+                
             {
               var Js =  JObject.Parse(jsonString); // make json an var array?
                 StoreVar = Convert.ToString(Js[FetchedValue]); // setvalue becomes the json feteched value
                 return StoreVar; // return value so we can also set textbox value as the function. quicker assign.
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e) // fetching Tab 1 Data
@@ -176,64 +176,75 @@ namespace TornMainForm
                 {
                     Refreshtimer.Stop();
                 }
-                               
-                ButtonLimittimer.Start();
-                GetDatabtn.Enabled = false;
-                
-                OneSecondtimer.Start();
-                GetDatabtn.Text = Convert.ToString(ButtonLimittimer.Interval / 1000);              
-
-                UserData.Basic = MyFunctions.FetchUserData(1,"basic,profile,bars,money,cooldowns"); // Fields to fetch
-                          
-                UserData.User = JObject.Parse(UserData.Basic); // parse to fetchable jtoken data.
-                var details = JObject.Parse(UserData.Basic); // makes json string data callable. 
-                                                                          
-                lvlValuelbl.Text = UserData.SetValue(UserData.Basic, UserData.level, "level");               
-                GenderValuelbl.Text = UserData.SetValue(UserData.Basic, UserData.gender, "gender");
-                NameValuelbl.Text = Convert.ToString(details["name"]);
-                IDValuelbl.Text = Convert.ToString(details["player_id"]);
-                UserData.TornTime = Convert.ToString(details["server_time"]);
-                UserData.ChainCooldowns = Convert.ToString(details["cooldowns"]);
-
-                string status = Convert.ToString(details["status"]).Trim(new char[] { '[', ']', ' ', ',', '"', '.' }).Replace("\"", string.Empty).Replace(",", string.Empty);
-                
-                Statuslbl.Text = "Status: " + status;
-                UserData.Lifejson = details["life"];  LifeValue.Text = Convert.ToString(UserData.Lifejson["current"] + " / " + UserData.Lifejson["maximum"]);
-                UserData.Energyjson = details["energy"]; EnergyValuelbl.Text = Convert.ToString(UserData.Energyjson["current"] + " / " + UserData.Energyjson["maximum"]);
-                UserData.Nervejson = details["nerve"]; NerveValuelbl.Text = Convert.ToString(UserData.Nervejson["current"] + " / " + UserData.Nervejson["maximum"]);
-                UserData.Happyjson = details["happy"]; HappyValuelbl.Text = Convert.ToString(UserData.Happyjson["current"] + " / " + UserData.Happyjson["maximum"]);
-                UserData.Chainjson = details["chain"]; ChainValuelbl.Text = Convert.ToString(UserData.Chainjson["current"]);
-                UserData.factionjson = details["faction"]; FactionValuelbl.Text = Convert.ToString(UserData.factionjson["faction_name"]);
-                UserData.companyJson = details["job"]; CompanyValuelbl.Text = Convert.ToString(UserData.companyJson["company_name"]);
-                PointsValuelbl.Text = "Points " + Convert.ToString(String.Format("{0:n0}", UserData.User["points"]));
-                MoneyOnHandlbl.Text = "Money on hand: " + Convert.ToString(String.Format("{0:n0}", UserData.User["money_onhand"]));
-                MoneyInVaultlbl.Text = "Money in Vault " + Convert.ToString(String.Format("{0:n0}", UserData.User["vault_amount"]));
-                CoolDownValuelbl.Text = Convert.ToString(UserData.Chainjson["cooldown"]);
-                UserData.DBMCooldowns = details["cooldowns"];                               
-
-                ChainTimeOutValuelbl.Text =  Convert.ToString(UserData.Chainjson["timeout"]);                
-
-                //   StatusValuelbl.Location.Y.Equals(StatusValuelbl.Location.Y - 40);                
-
-                ApiKeyLockcbx.Checked = true;
-                UserData.TimerAble += 1; // when timerable is > 0 the refreshtimer will automate itself. when an exception occurs value is put to 0 which turns timer off.
-
-                int f = Refreshtimer.Interval / 1000; // value of refresh rate
-
-                RefreshValuelbl.Text = Convert.ToString(f);
-                OneSecondtimeTwo.Start(); // this timer should turn on last to prevent errors. the above code needs to run first.
-                if (UserData.TimerAble > 0)
+                if (APIKey.Length == 16)
                 {
-                    Refreshtimer.Start();
+                    APILengthWarning.Visible = false; // turn off API warning label 
+
+                    ButtonLimittimer.Start();
+                    GetDatabtn.Enabled = false;
+
+                    OneSecondtimer.Start();
+                    GetDatabtn.Text = Convert.ToString(ButtonLimittimer.Interval / 1000);
+
+                    UserData.Basic = MyFunctions.FetchUserData(1, "basic,profile,bars,money,cooldowns"); // Fields to fetch
+
+                    UserData.User = JObject.Parse(UserData.Basic); // parse to fetchable jtoken data.
+                    var details = JObject.Parse(UserData.Basic); // makes json string data callable. 
+
+                    lvlValuelbl.Text = UserData.SetValue(UserData.Basic, UserData.level, "level");
+                    GenderValuelbl.Text = UserData.SetValue(UserData.Basic, UserData.gender, "gender");
+                    NameValuelbl.Text = Convert.ToString(details["name"]);
+                    IDValuelbl.Text = Convert.ToString(details["player_id"]);
+                    UserData.TornTime = Convert.ToString(details["server_time"]);
+                    UserData.ChainCooldowns = Convert.ToString(details["cooldowns"]);
+
+                    string status = Convert.ToString(details["status"]).Trim(new char[] { '[', ']', ' ', ',', '"', '.' }).Replace("\"", string.Empty).Replace(",", string.Empty);
+
+                    Statuslbl.Text = "Status: " + status;
+                    UserData.Lifejson = details["life"]; LifeValue.Text = Convert.ToString(UserData.Lifejson["current"] + " / " + UserData.Lifejson["maximum"]);
+                    UserData.Energyjson = details["energy"]; EnergyValuelbl.Text = Convert.ToString(UserData.Energyjson["current"] + " / " + UserData.Energyjson["maximum"]);
+                    UserData.Nervejson = details["nerve"]; NerveValuelbl.Text = Convert.ToString(UserData.Nervejson["current"] + " / " + UserData.Nervejson["maximum"]);
+                    UserData.Happyjson = details["happy"]; HappyValuelbl.Text = Convert.ToString(UserData.Happyjson["current"] + " / " + UserData.Happyjson["maximum"]);
+                    UserData.Chainjson = details["chain"]; ChainValuelbl.Text = Convert.ToString(UserData.Chainjson["current"]);
+                    UserData.factionjson = details["faction"];
+                    UserData.companyJson = details["job"];
+                    // Points, money values
+                    PointsValuelbl.Text = "Points " + Convert.ToString(String.Format("{0:n0}", UserData.User["points"]));
+                    MoneyOnHandlbl.Text = "Money on hand: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.User["money_onhand"]));
+                    MoneyInVaultlbl.Text = "Money in Vault: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.User["vault_amount"]));
+                    CaymanbankValuelbl.Text = "Money in Cayman's: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.User["cayman_bank"]));
+                    UserData.Bank = UserData.User["city_bank"]; // bank values 
+                    CityBankValuelbl.Text = "Money in Bank: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.Bank["amount"]));
+                    CoolDownValuelbl.Text = Convert.ToString(UserData.Chainjson["cooldown"]);
+                    UserData.DBMCooldowns = details["cooldowns"];
+
+                    ChainTimeOutValuelbl.Text = Convert.ToString(UserData.Chainjson["timeout"]);
+
+                    //   StatusValuelbl.Location.Y.Equals(StatusValuelbl.Location.Y - 40);                
+
+                    ApiKeyLockcbx.Checked = true;
+                    UserData.TimerAble += 1; // when timerable is > 0 the refreshtimer will automate itself. when an exception occurs value is put to 0 which turns timer off.
+
+                    int f = Refreshtimer.Interval / 1000; // value of refresh rate
+
+                    RefreshValuelbl.Text = Convert.ToString(f);
+                    OneSecondtimeTwo.Start(); // this timer should turn on last to prevent errors. 
+                    if (UserData.TimerAble > 0)
+                    {
+                        Refreshtimer.Start();
+                    }
+                }
+                if (APIKey.Length != 16)
+                {
+                    APILengthWarning.Visible = true;
                 }
                 
             }
             catch (Exception)
-            {
-               
-                MessageBox.Show("Enter valid API key");
+            {               
+                MessageBox.Show("Enter valid API key"); 
                 OneSecondtimeTwo.Stop();
-                UserData.TimerAble = 0; // when timerable is > 0 the refreshtimer will automate itself. when an exception occurs value is put to 0 which turns timer off.
+                UserData.TimerAble = 0; // when timerable is > 0 the refreshtimer will automate itself. when an exception occurs value is put to 0 which turns timer off. value is increased by button press
             }
         }
 
@@ -273,6 +284,7 @@ namespace TornMainForm
             MyFunctions.TimerCountdownWithTicks(UserData.DBMCooldowns, MedicalCooldownValue, "medical");
             MyFunctions.TimerCountdownWithTicks(UserData.DBMCooldowns, BoosterCdValuelbl, "booster");
             MyFunctions.TimerCountdownWithTicks(UserData.Chainjson, CoolDownValuelbl, "cooldown");
+            MyFunctions.TimerCountdownWithTicks(UserData.Bank, BankTimeLeftValuelbl, "time_left");
                             
             if (Convert.ToInt32( ChainTimeOutValuelbl.Text) > 0)
             {
@@ -283,10 +295,13 @@ namespace TornMainForm
             {
                 string statusBegin = Statuslbl.Text.Split('<')[0];
                 string statusend = Statuslbl.Text.Split('\\')[1];
-                Statuslbl.Text = statusBegin;
+               Statuslbl.Text = statusBegin;
                 
                 UserData.StatusLink = "https://www.torn.com/" + statusend;
-                StatusLinkProfileValuelbl.Text = statusend;
+              StatusLinkProfileValuelbl.Text = statusend;
+           /*    int CountStr = statusBegin.Count();
+                int endstr = "https://www.torn.com/".Count() + statusend.Count();
+                StatusLinkProfileValuelbl.Links.Add.(CountStr,endstr+1,UserData.StatusLink);*/ // this line currently throws error "over lapping link"
               StatusLinkProfileValuelbl.Visible = true;               
 
             }
@@ -320,8 +335,9 @@ namespace TornMainForm
         private void StockGetDatabtn_Click(object sender, EventArgs e)
         {
             MyFunctions.AddJsonDataToDictionary(UserData.StocksIDandNames, "stocks","name");
-        }
-        
+
+            
+        }       
         
 
 
