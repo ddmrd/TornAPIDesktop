@@ -6,11 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.Web;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json.Linq;
+
 
 namespace TornMainForm
 {
@@ -106,16 +108,18 @@ namespace TornMainForm
             /// </summary>
             /// <param name="DictToStore"></param>
             /// <param name="FromWhatParent"></param>
-            /// <param name="TheChildYouWant"></param>
-            public static void AddJsonDataToDictionary(Dictionary<string,string> DictToStore,string FromWhatParent,string TheChildYouWant) // get values from parent and add them to dictionary.
+            /// <param name="TheChildYouWant"></param>            
+            /// <param name="VartoPullStoredJsonDataFrom"></param>
+            /// <param name="knownIdUpperInt"></param>
+            public static void AddJsonDataToDictionary(Dictionary<string,string> DictToStore,string FromWhatParent,string TheChildYouWant,string VartoPullStoredJsonDataFrom,int knownIdUpperInt) // get values from parent and add them to dictionary.
                  {
 
-                string datacollected = MyFunctions.FetchUserData(6, FromWhatParent); // fetching api url data
+                string datacollected = VartoPullStoredJsonDataFrom;  // fetching api url data
                 var readabledata = JObject.Parse(datacollected);
                 var Id = JObject.Parse(Convert.ToString(readabledata));
                 var f = JObject.Parse(Convert.ToString(Id[FromWhatParent]));
                 
-                for (int i = 0; i < 33; i++)
+                for (int i = 0; i < knownIdUpperInt; i++)
                 {
                     try
                     {
@@ -131,11 +135,20 @@ namespace TornMainForm
             } 
         }
 
-        
-        public  class UserData
+        public class TornData //variables to store Data obtained from Torn API
         {
-             public static Dictionary<string, string> StocksIDandNames = new Dictionary<string, string> (); // value to store stock ID and Names for ID value.
+            public static Dictionary<string, string> StocksIDandNames = new Dictionary<string, string>(); // value to store stock ID and Names for ID value.
             public static Dictionary<string, string> StockIDandCurrentPrice = new Dictionary<string, string>(); // value to store stock ID and CurrentPrice.
+            public static Dictionary<string, string> StockIDandAvailableshares = new Dictionary<string, string>();
+            public static Dictionary<string, string> StockIdandForecast = new Dictionary<string, string>();
+            public static Dictionary<string, string> StockIdandDemand = new Dictionary<string, string>();
+            public static Dictionary<string, string> StockIdandacronym = new Dictionary<string, string>();
+            public static string TornStockInfo = null;
+            public static string TornTime = null;
+        }
+
+        public  class UserData // variables to store Data obtained from user API
+        {             
             public static string Basic = null; // value to become json string
             public  static JObject User = null; // contain feteched user data from json string
             public static  string level = null;
@@ -152,8 +165,7 @@ namespace TornMainForm
             public static JToken factionjson = null; // will contain details of the users faction name. Value is fetched from profile API
             public static JToken companyJson = null;
             public static JToken money = null;
-            public static JToken DBMCooldowns = null;
-            public static string TornTime = null;
+            public static JToken DBMCooldowns = null;            
             public static string ChainCooldowns = null;
                       
             public static long TimerAble = 0; // when timerable is > 0 the refreshtimer will automate itself. when an exception occurs value is put to 0 which turns timer off.
@@ -195,7 +207,7 @@ namespace TornMainForm
                     GenderValuelbl.Text = UserData.SetValue(UserData.Basic, UserData.gender, "gender");
                     NameValuelbl.Text = Convert.ToString(details["name"]);
                     IDValuelbl.Text = Convert.ToString(details["player_id"]);
-                    UserData.TornTime = Convert.ToString(details["server_time"]);
+                    TornData.TornTime = Convert.ToString(details["server_time"]);
                     UserData.ChainCooldowns = Convert.ToString(details["cooldowns"]);
 
                     string status = Convert.ToString(details["status"]).Trim(new char[] { '[', ']', ' ', ',', '"', '.' }).Replace("\"", string.Empty).Replace(",", string.Empty);
@@ -313,8 +325,8 @@ namespace TornMainForm
                 DateTime begginingoftime = new DateTime(1970, 01, 01);
                  
              var details = JObject.Parse(Convert.ToString(UserData.User));
-                UserData.TornTime = Convert.ToString( Convert.ToInt64(UserData.TornTime) + 1);
-                TimeSpan torntime = TimeSpan.FromSeconds(Convert.ToUInt64(UserData.TornTime) +1);
+                TornData.TornTime = Convert.ToString( Convert.ToInt64(TornData.TornTime) + 1);
+                TimeSpan torntime = TimeSpan.FromSeconds(Convert.ToUInt64(TornData.TornTime) +1);
                 begginingoftime = begginingoftime +  torntime;
                 TornCityTimelbl.Text = Convert.ToString("TCT: "  + begginingoftime);              
 
@@ -334,9 +346,20 @@ namespace TornMainForm
 
         private void StockGetDatabtn_Click(object sender, EventArgs e)
         {
-            MyFunctions.AddJsonDataToDictionary(UserData.StocksIDandNames, "stocks","name");
+            new Thread(() => // new thread is used for more cpu intense tasks. this will allow the tab 1 to continue to be accessed as its thread will not be too busy.
+          {
+              TornData.TornStockInfo = MyFunctions.FetchUserData(6, "stocks");
+              MyFunctions.AddJsonDataToDictionary(TornData.StocksIDandNames, "stocks", "name", TornData.TornStockInfo, 33);
+              MyFunctions.AddJsonDataToDictionary(TornData.StockIDandCurrentPrice, "stocks", "current_price", TornData.TornStockInfo, 33);
+              MyFunctions.AddJsonDataToDictionary(TornData.StockIDandAvailableshares, "stocks", "available_shares", TornData.TornStockInfo, 33);
+              MyFunctions.AddJsonDataToDictionary(TornData.StockIdandForecast, "stocks", "forecast", TornData.TornStockInfo, 33);
+              MyFunctions.AddJsonDataToDictionary(TornData.StockIdandDemand, "stocks", "demand", TornData.TornStockInfo, 33);
+              MyFunctions.AddJsonDataToDictionary(TornData.StockIdandacronym, "stocks", "acronym", TornData.TornStockInfo, 33);
+              throw new Exception();
+          }).Start();
+          //  throw new Exception();
 
-            
+
         }       
         
 

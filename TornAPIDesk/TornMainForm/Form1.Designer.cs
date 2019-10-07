@@ -704,9 +704,9 @@
             this.APILengthWarning.ForeColor = System.Drawing.Color.Red;
             this.APILengthWarning.Location = new System.Drawing.Point(79, 42);
             this.APILengthWarning.Name = "APILengthWarning";
-            this.APILengthWarning.Size = new System.Drawing.Size(218, 13);
+            this.APILengthWarning.Size = new System.Drawing.Size(184, 13);
             this.APILengthWarning.TabIndex = 55;
-            this.APILengthWarning.Text = "API key should be atleast 16 characters long";
+            this.APILengthWarning.Text = "API key should be 16 characters long";
             this.APILengthWarning.Visible = false;
             // 
             // MainForm
