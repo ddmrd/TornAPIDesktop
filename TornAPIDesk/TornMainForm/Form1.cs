@@ -12,6 +12,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using Newtonsoft.Json.Bson;
+using Newtonsoft.Json.Converters;
+
 
 
 namespace TornMainForm
@@ -132,7 +135,12 @@ namespace TornMainForm
                     }                                     
                 }
 
-            } 
+            }
+           
+        }
+        public class FileReadWriteLocations
+        {
+            public static string FileToSaveItemList = null;
         }
 
         public class TornData //variables to store Data obtained from Torn API
@@ -143,12 +151,18 @@ namespace TornMainForm
             public static Dictionary<string, string> StockIdandForecast = new Dictionary<string, string>();
             public static Dictionary<string, string> StockIdandDemand = new Dictionary<string, string>();
             public static Dictionary<string, string> StockIdandacronym = new Dictionary<string, string>();
+            public static Dictionary<string, string> ItemsIdAndName = new Dictionary<string, string>();
             public static string TornStockInfo = null;
             public static string TornTime = null;
+            public static string TornItemInfo = null;
+            public static string TornJsonFetchedInfo = null;
+
+
         }
 
         public  class UserData // variables to store Data obtained from user API
-        {             
+        {
+            public static JToken Notifications = null;        
             public static string Basic = null; // value to become json string
             public  static JObject User = null; // contain feteched user data from json string
             public static  string level = null;
@@ -198,7 +212,7 @@ namespace TornMainForm
                     OneSecondtimer.Start();
                     GetDatabtn.Text = Convert.ToString(ButtonLimittimer.Interval / 1000);
 
-                    UserData.Basic = MyFunctions.FetchUserData(1, "basic,profile,bars,money,cooldowns"); // Fields to fetch
+                    UserData.Basic = MyFunctions.FetchUserData(1, "basic,profile,bars,money,cooldowns,notifications"); // Fields to fetch
 
                     UserData.User = JObject.Parse(UserData.Basic); // parse to fetchable jtoken data.
                     var details = JObject.Parse(UserData.Basic); // makes json string data callable. 
@@ -207,7 +221,7 @@ namespace TornMainForm
                     GenderValuelbl.Text = UserData.SetValue(UserData.Basic, UserData.gender, "gender");
                     NameValuelbl.Text = Convert.ToString(details["name"]);
                     IDValuelbl.Text = Convert.ToString(details["player_id"]);
-                    TornData.TornTime = Convert.ToString(details["server_time"]);
+                    TornData.TornTime = Convert.ToString(details["server_time"]); 
                     UserData.ChainCooldowns = Convert.ToString(details["cooldowns"]);
 
                     string status = Convert.ToString(details["status"]).Trim(new char[] { '[', ']', ' ', ',', '"', '.' }).Replace("\"", string.Empty).Replace(",", string.Empty);
@@ -229,6 +243,9 @@ namespace TornMainForm
                     CityBankValuelbl.Text = "Money in Bank: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.Bank["amount"]));
                     CoolDownValuelbl.Text = Convert.ToString(UserData.Chainjson["cooldown"]);
                     UserData.DBMCooldowns = details["cooldowns"];
+                    UserData.Notifications = details["notifications"]; 
+                    NewEventValuelbl.Text = "New Events ["+ Convert.ToString(UserData.Notifications["events"])+"]";
+                    NewMessagesValuelbl.Text = "New Messages [" + Convert.ToString(UserData.Notifications["messages"])+"]";
 
                     ChainTimeOutValuelbl.Text = Convert.ToString(UserData.Chainjson["timeout"]);
 
@@ -346,23 +363,77 @@ namespace TornMainForm
 
         private void StockGetDatabtn_Click(object sender, EventArgs e)
         {
-            new Thread(() => // new thread is used for more cpu intense tasks. this will allow the tab 1 to continue to be accessed as its thread will not be too busy.
+            new Thread(() => // new thread is used for more cpu intense tasks. this will allow the user constant app use as its main thread will not be too busy.
           {
-              TornData.TornStockInfo = MyFunctions.FetchUserData(6, "stocks");
-              MyFunctions.AddJsonDataToDictionary(TornData.StocksIDandNames, "stocks", "name", TornData.TornStockInfo, 33);
-              MyFunctions.AddJsonDataToDictionary(TornData.StockIDandCurrentPrice, "stocks", "current_price", TornData.TornStockInfo, 33);
-              MyFunctions.AddJsonDataToDictionary(TornData.StockIDandAvailableshares, "stocks", "available_shares", TornData.TornStockInfo, 33);
-              MyFunctions.AddJsonDataToDictionary(TornData.StockIdandForecast, "stocks", "forecast", TornData.TornStockInfo, 33);
-              MyFunctions.AddJsonDataToDictionary(TornData.StockIdandDemand, "stocks", "demand", TornData.TornStockInfo, 33);
-              MyFunctions.AddJsonDataToDictionary(TornData.StockIdandacronym, "stocks", "acronym", TornData.TornStockInfo, 33);
-              throw new Exception();
+          TornData.TornJsonFetchedInfo = MyFunctions.FetchUserData(6, "stocks,items");
+             // TornData.TornStockInfo = Convert.ToString(JObject.Parse(TornData.TornJsonFetchedInfo));
+
+          if (TornData.StocksIDandNames.ContainsKey("1") == false) // once information is feteched there is no need to update it as it stays constant.
+          {
+              MyFunctions.AddJsonDataToDictionary(TornData.StockIdandacronym, "stocks", "acronym", TornData.TornJsonFetchedInfo, 33);
+              MyFunctions.AddJsonDataToDictionary(TornData.StocksIDandNames, "stocks", "name", TornData.TornJsonFetchedInfo, 33);
+          }
+          MyFunctions.AddJsonDataToDictionary(TornData.StockIDandCurrentPrice, "stocks", "current_price", TornData.TornJsonFetchedInfo, 33);
+          MyFunctions.AddJsonDataToDictionary(TornData.StockIDandAvailableshares, "stocks", "available_shares", TornData.TornJsonFetchedInfo, 33);
+          MyFunctions.AddJsonDataToDictionary(TornData.StockIdandForecast, "stocks", "forecast", TornData.TornJsonFetchedInfo, 33);
+          MyFunctions.AddJsonDataToDictionary(TornData.StockIdandDemand, "stocks", "demand", TornData.TornJsonFetchedInfo, 33);
+           
           }).Start();
           //  throw new Exception();
 
 
-        }       
-        
+        }
+        //FileReadToFromBrowseButton
+        private void BrowseFileToReadAndSavebtn_Click(object sender, EventArgs e)
+        {
+            using (var FileReadToFromBrowseButton = new FolderBrowserDialog())
+            {
+                DialogResult result = FileReadToFromBrowseButton.ShowDialog();
 
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(FileReadToFromBrowseButton.SelectedPath))
+                {
+                    string[] files = Directory.GetFiles(FileReadToFromBrowseButton.SelectedPath);
 
+                    System.Windows.Forms.MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
+
+                }
+                FileToReadtoAndSaveTotxtbox.Text = FileReadToFromBrowseButton.SelectedPath;
+                FileReadWriteLocations.FileToSaveItemList = FileToReadtoAndSaveTotxtbox.Text;
+            }
+            //FileToReadtoAndSaveTotxtbox.Text = FileReadToFromBrowseButton.SelectedPath;
+          //  FileReadWriteLocations.FileToSaveItemList = FileToReadtoAndSaveTotxtbox.Text;
+        }
+
+        private void GetItemNamesAndIdbtn_Click(object sender, EventArgs e)
+        {
+            TornData.TornJsonFetchedInfo = MyFunctions.FetchUserData(6, "stocks,items");
+            //TODO use code below to make json file
+
+           //   TornData.TornItemInfo = Convert.ToString( JObject.Parse(Convert.ToString( File.ReadAllLines(FileReadWriteLocations.FileToSaveItemList + "\\ItemList"))));
+            //  throw new Exception();
+
+            //  This area was used to create a file containing all items and id's of them.
+            //TODO Write feature to fetch item circulation and name by using the Files Name which fetchs ID then fetching circulation.
+            try
+            {
+                if (File.Exists(FileReadWriteLocations.FileToSaveItemList + "\\ItemList") == false) // create file if it does not exsist
+                {
+                    MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1003);
+                    List<string> itemlist = TornData.ItemsIdAndName.Keys.ToList();
+                    List<string> itemlistname = TornData.ItemsIdAndName.Values.ToList();
+                    int i = 0;
+
+                    foreach (var item in TornData.ItemsIdAndName.Keys)
+                    {
+                        File.AppendAllText(FileReadWriteLocations.FileToSaveItemList + "\\ItemList", "\"" + itemlistname[i] + "\": { id:\"" + item + "\" } " + Environment.NewLine);
+                        i++;
+                    }
+                }               
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Have you Entered a File to Read From and Save to in Settings?");
+            }
+        }
     }
 }

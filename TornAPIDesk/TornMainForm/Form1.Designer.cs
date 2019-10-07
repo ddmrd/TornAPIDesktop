@@ -35,6 +35,13 @@
             this.ApiKeyLockcbx = new System.Windows.Forms.CheckBox();
             this.MainTabBar = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.NewMessagesValuelbl = new System.Windows.Forms.Label();
+            this.NewEventValuelbl = new System.Windows.Forms.Label();
+            this.APILengthWarning = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.BankTimeLeftValuelbl = new System.Windows.Forms.Label();
+            this.CityBankValuelbl = new System.Windows.Forms.Label();
+            this.CaymanbankValuelbl = new System.Windows.Forms.Label();
             this.StatusLinkProfileValuelbl = new System.Windows.Forms.LinkLabel();
             this.BoosterCdValuelbl = new System.Windows.Forms.Label();
             this.BoosterCdlbl = new System.Windows.Forms.Label();
@@ -77,21 +84,24 @@
             this.lvllbl = new System.Windows.Forms.Label();
             this.GetDatabtn = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.StockGetDatabtn = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.StockGetDatabtn = new System.Windows.Forms.Button();
             this.Refreshtimer = new System.Windows.Forms.Timer(this.components);
             this.ButtonLimittimer = new System.Windows.Forms.Timer(this.components);
             this.OneSecondtimer = new System.Windows.Forms.Timer(this.components);
             this.OneSecondtimeTwo = new System.Windows.Forms.Timer(this.components);
             this.TornCityTimelbl = new System.Windows.Forms.Label();
-            this.CaymanbankValuelbl = new System.Windows.Forms.Label();
-            this.CityBankValuelbl = new System.Windows.Forms.Label();
-            this.BankTimeLeftValuelbl = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.APILengthWarning = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.FileToSaveAndReadItemNameAndId = new System.Windows.Forms.Label();
+            this.FileToReadtoAndSaveTotxtbox = new System.Windows.Forms.TextBox();
+            this.BrowseFileToReadAndSavebtn = new System.Windows.Forms.Button();
+            this.GetItemNamesAndIdbtn = new System.Windows.Forms.Button();
             this.MainTabBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // TornAPIKey
@@ -128,6 +138,8 @@
             this.MainTabBar.Controls.Add(this.tabPage1);
             this.MainTabBar.Controls.Add(this.tabPage2);
             this.MainTabBar.Controls.Add(this.tabPage3);
+            this.MainTabBar.Controls.Add(this.tabPage4);
+            this.MainTabBar.Controls.Add(this.tabPage5);
             this.MainTabBar.Location = new System.Drawing.Point(12, 12);
             this.MainTabBar.Name = "MainTabBar";
             this.MainTabBar.SelectedIndex = 0;
@@ -137,6 +149,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.NewMessagesValuelbl);
+            this.tabPage1.Controls.Add(this.NewEventValuelbl);
             this.tabPage1.Controls.Add(this.APILengthWarning);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.BankTimeLeftValuelbl);
@@ -193,6 +207,71 @@
             this.tabPage1.Size = new System.Drawing.Size(537, 311);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "UserInfo";
+            // 
+            // NewMessagesValuelbl
+            // 
+            this.NewMessagesValuelbl.AutoSize = true;
+            this.NewMessagesValuelbl.Location = new System.Drawing.Point(87, 288);
+            this.NewMessagesValuelbl.Name = "NewMessagesValuelbl";
+            this.NewMessagesValuelbl.Size = new System.Drawing.Size(80, 13);
+            this.NewMessagesValuelbl.TabIndex = 57;
+            this.NewMessagesValuelbl.Text = "New Messages";
+            // 
+            // NewEventValuelbl
+            // 
+            this.NewEventValuelbl.AutoSize = true;
+            this.NewEventValuelbl.Location = new System.Drawing.Point(198, 287);
+            this.NewEventValuelbl.Name = "NewEventValuelbl";
+            this.NewEventValuelbl.Size = new System.Drawing.Size(71, 13);
+            this.NewEventValuelbl.TabIndex = 56;
+            this.NewEventValuelbl.Text = "New Events: ";
+            // 
+            // APILengthWarning
+            // 
+            this.APILengthWarning.AutoSize = true;
+            this.APILengthWarning.ForeColor = System.Drawing.Color.Red;
+            this.APILengthWarning.Location = new System.Drawing.Point(79, 42);
+            this.APILengthWarning.Name = "APILengthWarning";
+            this.APILengthWarning.Size = new System.Drawing.Size(184, 13);
+            this.APILengthWarning.TabIndex = 55;
+            this.APILengthWarning.Text = "API key should be 16 characters long";
+            this.APILengthWarning.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(337, 250);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 13);
+            this.label1.TabIndex = 54;
+            this.label1.Text = "Bank Time left: ";
+            // 
+            // BankTimeLeftValuelbl
+            // 
+            this.BankTimeLeftValuelbl.AutoSize = true;
+            this.BankTimeLeftValuelbl.Location = new System.Drawing.Point(427, 250);
+            this.BankTimeLeftValuelbl.Name = "BankTimeLeftValuelbl";
+            this.BankTimeLeftValuelbl.Size = new System.Drawing.Size(26, 13);
+            this.BankTimeLeftValuelbl.TabIndex = 53;
+            this.BankTimeLeftValuelbl.Text = "N/a";
+            // 
+            // CityBankValuelbl
+            // 
+            this.CityBankValuelbl.AutoSize = true;
+            this.CityBankValuelbl.Location = new System.Drawing.Point(337, 220);
+            this.CityBankValuelbl.Name = "CityBankValuelbl";
+            this.CityBankValuelbl.Size = new System.Drawing.Size(52, 13);
+            this.CityBankValuelbl.TabIndex = 52;
+            this.CityBankValuelbl.Text = "City Bank";
+            // 
+            // CaymanbankValuelbl
+            // 
+            this.CaymanbankValuelbl.AutoSize = true;
+            this.CaymanbankValuelbl.Location = new System.Drawing.Point(337, 190);
+            this.CaymanbankValuelbl.Name = "CaymanbankValuelbl";
+            this.CaymanbankValuelbl.Size = new System.Drawing.Size(72, 13);
+            this.CaymanbankValuelbl.TabIndex = 51;
+            this.CaymanbankValuelbl.Text = "Cayman bank";
             // 
             // StatusLinkProfileValuelbl
             // 
@@ -604,34 +683,45 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.StockGetDatabtn);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(537, 311);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Events";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.GetItemNamesAndIdbtn);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(537, 311);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "ItemSearch";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.StockGetDatabtn);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(537, 311);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "tabPage4";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // StockGetDatabtn
             // 
-            this.StockGetDatabtn.Location = new System.Drawing.Point(428, 274);
+            this.StockGetDatabtn.Location = new System.Drawing.Point(439, 282);
             this.StockGetDatabtn.Name = "StockGetDatabtn";
             this.StockGetDatabtn.Size = new System.Drawing.Size(92, 23);
             this.StockGetDatabtn.TabIndex = 0;
             this.StockGetDatabtn.Text = "Get Stock Info";
             this.StockGetDatabtn.UseVisualStyleBackColor = true;
             this.StockGetDatabtn.Click += new System.EventHandler(this.StockGetDatabtn_Click);
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(537, 311);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // Refreshtimer
             // 
@@ -656,58 +746,61 @@
             // TornCityTimelbl
             // 
             this.TornCityTimelbl.AutoSize = true;
-            this.TornCityTimelbl.Location = new System.Drawing.Point(243, 9);
+            this.TornCityTimelbl.Location = new System.Drawing.Point(328, 9);
             this.TornCityTimelbl.Name = "TornCityTimelbl";
             this.TornCityTimelbl.Size = new System.Drawing.Size(26, 13);
             this.TornCityTimelbl.TabIndex = 40;
             this.TornCityTimelbl.Text = "N/a";
             // 
-            // CaymanbankValuelbl
+            // tabPage5
             // 
-            this.CaymanbankValuelbl.AutoSize = true;
-            this.CaymanbankValuelbl.Location = new System.Drawing.Point(337, 190);
-            this.CaymanbankValuelbl.Name = "CaymanbankValuelbl";
-            this.CaymanbankValuelbl.Size = new System.Drawing.Size(72, 13);
-            this.CaymanbankValuelbl.TabIndex = 51;
-            this.CaymanbankValuelbl.Text = "Cayman bank";
+            this.tabPage5.Controls.Add(this.BrowseFileToReadAndSavebtn);
+            this.tabPage5.Controls.Add(this.FileToReadtoAndSaveTotxtbox);
+            this.tabPage5.Controls.Add(this.FileToSaveAndReadItemNameAndId);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(537, 311);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Settings";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // CityBankValuelbl
+            // FileToSaveAndReadItemNameAndId
             // 
-            this.CityBankValuelbl.AutoSize = true;
-            this.CityBankValuelbl.Location = new System.Drawing.Point(337, 220);
-            this.CityBankValuelbl.Name = "CityBankValuelbl";
-            this.CityBankValuelbl.Size = new System.Drawing.Size(52, 13);
-            this.CityBankValuelbl.TabIndex = 52;
-            this.CityBankValuelbl.Text = "City Bank";
+            this.FileToSaveAndReadItemNameAndId.AutoSize = true;
+            this.FileToSaveAndReadItemNameAndId.Location = new System.Drawing.Point(26, 25);
+            this.FileToSaveAndReadItemNameAndId.Name = "FileToSaveAndReadItemNameAndId";
+            this.FileToSaveAndReadItemNameAndId.Size = new System.Drawing.Size(122, 13);
+            this.FileToSaveAndReadItemNameAndId.TabIndex = 0;
+            this.FileToSaveAndReadItemNameAndId.Text = "File location to save files";
             // 
-            // BankTimeLeftValuelbl
+            // FileToReadtoAndSaveTotxtbox
             // 
-            this.BankTimeLeftValuelbl.AutoSize = true;
-            this.BankTimeLeftValuelbl.Location = new System.Drawing.Point(427, 250);
-            this.BankTimeLeftValuelbl.Name = "BankTimeLeftValuelbl";
-            this.BankTimeLeftValuelbl.Size = new System.Drawing.Size(26, 13);
-            this.BankTimeLeftValuelbl.TabIndex = 53;
-            this.BankTimeLeftValuelbl.Text = "N/a";
+            this.FileToReadtoAndSaveTotxtbox.Location = new System.Drawing.Point(163, 22);
+            this.FileToReadtoAndSaveTotxtbox.Name = "FileToReadtoAndSaveTotxtbox";
+            this.FileToReadtoAndSaveTotxtbox.ReadOnly = true;
+            this.FileToReadtoAndSaveTotxtbox.Size = new System.Drawing.Size(232, 20);
+            this.FileToReadtoAndSaveTotxtbox.TabIndex = 1;
             // 
-            // label1
+            // BrowseFileToReadAndSavebtn
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(337, 250);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 13);
-            this.label1.TabIndex = 54;
-            this.label1.Text = "Bank Time left: ";
+            this.BrowseFileToReadAndSavebtn.Location = new System.Drawing.Point(420, 22);
+            this.BrowseFileToReadAndSavebtn.Name = "BrowseFileToReadAndSavebtn";
+            this.BrowseFileToReadAndSavebtn.Size = new System.Drawing.Size(75, 23);
+            this.BrowseFileToReadAndSavebtn.TabIndex = 2;
+            this.BrowseFileToReadAndSavebtn.Text = "Browse";
+            this.BrowseFileToReadAndSavebtn.UseVisualStyleBackColor = true;
+            this.BrowseFileToReadAndSavebtn.Click += new System.EventHandler(this.BrowseFileToReadAndSavebtn_Click);
             // 
-            // APILengthWarning
+            // GetItemNamesAndIdbtn
             // 
-            this.APILengthWarning.AutoSize = true;
-            this.APILengthWarning.ForeColor = System.Drawing.Color.Red;
-            this.APILengthWarning.Location = new System.Drawing.Point(79, 42);
-            this.APILengthWarning.Name = "APILengthWarning";
-            this.APILengthWarning.Size = new System.Drawing.Size(184, 13);
-            this.APILengthWarning.TabIndex = 55;
-            this.APILengthWarning.Text = "API key should be 16 characters long";
-            this.APILengthWarning.Visible = false;
+            this.GetItemNamesAndIdbtn.Location = new System.Drawing.Point(456, 282);
+            this.GetItemNamesAndIdbtn.Name = "GetItemNamesAndIdbtn";
+            this.GetItemNamesAndIdbtn.Size = new System.Drawing.Size(75, 23);
+            this.GetItemNamesAndIdbtn.TabIndex = 0;
+            this.GetItemNamesAndIdbtn.Text = "Fetch Item";
+            this.GetItemNamesAndIdbtn.UseVisualStyleBackColor = true;
+            this.GetItemNamesAndIdbtn.Click += new System.EventHandler(this.GetItemNamesAndIdbtn_Click);
             // 
             // MainForm
             // 
@@ -723,7 +816,10 @@
             this.MainTabBar.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -790,6 +886,14 @@
         private System.Windows.Forms.Label BankTimeLeftValuelbl;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label APILengthWarning;
+        private System.Windows.Forms.Label NewMessagesValuelbl;
+        private System.Windows.Forms.Label NewEventValuelbl;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button BrowseFileToReadAndSavebtn;
+        private System.Windows.Forms.TextBox FileToReadtoAndSaveTotxtbox;
+        private System.Windows.Forms.Label FileToSaveAndReadItemNameAndId;
+        private System.Windows.Forms.Button GetItemNamesAndIdbtn;
     }
 }
 
