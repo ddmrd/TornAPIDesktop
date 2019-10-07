@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Windows.Forms;
-using System.Web;
-using System.Net;
 using System.IO;
-using Newtonsoft.Json.Linq;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web;
+using System.Windows.Forms;
 
 
 namespace TornMainForm
@@ -49,28 +49,28 @@ namespace TornMainForm
      /// <param name="switchOption"></param>
      /// <param name="feilds"></param>
      /// <returns></returns>
-     public static string FetchUserData(int switchOption,string feilds) // function to request and receive API data.
+     public static string FetchUserData(int switchOption,string fields) // function to request and receive API data.
             {
             string  test = null;
                 switch (switchOption)
                 {
                     case 1:
-                         test = string.Format("https://api.torn.com/user/?selections=" + feilds + "&key=" + MainForm.APIKey);
+                         test = string.Format("https://api.torn.com/user/?selections=" + fields + "&key=" + MainForm.APIKey);
                         break;
                     case 2: 
-                         test = string.Format("https://api.torn.com/property/?selections=" + feilds + "&key=" + MainForm.APIKey);
+                         test = string.Format("https://api.torn.com/property/?selections=" + fields + "&key=" + MainForm.APIKey);
                         break;
                     case 3:
-                        test = test = string.Format("https://api.torn.com/faction/?selections=" + feilds + "&key=" + MainForm.APIKey);
+                        test = test = string.Format("https://api.torn.com/faction/?selections=" + fields + "&key=" + MainForm.APIKey);
                         break;
                     case 4:
-                        test = string.Format("https://api.torn.com/company/?selections=" + feilds + "&key=" + MainForm.APIKey);
+                        test = string.Format("https://api.torn.com/company/?selections=" + fields + "&key=" + MainForm.APIKey);
                         break;
                     case 5:
-                         test = string.Format("https://api.torn.com/market/?selections=" + feilds + "&key=" + MainForm.APIKey);
+                         test = string.Format("https://api.torn.com/market/?selections=" + fields + "&key=" + MainForm.APIKey);
                         break;
                     case 6:
-                        test = test = string.Format("https://api.torn.com/torn/?selections=" + feilds + "&key=" + MainForm.APIKey);
+                        test = test = string.Format("https://api.torn.com/torn/?selections=" + fields + "&key=" + MainForm.APIKey);
                         break;
 
                 }                               
