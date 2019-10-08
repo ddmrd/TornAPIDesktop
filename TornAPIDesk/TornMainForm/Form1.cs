@@ -432,7 +432,20 @@ namespace TornMainForm
             }
             catch (Exception)
             {
-                MessageBox.Show("Have you Entered a File to Read From and Save to in Settings?");
+                MessageBox.Show("Have you Entered a Directory to Read From and Save to in Settings?");
+               
+            }
+        }
+
+        private void SettingsAPILockchkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SettingsAPILockchkbox.Checked == true)
+            {
+                SettingsAPIKeyValuetxtbox.ReadOnly = true;
+            }
+            if (SettingsAPILockchkbox.Checked == false)
+            {
+                SettingsAPIKeyValuetxtbox.ReadOnly = false;
             }
         }
     }

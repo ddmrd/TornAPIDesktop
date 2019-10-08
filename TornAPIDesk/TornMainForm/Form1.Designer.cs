@@ -97,6 +97,10 @@
             this.FileToReadtoAndSaveTotxtbox = new System.Windows.Forms.TextBox();
             this.BrowseFileToReadAndSavebtn = new System.Windows.Forms.Button();
             this.GetItemNamesAndIdbtn = new System.Windows.Forms.Button();
+            this.SettingsAPIkeylbl = new System.Windows.Forms.Label();
+            this.SettingsAPILockchkbox = new System.Windows.Forms.CheckBox();
+            this.SettingsAPIKeyValuetxtbox = new System.Windows.Forms.TextBox();
+            this.SettingsDescriptionlbl = new System.Windows.Forms.Label();
             this.MainTabBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -754,6 +758,10 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.SettingsDescriptionlbl);
+            this.tabPage5.Controls.Add(this.SettingsAPIkeylbl);
+            this.tabPage5.Controls.Add(this.SettingsAPILockchkbox);
+            this.tabPage5.Controls.Add(this.SettingsAPIKeyValuetxtbox);
             this.tabPage5.Controls.Add(this.BrowseFileToReadAndSavebtn);
             this.tabPage5.Controls.Add(this.FileToReadtoAndSaveTotxtbox);
             this.tabPage5.Controls.Add(this.FileToSaveAndReadItemNameAndId);
@@ -768,23 +776,23 @@
             // FileToSaveAndReadItemNameAndId
             // 
             this.FileToSaveAndReadItemNameAndId.AutoSize = true;
-            this.FileToSaveAndReadItemNameAndId.Location = new System.Drawing.Point(26, 25);
+            this.FileToSaveAndReadItemNameAndId.Location = new System.Drawing.Point(5, 108);
             this.FileToSaveAndReadItemNameAndId.Name = "FileToSaveAndReadItemNameAndId";
-            this.FileToSaveAndReadItemNameAndId.Size = new System.Drawing.Size(122, 13);
+            this.FileToSaveAndReadItemNameAndId.Size = new System.Drawing.Size(166, 13);
             this.FileToSaveAndReadItemNameAndId.TabIndex = 0;
-            this.FileToSaveAndReadItemNameAndId.Text = "File location to save files";
+            this.FileToSaveAndReadItemNameAndId.Text = "File location to save and load files";
             // 
             // FileToReadtoAndSaveTotxtbox
             // 
-            this.FileToReadtoAndSaveTotxtbox.Location = new System.Drawing.Point(163, 22);
+            this.FileToReadtoAndSaveTotxtbox.Location = new System.Drawing.Point(177, 105);
             this.FileToReadtoAndSaveTotxtbox.Name = "FileToReadtoAndSaveTotxtbox";
             this.FileToReadtoAndSaveTotxtbox.ReadOnly = true;
-            this.FileToReadtoAndSaveTotxtbox.Size = new System.Drawing.Size(232, 20);
+            this.FileToReadtoAndSaveTotxtbox.Size = new System.Drawing.Size(236, 20);
             this.FileToReadtoAndSaveTotxtbox.TabIndex = 1;
             // 
             // BrowseFileToReadAndSavebtn
             // 
-            this.BrowseFileToReadAndSavebtn.Location = new System.Drawing.Point(420, 22);
+            this.BrowseFileToReadAndSavebtn.Location = new System.Drawing.Point(430, 105);
             this.BrowseFileToReadAndSavebtn.Name = "BrowseFileToReadAndSavebtn";
             this.BrowseFileToReadAndSavebtn.Size = new System.Drawing.Size(75, 23);
             this.BrowseFileToReadAndSavebtn.TabIndex = 2;
@@ -801,6 +809,42 @@
             this.GetItemNamesAndIdbtn.Text = "Fetch Item";
             this.GetItemNamesAndIdbtn.UseVisualStyleBackColor = true;
             this.GetItemNamesAndIdbtn.Click += new System.EventHandler(this.GetItemNamesAndIdbtn_Click);
+            // 
+            // SettingsAPIkeylbl
+            // 
+            this.SettingsAPIkeylbl.AutoSize = true;
+            this.SettingsAPIkeylbl.Location = new System.Drawing.Point(6, 159);
+            this.SettingsAPIkeylbl.Name = "SettingsAPIkeylbl";
+            this.SettingsAPIkeylbl.Size = new System.Drawing.Size(69, 13);
+            this.SettingsAPIkeylbl.TabIndex = 4;
+            this.SettingsAPIkeylbl.Text = "Your API key";
+            // 
+            // SettingsAPILockchkbox
+            // 
+            this.SettingsAPILockchkbox.AutoSize = true;
+            this.SettingsAPILockchkbox.Location = new System.Drawing.Point(449, 159);
+            this.SettingsAPILockchkbox.Name = "SettingsAPILockchkbox";
+            this.SettingsAPILockchkbox.Size = new System.Drawing.Size(70, 17);
+            this.SettingsAPILockchkbox.TabIndex = 5;
+            this.SettingsAPILockchkbox.Text = "Lock text";
+            this.SettingsAPILockchkbox.UseVisualStyleBackColor = true;
+            this.SettingsAPILockchkbox.CheckedChanged += new System.EventHandler(this.SettingsAPILockchkbox_CheckedChanged);
+            // 
+            // SettingsAPIKeyValuetxtbox
+            // 
+            this.SettingsAPIKeyValuetxtbox.Location = new System.Drawing.Point(81, 156);
+            this.SettingsAPIKeyValuetxtbox.MaxLength = 16;
+            this.SettingsAPIKeyValuetxtbox.Name = "SettingsAPIKeyValuetxtbox";
+            this.SettingsAPIKeyValuetxtbox.Size = new System.Drawing.Size(362, 20);
+            this.SettingsAPIKeyValuetxtbox.TabIndex = 3;
+            // 
+            // SettingsDescriptionlbl
+            // 
+            this.SettingsDescriptionlbl.Location = new System.Drawing.Point(22, 26);
+            this.SettingsDescriptionlbl.Name = "SettingsDescriptionlbl";
+            this.SettingsDescriptionlbl.Size = new System.Drawing.Size(474, 60);
+            this.SettingsDescriptionlbl.TabIndex = 6;
+            this.SettingsDescriptionlbl.Text = resources.GetString("SettingsDescriptionlbl.Text");
             // 
             // MainForm
             // 
@@ -894,6 +938,10 @@
         private System.Windows.Forms.TextBox FileToReadtoAndSaveTotxtbox;
         private System.Windows.Forms.Label FileToSaveAndReadItemNameAndId;
         private System.Windows.Forms.Button GetItemNamesAndIdbtn;
+        private System.Windows.Forms.Label SettingsAPIkeylbl;
+        private System.Windows.Forms.CheckBox SettingsAPILockchkbox;
+        private System.Windows.Forms.TextBox SettingsAPIKeyValuetxtbox;
+        private System.Windows.Forms.Label SettingsDescriptionlbl;
     }
 }
 
