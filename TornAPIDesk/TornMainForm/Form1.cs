@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,9 +15,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
-using Newtonsoft.Json.Bson;
-using Newtonsoft.Json.Converters;
-
 
 
 namespace TornMainForm
@@ -24,7 +24,7 @@ namespace TornMainForm
         public static string APIKey = null; // api key 
         public MainForm()
         { 
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
         private void TornAPIKey_TextChanged(object sender, EventArgs e)
@@ -75,7 +75,6 @@ namespace TornMainForm
                     case 6:
                         test = test = string.Format("https://api.torn.com/torn/?selections=" + fields + "&key=" + MainForm.APIKey);
                         break;
-
                 }                               
 
                 WebRequest RequestBasic = WebRequest.Create(test);
@@ -134,7 +133,6 @@ namespace TornMainForm
                         continue;
                     }                                     
                 }
-
             }
            
         }
@@ -142,6 +140,13 @@ namespace TornMainForm
         {
             public static string FileToSaveItemList = null;
         }
+        public class Settings
+        { 
+            public static string APIKey = null;           
+            public static JToken ParsedSettingsData = null;
+            public static string SettingsFileName = Directory.GetCurrentDirectory() + "\\Settings.json";
+           
+        } 
 
         public class TornData //variables to store Data obtained from Torn API
         {
@@ -157,7 +162,6 @@ namespace TornMainForm
             public static string TornItemInfo = null;
             public static string TornJsonFetchedInfo = null;
 
-
         }
 
         public  class UserData // variables to store Data obtained from user API
@@ -168,7 +172,7 @@ namespace TornMainForm
             public static  string level = null;
             public static string gender = null;
             public static string name = null;
-            public static JToken Bank = null;
+            public static JToken Bank = null; //  value for bank information such as money in bank and time left for investment to end.
             public static string player_id = null;
             public static string status = null; // Value will be based on the status from the profile API 
             public static JToken Chainjson = null; // will contain all details about the Chain bar
@@ -345,14 +349,13 @@ namespace TornMainForm
                 TornData.TornTime = Convert.ToString( Convert.ToInt64(TornData.TornTime) + 1);
                 TimeSpan torntime = TimeSpan.FromSeconds(Convert.ToUInt64(TornData.TornTime) +1);
                 begginingoftime = begginingoftime +  torntime;
-                TornCityTimelbl.Text = Convert.ToString("TCT: "  + begginingoftime);              
+                TornCityTimelbl.Text = Convert.ToString("TCT: "  + begginingoftime);             
 
             }
             catch (Exception)
             {
                 TornCityTimelbl.Text = "0";
             }
-
         }
 
         private void StatusLinkProfileValuelbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -366,9 +369,11 @@ namespace TornMainForm
             new Thread(() => // new thread is used for more cpu intense tasks. this will allow the user constant app use as its main thread will not be too busy.
           {
           TornData.TornJsonFetchedInfo = MyFunctions.FetchUserData(6, "stocks,items");
-             // TornData.TornStockInfo = Convert.ToString(JObject.Parse(TornData.TornJsonFetchedInfo));
-
-          if (TornData.StocksIDandNames.ContainsKey("1") == false) // once information is feteched there is no need to update it as it stays constant.
+              // TornData.TornStockInfo = Convert.ToString(JObject.Parse(TornData.TornJsonFetchedInfo));
+              try
+              {
+              
+              if (TornData.StocksIDandNames.ContainsKey("1") == false) // once information is feteched there is no need to update it as it stays constant.
           {
               MyFunctions.AddJsonDataToDictionary(TornData.StockIdandacronym, "stocks", "acronym", TornData.TornJsonFetchedInfo, 33);
               MyFunctions.AddJsonDataToDictionary(TornData.StocksIDandNames, "stocks", "name", TornData.TornJsonFetchedInfo, 33);
@@ -377,7 +382,12 @@ namespace TornMainForm
           MyFunctions.AddJsonDataToDictionary(TornData.StockIDandAvailableshares, "stocks", "available_shares", TornData.TornJsonFetchedInfo, 33);
           MyFunctions.AddJsonDataToDictionary(TornData.StockIdandForecast, "stocks", "forecast", TornData.TornJsonFetchedInfo, 33);
           MyFunctions.AddJsonDataToDictionary(TornData.StockIdandDemand, "stocks", "demand", TornData.TornJsonFetchedInfo, 33);
-           
+              }
+              catch (Exception)
+              {
+                  MessageBox.Show("Invalid API Key");
+              }
+
           }).Start();
           //  throw new Exception();
 
@@ -391,10 +401,7 @@ namespace TornMainForm
                 DialogResult result = FileReadToFromBrowseButton.ShowDialog();
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(FileReadToFromBrowseButton.SelectedPath))
-                {
-                    string[] files = Directory.GetFiles(FileReadToFromBrowseButton.SelectedPath);
-
-                    System.Windows.Forms.MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
+                {                                     
 
                 }
                 FileToReadtoAndSaveTotxtbox.Text = FileReadToFromBrowseButton.SelectedPath;
@@ -406,35 +413,39 @@ namespace TornMainForm
 
         private void GetItemNamesAndIdbtn_Click(object sender, EventArgs e)
         {
-            TornData.TornJsonFetchedInfo = MyFunctions.FetchUserData(6, "stocks,items");
-            //TODO use code below to make json file
-
-           //   TornData.TornItemInfo = Convert.ToString( JObject.Parse(Convert.ToString( File.ReadAllLines(FileReadWriteLocations.FileToSaveItemList + "\\ItemList"))));
-            //  throw new Exception();
-
-            //  This area was used to create a file containing all items and id's of them.
-            //TODO Write feature to fetch item circulation and name by using the Files Name which fetchs ID then fetching circulation.
-            try
+            new Thread(() =>
             {
-                if (File.Exists(FileReadWriteLocations.FileToSaveItemList + "\\ItemList") == false) // create file if it does not exsist
-                {
-                    MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1003);
-                    List<string> itemlist = TornData.ItemsIdAndName.Keys.ToList();
-                    List<string> itemlistname = TornData.ItemsIdAndName.Values.ToList();
-                    int i = 0;
+                TornData.TornJsonFetchedInfo = MyFunctions.FetchUserData(6, "stocks,items");
+                //TODO use code below to make json file
 
-                    foreach (var item in TornData.ItemsIdAndName.Keys)
+                //   TornData.TornItemInfo = Convert.ToString( JObject.Parse(Convert.ToString( File.ReadAllLines(FileReadWriteLocations.FileToSaveItemList + "\\ItemList"))));
+                //  throw new Exception();
+
+                //  This area was used to create a file containing all items and id's of them.
+                //TODO Write feature to fetch item circulation and name by using the Files Name which fetchs ID then fetching circulation.
+                try
+                {
+                    if (File.Exists(FileReadWriteLocations.FileToSaveItemList + "\\ItemList") == false) // create file if it does not exsist
                     {
-                        File.AppendAllText(FileReadWriteLocations.FileToSaveItemList + "\\ItemList", "\"" + itemlistname[i] + "\": { id:\"" + item + "\" } " + Environment.NewLine);
-                        i++;
+                        MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1003);
+                        List<string> itemlist = TornData.ItemsIdAndName.Keys.ToList();
+                        List<string> itemlistname = TornData.ItemsIdAndName.Values.ToList();
+                        int i = 0;
+
+                        foreach (var item in TornData.ItemsIdAndName.Keys)
+                        {
+                            File.AppendAllText(FileReadWriteLocations.FileToSaveItemList + "\\ItemList", "\"" + itemlistname[i] + "\": { id:\"" + item + "\" } " + Environment.NewLine);
+                            i++;
+                        }
                     }
-                }               
-            }
+                }
+                
             catch (Exception)
             {
-                MessageBox.Show("Have you Entered a Directory to Read From and Save to in Settings?");
-               
+                MessageBox.Show("Have you Entered a Directory to Read From and Save to in Settings?");               
             }
+           }).Start(); 
+            
         }
 
         private void SettingsAPILockchkbox_CheckedChanged(object sender, EventArgs e)
@@ -447,6 +458,26 @@ namespace TornMainForm
             {
                 SettingsAPIKeyValuetxtbox.ReadOnly = false;
             }
+        }       
+        
+        private void SaveSettingsbtn_Click(object sender, EventArgs e) //Settings Read 
+        { AppSettings f = new AppSettings();
+            f.APIkey = SettingsAPIKeyValuetxtbox.Text;
+            f.saveSettings();
+        }      
+
+        private void MainForm_Load(object sender, EventArgs e) //TODO fix file load and json parsing of saved settings.
+        {
+            AppSettings.loadSettings();
+            SettingsAPIKeyValuetxtbox.Text = Settings.APIKey;
+            TornAPIKey.Text = Settings.APIKey;
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+           // richTextBox1.Text = Settings.SettingsFile;
+            richTextBox1.Text = richTextBox1.Text + Settings.ParsedSettingsData;
         }
     }
+    
 }
