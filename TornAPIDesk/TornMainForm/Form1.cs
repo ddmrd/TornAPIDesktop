@@ -1,6 +1,4 @@
-﻿using Json;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -43,7 +41,12 @@ namespace TornMainForm
                 TornAPIKey.ReadOnly = false;
             }
         }
-        
+        public class ItemsAndId
+        { 
+            public  JToken ItemName = null;
+            public  string ItemId = null;
+        }
+
         public static class MyFunctions
         {
      /// <summary>
@@ -160,8 +163,9 @@ namespace TornMainForm
             public static Dictionary<string, string> ItemsIdAndName = new Dictionary<string, string>();
             public static string TornStockInfo = null;
             public static string TornTime = null;
-            public static string TornItemInfo = null;
+            public static string TornItemNames = null;
             public static string TornJsonFetchedInfo = null;
+            public static string NameThenIDofItems = null;
         }
 
         public  class UserData // variables to store Data obtained from user API
@@ -411,11 +415,8 @@ namespace TornMainForm
           //  FileReadWriteLocations.FileToSaveItemList = FileToReadtoAndSaveTotxtbox.Text;
         }
 
-       public static class ItemsAndId
-        {
-            public static string ItemName = null;
-            public static string ItemId = null;
-        }
+    
+      
 
         private void GetItemNamesAndIdbtn_Click(object sender, EventArgs e)
         {
@@ -437,21 +438,40 @@ namespace TornMainForm
                 //  This area was used to create a file containing all items and id's of them.
                 //TODO Write feature to fetch item circulation and name by using the Files Name which fetchs ID then fetching circulation.
 
-                if (File.Exists(Settings.ItemFileName + "\\ItemList") == false) // create file if it does not exsist
+                if (File.Exists(Settings.ItemFileName) == false) // create file if it does not exsist
                     {
                         MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1003);
-                        List<string> itemlist = TornData.ItemsIdAndName.Keys.ToList();
+                        List<string> itemlistId = TornData.ItemsIdAndName.Keys.ToList();
                         List<string> itemlistname = TornData.ItemsIdAndName.Values.ToList();
-                        int i = 0;
-
-                        foreach (var item in TornData.ItemsIdAndName.Keys)
+                    //   StreamWriter Writer = new StreamWriter(Settings.ItemFileName);
+                 
+                        
+                    //make object for item name and id. add them to object. convert to json. append to json file.  
+                        
+                   JObject acd = new JObject( new JProperty ( JsonConvert.SerializeObject("e")));
+                    for (int i = 0; i < TornData.ItemsIdAndName.Keys.Count ; i++)
+                    {                                         
+                         JProperty f = new JProperty(JsonConvert.SerializeObject(itemlistname[i]),itemlistId[i]);
+                        try
                         {
-                            File.AppendAllText(FileReadWriteLocations.FileToSaveItemList + "\\ItemList", "\"" + itemlistname[i] + "\": { id:\"" + item + "\" } " + Environment.NewLine);
-                            i++;
+                            acd.Add(f);
                         }
+                        catch (Exception)
+                        {
+                            continue;
+                        }                                                                                                         
+                                      
                     }
-                
-                
+                    // var Json = JsonConvert.SerializeObject(acd);
+                    //File.AppendAllText(Settings.ItemFileName, Json);
+                    File.AppendAllText(Settings.ItemFileName, Convert.ToString(acd));
+                }
+                if (File.Exists(Settings.ItemFileName) == true)
+                {
+                    TornData.NameThenIDofItems = File.ReadAllText(Settings.ItemFileName);
+                    TornData.TornItemNames = Convert.ToString(JObject.Parse(TornData.NameThenIDofItems));
+                    throw new Exception();                   
+                }                
            
            }).Start(); 
             
