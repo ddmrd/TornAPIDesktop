@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="SettingsDescriptionlbl.Text" xml:space="preserve">
-    <value>Here you can choose to save your api key and file location. This will make the application automatically load the API key on launch. This save and loading function also helps to serve other aspects of the program which must be set in order to use these functions. Choose or create a file location that you have permission to write to and read from.</value>
+    <value>Here you choose to save your api key. Enter your api key and click save.This will create a file in your applications current directory so make sure you have read and write permissions to this location.</value>
   </data>
   <metadata name="Refreshtimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

@@ -823,6 +823,7 @@
             this.BrowseFileToReadAndSavebtn.TabIndex = 2;
             this.BrowseFileToReadAndSavebtn.Text = "Browse";
             this.BrowseFileToReadAndSavebtn.UseVisualStyleBackColor = true;
+            this.BrowseFileToReadAndSavebtn.Visible = false;
             this.BrowseFileToReadAndSavebtn.Click += new System.EventHandler(this.BrowseFileToReadAndSavebtn_Click);
             // 
             // FileToReadtoAndSaveTotxtbox
@@ -832,6 +833,7 @@
             this.FileToReadtoAndSaveTotxtbox.ReadOnly = true;
             this.FileToReadtoAndSaveTotxtbox.Size = new System.Drawing.Size(236, 20);
             this.FileToReadtoAndSaveTotxtbox.TabIndex = 1;
+            this.FileToReadtoAndSaveTotxtbox.Visible = false;
             // 
             // FileToSaveAndReadItemNameAndId
             // 
@@ -841,6 +843,7 @@
             this.FileToSaveAndReadItemNameAndId.Size = new System.Drawing.Size(166, 13);
             this.FileToSaveAndReadItemNameAndId.TabIndex = 0;
             this.FileToSaveAndReadItemNameAndId.Text = "File location to save and load files";
+            this.FileToSaveAndReadItemNameAndId.Visible = false;
             // 
             // Refreshtimer
             // 

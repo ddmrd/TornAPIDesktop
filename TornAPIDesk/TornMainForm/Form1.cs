@@ -145,7 +145,8 @@ namespace TornMainForm
             public static string APIKey = null;           
             public static JToken ParsedSettingsData = null;
             public static string SettingsFileName = Directory.GetCurrentDirectory() + "\\Settings.json";
-           
+            public static string ItemFileName = Directory.GetCurrentDirectory() + "\\Items.json";
+
         } 
 
         public class TornData //variables to store Data obtained from Torn API
@@ -161,7 +162,6 @@ namespace TornMainForm
             public static string TornTime = null;
             public static string TornItemInfo = null;
             public static string TornJsonFetchedInfo = null;
-
         }
 
         public  class UserData // variables to store Data obtained from user API
@@ -411,21 +411,33 @@ namespace TornMainForm
           //  FileReadWriteLocations.FileToSaveItemList = FileToReadtoAndSaveTotxtbox.Text;
         }
 
+       public static class ItemsAndId
+        {
+            public static string ItemName = null;
+            public static string ItemId = null;
+        }
+
         private void GetItemNamesAndIdbtn_Click(object sender, EventArgs e)
         {
             new Thread(() =>
             {
-                TornData.TornJsonFetchedInfo = MyFunctions.FetchUserData(6, "stocks,items");
+                try
+                {                
+                TornData.TornJsonFetchedInfo = MyFunctions.FetchUserData(6,"items,stocks");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("API key invalid");
+                }
                 //TODO use code below to make json file
 
-                //   TornData.TornItemInfo = Convert.ToString( JObject.Parse(Convert.ToString( File.ReadAllLines(FileReadWriteLocations.FileToSaveItemList + "\\ItemList"))));
+                //  TornData.TornItemInfo = Convert.ToString( JObject.Parse(Convert.ToString( File.ReadAllLines(FileReadWriteLocations.FileToSaveItemList + "\\ItemList"))));
                 //  throw new Exception();
 
                 //  This area was used to create a file containing all items and id's of them.
                 //TODO Write feature to fetch item circulation and name by using the Files Name which fetchs ID then fetching circulation.
-                try
-                {
-                    if (File.Exists(FileReadWriteLocations.FileToSaveItemList + "\\ItemList") == false) // create file if it does not exsist
+
+                if (File.Exists(Settings.ItemFileName + "\\ItemList") == false) // create file if it does not exsist
                     {
                         MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1003);
                         List<string> itemlist = TornData.ItemsIdAndName.Keys.ToList();
@@ -438,12 +450,9 @@ namespace TornMainForm
                             i++;
                         }
                     }
-                }
                 
-            catch (Exception)
-            {
-                MessageBox.Show("Have you Entered a Directory to Read From and Save to in Settings?");               
-            }
+                
+           
            }).Start(); 
             
         }
@@ -461,22 +470,43 @@ namespace TornMainForm
         }       
         
         private void SaveSettingsbtn_Click(object sender, EventArgs e) //Settings Read 
-        { AppSettings f = new AppSettings();
-            f.APIkey = SettingsAPIKeyValuetxtbox.Text;
-            f.saveSettings();
+        {
+            try
+            {
+                AppSettings f = new AppSettings();
+                f.APIkey = SettingsAPIKeyValuetxtbox.Text;
+                f.saveSettings();
+            }
+            catch (Exception)
+            { 
+                MessageBox.Show("APIKEY not saved go to settings to do so. If this message continues make sure you have read/write permissions in current directory");
+            }
         }      
 
         private void MainForm_Load(object sender, EventArgs e) //TODO fix file load and json parsing of saved settings.
         {
             AppSettings.loadSettings();
-            SettingsAPIKeyValuetxtbox.Text = Settings.APIKey;
-            TornAPIKey.Text = Settings.APIKey;
+            SettingsAPIKeyValuetxtbox.Text = Settings.APIKey.Trim(' ');
+            TornAPIKey.Text = Settings.APIKey.Trim(' '); 
+            MainForm.APIKey = SettingsAPIKeyValuetxtbox.Text.Trim(' ');
+            ApiKeyLockcbx.Checked = true;
+
+
+
+            if (SettingsAPILockchkbox.Checked == true)
+            {
+                SettingsAPIKeyValuetxtbox.ReadOnly = true;
+            }
+            if (SettingsAPILockchkbox.Checked == false)
+            {
+                SettingsAPIKeyValuetxtbox.ReadOnly = false;
+            }
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
            // richTextBox1.Text = Settings.SettingsFile;
-            richTextBox1.Text = richTextBox1.Text + Settings.ParsedSettingsData;
+            
         }
     }
     

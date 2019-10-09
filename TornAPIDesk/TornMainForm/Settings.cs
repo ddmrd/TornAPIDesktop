@@ -27,7 +27,7 @@ namespace TornMainForm
             {
                 return new AppSettings();
             }
-
+            
         }
 
         public  void saveSettings()
