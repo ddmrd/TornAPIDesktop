@@ -11,3 +11,7 @@ c:\users\danie\onedrive\documents\visual studio 2015\Projects\TornAPIDesk\TornMa
 c:\users\danie\onedrive\documents\visual studio 2015\Projects\TornAPIDesk\TornMainForm\bin\Debug\Newtonsoft.Json.xml
 C:\Users\danie\OneDrive\Documents\Visual Studio 2015\Projects\TornAPIDesk\TornMainForm\bin\Debug\Json.dll
 C:\Users\danie\OneDrive\Documents\Visual Studio 2015\Projects\TornAPIDesk\TornMainForm\bin\Debug\Json.pdb
+C:\Users\danie\OneDrive\Documents\Visual Studio 2015\Projects\TornAPIDesk\TornMainForm\bin\Debug\TornMainForm.exe.manifest
+C:\Users\danie\OneDrive\Documents\Visual Studio 2015\Projects\TornAPIDesk\TornMainForm\bin\Debug\TornMainForm.application
+C:\Users\danie\OneDrive\Documents\Visual Studio 2015\Projects\TornAPIDesk\TornMainForm\obj\Debug\TornMainForm.exe.manifest
+C:\Users\danie\OneDrive\Documents\Visual Studio 2015\Projects\TornAPIDesk\TornMainForm\obj\Debug\TornMainForm.application
