@@ -7,7 +7,7 @@ To use this app place items.json, Newtonsoft.Json.dll, Newtonsoft.Json.xml, Sett
 
 This is a Desktop application so you don't need to share your api key with anyone else.
 
-The main page intends to auto refresh every 30 seconds with the option to manually request every 12 seconds. This helps limit the chance being temporarily banned 
+The main page intends to auto refresh every 30 seconds with the option to manually request every 12 seconds. This helps limit the chance being temporarily banned. 
 
 # Purpose
 
