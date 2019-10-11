@@ -4,7 +4,8 @@ Some testing has been done to try and make sure application runs smoothly. If th
 This app at the start will need your api key. You can go to the settings and enter this then click save. In order for the save function to work you need to put the executable into a file you can read from and write to.
 
 This is a Desktop application so you don't need to share your api key with anyone else.
-The main page intends to auto refresh every 30 seconds.
+
+The main page intends to auto refresh every 30 seconds with the option to manually request every 12 seconds.
 
 # Purpose
 
