@@ -1,5 +1,5 @@
 # TornAPIDesktop
-Some testing has been done to try and make sure application runs smoothly. If there are any issues or requests for features within the API rulesi will try to assist.
+Some testing has been done to try and make sure application runs smoothly. If there are any issues or requests for features within the API rules i will try to assist.
 # Usage
 This app at the start will need your api key. You can go to the settings and enter this then click save. In order for the save function to work you need to put the executable into a file you can read from and write to.
 
