@@ -10,3 +10,5 @@ This is a Desktop application so you don't need to share your api key with anyon
 This is a desktop application that uses your Torn API key to fetch information about your account and updates it periodically to keep you up to date on typical information such as; cooldowns, energy timers, bank money, status and other in game features.
 
 A item search page is featured so you see the effect, market price, buy price, sale price, description and amount in circulation.
+
+<img src= "https://github.com/ddmrd/TornAPIDesktop/blob/master/TornAPIDesktop.png" alt = "api"/>
