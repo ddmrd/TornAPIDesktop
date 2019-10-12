@@ -15,4 +15,16 @@ This is a desktop application that uses your Torn API key to fetch information a
 
 An item search page is featured so you see the effect, market price, buy price, sale price, description and quantity of the item in circulation.
 
-<img src= "https://github.com/ddmrd/TornAPIDesktop/blob/master/TornAPIDesktop.png" alt = "api"/>
+<img src= "https://github.com/ddmrd/TornAPIDesktop/blob/master/UserInfo.png" alt = "api1"/>
+
+
+<img src= "https://github.com/ddmrd/TornAPIDesktop/blob/master/ItemSearch.png" alt = "api2"/>
+
+<img src= "https://github.com/ddmrd/TornAPIDesktop/blob/master/StockInfo.png" alt = "api3"/>
+
+Setting page allows you to save your api so you dont have to re-enter on app start up. Feature two allows you to change the text colour on the UserInfo page
+
+<img src= "https://github.com/ddmrd/TornAPIDesktop/blob/master/Settings.png" alt = "api4"/>
+
+
+
