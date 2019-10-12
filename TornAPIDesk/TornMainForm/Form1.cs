@@ -346,26 +346,46 @@ namespace TornMainForm
                 // EventId.Reverse();
                 foreach (var item in EventId)
                 {
-                    string.Concat(item, "evnt");
-                    string resultString = Regex.Match(item, @"\d+").Value;
+                        try
+                        {
+                            string.Concat(item, "evnt");
+                            string resultString = Regex.Match(item, @"\d+").Value; // finds first occurance of number for event id
 
+                            JToken Idcontent = UserData.Events[resultString];
+                            string AcEvent = Convert.ToString(Idcontent["event"]);
+                            // making events neater
+                            AcEvent = AcEvent.Trim(new Char[] { ' ', '*', '<', '>', '[', ']', '^', '/', '\\', 'a', '=' });
+                            AcEvent = AcEvent.Replace("href", "");                          
+                            AcEvent = AcEvent.Replace("</a>", "");
+                            AcEvent = AcEvent.Replace("<b>", "");
+                            AcEvent = AcEvent.Replace("[<a", "");
+                            AcEvent = AcEvent.Replace("<//b>", "");                                                     
+                           
+                            AcEvent = Regex.Replace(AcEvent, "XID", " ");
+                            AcEvent = Regex.Replace(AcEvent, @"[^0-9a-zA-Z:,. ]+", "");
 
-                    JToken Idcontent = UserData.Events[resultString];
-                    string AcEvent = Convert.ToString(Idcontent["event"]);
-                        // making events neater
-                    AcEvent = AcEvent.Trim(new Char[] { ' ', '*', '<', '>','[',']','^','/','\\','a','=' });                                               
-                        AcEvent = AcEvent.Replace("href", "");
-                        AcEvent =  AcEvent.Trim(new Char[] {' ','=' } );
-                        AcEvent = AcEvent.Replace("</a>", "");
-                        AcEvent = AcEvent.Replace("<b>", "");
-                     AcEvent = AcEvent.Replace("[<a", "");
-                        AcEvent = AcEvent.Replace("<//b>", "");
-                        AcEvent = AcEvent.Replace("<a", "");
-                        AcEvent = AcEvent.Replace("=", "");
-                        
-                        EventEvent.Add(AcEvent);
-                    richTextBox1.Text = richTextBox1.Text + AcEvent + Environment.NewLine + Environment.NewLine;
-                }                              
+                            AcEvent = Regex.Replace(AcEvent, "http:www.torn.comprofiles.php?", " ");
+                            AcEvent = Regex.Replace(AcEvent, "http:www.torn.comstockexchange.php", " ");
+                            AcEvent = Regex.Replace(AcEvent, "http:www.torn.comloader.php", " ");
+                            AcEvent = Regex.Replace(AcEvent, "http:www.torn.comorganisedcrimes.php", " ");
+                            AcEvent = Regex.Replace(AcEvent, "sidracingtablograce", " ");
+                            AcEvent = Regex.Replace(AcEvent, "http:www.torn.comjoblist.phppcorpinfoID", " ");
+                            AcEvent = Regex.Replace(AcEvent, "http: www.torn.comjoblist.phppcorpinfoID", " ");
+                            AcEvent = AcEvent.Replace("view"," ");                            
+
+                            AcEvent = Regex.Replace(AcEvent," [\\w]{ 1, 2}", " ");
+                           // AcEvent = Regex.Replace(AcEvent, " [\\w]{ 18, 26}", " ");
+                            AcEvent = AcEvent.TrimStart(' ');
+                         
+                            EventEvent.Add(AcEvent);
+                            richTextBox1.Text = richTextBox1.Text + AcEvent + Environment.NewLine + Environment.NewLine;
+                        }
+                        catch (Exception)
+                        {
+
+                            continue;
+                        }
+        }                              
 
                 ApiKeyLockcbx.Checked = true;
                 UserData.TimerAble += 1; // when timerable is > 0 the refreshtimer will automate itself. when an exception occurs value is put to 0 which turns timer off.
