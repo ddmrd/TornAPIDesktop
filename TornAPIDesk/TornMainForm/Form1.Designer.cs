@@ -35,6 +35,8 @@
             this.ApiKeyLockcbx = new System.Windows.Forms.CheckBox();
             this.MainTabBar = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.EducationLengthValuelbl = new System.Windows.Forms.Label();
+            this.EducationLengthlbl = new System.Windows.Forms.Label();
             this.Traveltimelbl = new System.Windows.Forms.Label();
             this.TravelTimeValuelbl = new System.Windows.Forms.Label();
             this.NewMessagesValuelbl = new System.Windows.Forms.Label();
@@ -153,8 +155,12 @@
             this.FetchItemsTimer = new System.Windows.Forms.Timer(this.components);
             this.StockInfoRefreshLimit = new System.Windows.Forms.Timer(this.components);
             this.LoadItemRefreshLimiter = new System.Windows.Forms.Timer(this.components);
-            this.EducationLengthlbl = new System.Windows.Forms.Label();
-            this.EducationLengthValuelbl = new System.Windows.Forms.Label();
+            this.DukeLootNamelbl = new System.Windows.Forms.Label();
+            this.LeslieNamelbl = new System.Windows.Forms.Label();
+            this.LeslieDukeTimersCountDown = new System.Windows.Forms.Timer(this.components);
+            this.RefreshTrueDataForLoots = new System.Windows.Forms.Timer(this.components);
+            this.DukeTimerlbl = new System.Windows.Forms.Label();
+            this.LeslieTimerValuelbl = new System.Windows.Forms.Label();
             this.MainTabBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -217,6 +223,10 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.LeslieTimerValuelbl);
+            this.tabPage1.Controls.Add(this.DukeTimerlbl);
+            this.tabPage1.Controls.Add(this.LeslieNamelbl);
+            this.tabPage1.Controls.Add(this.DukeLootNamelbl);
             this.tabPage1.Controls.Add(this.EducationLengthValuelbl);
             this.tabPage1.Controls.Add(this.EducationLengthlbl);
             this.tabPage1.Controls.Add(this.Traveltimelbl);
@@ -279,6 +289,26 @@
             this.tabPage1.Size = new System.Drawing.Size(618, 365);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "UserInfo";
+            // 
+            // EducationLengthValuelbl
+            // 
+            this.EducationLengthValuelbl.AutoSize = true;
+            this.EducationLengthValuelbl.Location = new System.Drawing.Point(411, 335);
+            this.EducationLengthValuelbl.Name = "EducationLengthValuelbl";
+            this.EducationLengthValuelbl.Size = new System.Drawing.Size(13, 13);
+            this.EducationLengthValuelbl.TabIndex = 61;
+            this.EducationLengthValuelbl.Text = "0";
+            this.EducationLengthValuelbl.Visible = false;
+            // 
+            // EducationLengthlbl
+            // 
+            this.EducationLengthlbl.AutoSize = true;
+            this.EducationLengthlbl.Location = new System.Drawing.Point(316, 335);
+            this.EducationLengthlbl.Name = "EducationLengthlbl";
+            this.EducationLengthlbl.Size = new System.Drawing.Size(87, 13);
+            this.EducationLengthlbl.TabIndex = 60;
+            this.EducationLengthlbl.Text = "Education length";
+            this.EducationLengthlbl.Visible = false;
             // 
             // Traveltimelbl
             // 
@@ -832,7 +862,7 @@
             // ItemCombobox
             // 
             this.ItemCombobox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.ItemCombobox.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.ItemCombobox.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.ItemCombobox.Enabled = false;
             this.ItemCombobox.FormattingEnabled = true;
             this.ItemCombobox.Location = new System.Drawing.Point(251, 64);
@@ -840,7 +870,6 @@
             this.ItemCombobox.Size = new System.Drawing.Size(121, 21);
             this.ItemCombobox.Sorted = true;
             this.ItemCombobox.TabIndex = 1;
-            this.ItemCombobox.UseWaitCursor = true;
             // 
             // GetItemNamesAndIdbtn
             // 
@@ -989,7 +1018,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(517, 244);
+            this.tabPage8.Size = new System.Drawing.Size(598, 298);
             this.tabPage8.TabIndex = 2;
             this.tabPage8.Text = "Page 3";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -1039,7 +1068,7 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(517, 244);
+            this.tabPage9.Size = new System.Drawing.Size(598, 298);
             this.tabPage9.TabIndex = 3;
             this.tabPage9.Text = "Page 4";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -1089,7 +1118,7 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(517, 244);
+            this.tabPage10.Size = new System.Drawing.Size(598, 298);
             this.tabPage10.TabIndex = 4;
             this.tabPage10.Text = "Page 5";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -1139,7 +1168,7 @@
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(517, 244);
+            this.tabPage11.Size = new System.Drawing.Size(598, 298);
             this.tabPage11.TabIndex = 5;
             this.tabPage11.Text = "Page 6";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -1189,7 +1218,7 @@
             this.tabPage12.Location = new System.Drawing.Point(4, 22);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(517, 244);
+            this.tabPage12.Size = new System.Drawing.Size(598, 298);
             this.tabPage12.TabIndex = 6;
             this.tabPage12.Text = "Page 7";
             this.tabPage12.UseVisualStyleBackColor = true;
@@ -1447,32 +1476,58 @@
             this.LoadItemRefreshLimiter.Interval = 1000;
             this.LoadItemRefreshLimiter.Tick += new System.EventHandler(this.LoadItemRefreshLimiter_Tick);
             // 
-            // EducationLengthlbl
+            // DukeLootNamelbl
             // 
-            this.EducationLengthlbl.AutoSize = true;
-            this.EducationLengthlbl.Location = new System.Drawing.Point(316, 335);
-            this.EducationLengthlbl.Name = "EducationLengthlbl";
-            this.EducationLengthlbl.Size = new System.Drawing.Size(87, 13);
-            this.EducationLengthlbl.TabIndex = 60;
-            this.EducationLengthlbl.Text = "Education length";
-            this.EducationLengthlbl.Visible = false;
+            this.DukeLootNamelbl.AutoSize = true;
+            this.DukeLootNamelbl.Location = new System.Drawing.Point(6, 116);
+            this.DukeLootNamelbl.Name = "DukeLootNamelbl";
+            this.DukeLootNamelbl.Size = new System.Drawing.Size(90, 13);
+            this.DukeLootNamelbl.TabIndex = 62;
+            this.DukeLootNamelbl.Text = "Duke Loot 4 In  : ";
             // 
-            // EducationLengthValuelbl
+            // LeslieNamelbl
             // 
-            this.EducationLengthValuelbl.AutoSize = true;
-            this.EducationLengthValuelbl.Location = new System.Drawing.Point(411, 335);
-            this.EducationLengthValuelbl.Name = "EducationLengthValuelbl";
-            this.EducationLengthValuelbl.Size = new System.Drawing.Size(13, 13);
-            this.EducationLengthValuelbl.TabIndex = 61;
-            this.EducationLengthValuelbl.Text = "0";
-            this.EducationLengthValuelbl.Visible = false;
+            this.LeslieNamelbl.AutoSize = true;
+            this.LeslieNamelbl.Location = new System.Drawing.Point(184, 116);
+            this.LeslieNamelbl.Name = "LeslieNamelbl";
+            this.LeslieNamelbl.Size = new System.Drawing.Size(85, 13);
+            this.LeslieNamelbl.TabIndex = 63;
+            this.LeslieNamelbl.Text = "Leslie Loot 4 In: ";
+            // 
+            // LeslieDukeTimersCountDown
+            // 
+            this.LeslieDukeTimersCountDown.Interval = 1000;
+            this.LeslieDukeTimersCountDown.Tick += new System.EventHandler(this.LeslieDukeTimers_Tick);
+            // 
+            // RefreshTrueDataForLoots
+            // 
+            this.RefreshTrueDataForLoots.Interval = 30000;
+            this.RefreshTrueDataForLoots.Tick += new System.EventHandler(this.RefreshTrueDataForLoots_Tick);
+            // 
+            // DukeTimerlbl
+            // 
+            this.DukeTimerlbl.AutoSize = true;
+            this.DukeTimerlbl.Location = new System.Drawing.Point(102, 116);
+            this.DukeTimerlbl.Name = "DukeTimerlbl";
+            this.DukeTimerlbl.Size = new System.Drawing.Size(49, 13);
+            this.DukeTimerlbl.TabIndex = 64;
+            this.DukeTimerlbl.Text = "00;00;00";
+            // 
+            // LeslieTimerValuelbl
+            // 
+            this.LeslieTimerValuelbl.AutoSize = true;
+            this.LeslieTimerValuelbl.Location = new System.Drawing.Point(275, 116);
+            this.LeslieTimerValuelbl.Name = "LeslieTimerValuelbl";
+            this.LeslieTimerValuelbl.Size = new System.Drawing.Size(49, 13);
+            this.LeslieTimerValuelbl.TabIndex = 65;
+            this.LeslieTimerValuelbl.Text = "00:00:00";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(650, 414);
+            this.ClientSize = new System.Drawing.Size(645, 408);
             this.Controls.Add(this.TornCityTimelbl);
             this.Controls.Add(this.MainTabBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1637,6 +1692,12 @@
         private System.Windows.Forms.Button GetDatabtn;
         private System.Windows.Forms.Label EducationLengthValuelbl;
         private System.Windows.Forms.Label EducationLengthlbl;
+        private System.Windows.Forms.Label LeslieNamelbl;
+        private System.Windows.Forms.Label DukeLootNamelbl;
+        private System.Windows.Forms.Timer LeslieDukeTimersCountDown;
+        private System.Windows.Forms.Timer RefreshTrueDataForLoots;
+        private System.Windows.Forms.Label LeslieTimerValuelbl;
+        private System.Windows.Forms.Label DukeTimerlbl;
     }
 }
 
