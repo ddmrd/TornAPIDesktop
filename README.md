@@ -10,7 +10,7 @@ This is a Desktop application so you don't need to share your api key with anyon
 The main page intends to auto refresh every 30 seconds with the option to manually request every 12 seconds. This helps limit the chance being temporarily banned. 
 
 # Purpose
-
+ 
 This is a desktop application that uses your Torn API key to fetch information about your account and updates it periodically to keep you up to date on typical information such as; cooldowns, energy timers, bank money, status and other in game features.
 
 An item search page is featured so you see the effect, market price, buy price, sale price, description and quantity of the item in circulation.
