@@ -14,19 +14,18 @@ using System.Drawing;
 
 namespace TornMainForm
 {
-    public partial class MainForm : Form
+    public partial class MainForm1 : Form
     {
         public static string APIKey = null; // api key 
-        public MainForm()
+        public MainForm1()
         {
             InitializeComponent();
         }
 
         private void TornAPIKey_TextChanged(object sender, EventArgs e)
         {
-            MainForm.APIKey = TornAPIKey.Text; // api key assgined
+            MainForm1.APIKey = TornAPIKey.Text; // api key assgined
         }
-
 
         private void ApiKeyLockcbx_CheckedChanged(object sender, EventArgs e)
         {
@@ -46,7 +45,34 @@ namespace TornMainForm
         }
 
         public static class MyFunctions
-        {
+        {           
+               public static void TabColour(TabPage TargetObj , string forecolour, string backcolour)
+            {
+                TargetObj.ForeColor = Color.FromName(forecolour);
+                TargetObj.BackColor = Color.FromName(backcolour);
+            }
+            public static void RichtxtBoxColour(RichTextBox targteobj, string forecolor , string backcolour)
+            {
+                targteobj.BackColor = Color.FromName(backcolour);
+                targteobj.ForeColor = Color.FromName(forecolor);
+            }
+            public static void ButtonColour(Button targetbutton,string forecolour, string backcolour)
+            {
+                targetbutton.BackColor = Color.FromName(backcolour);
+                targetbutton.ForeColor = Color.FromName(forecolour);
+            }
+
+            public static void comboboxcolour(ComboBox target , string forecolour, string backcolour)
+            {
+                target.BackColor = Color.FromName(backcolour);
+                target.ForeColor = Color.FromName(forecolour);
+            }
+            public static void Textboxcolour(TextBox target, string forcolour, string backcolour )
+            {
+                target.BackColor = Color.FromName(backcolour);
+                target.ForeColor = Color.FromName(forcolour);
+            }
+
             /// <summary>
             /// switch options: 1 = user , 2 = property , 3 = faction , 4 = company , 5 = market , 6 = torn. fields = The api options (children) from the switch description option.
             /// 7 = Yata loot timers data
@@ -60,22 +86,22 @@ namespace TornMainForm
                 switch (switchOption)
                 {
                     case 1:
-                        test = string.Format("https://api.torn.com/user/?selections=" + fields + "&key=" + MainForm.APIKey);
+                        test = string.Format("https://api.torn.com/user/?selections=" + fields + "&key=" + MainForm1.APIKey);
                         break;
                     case 2:
-                        test = string.Format("https://api.torn.com/property/?selections=" + fields + "&key=" + MainForm.APIKey);
+                        test = string.Format("https://api.torn.com/property/?selections=" + fields + "&key=" + MainForm1.APIKey);
                         break;
                     case 3:
-                        test = test = string.Format("https://api.torn.com/faction/?selections=" + fields + "&key=" + MainForm.APIKey);
+                        test = test = string.Format("https://api.torn.com/faction/?selections=" + fields + "&key=" + MainForm1.APIKey);
                         break;
                     case 4:
-                        test = string.Format("https://api.torn.com/company/?selections=" + fields + "&key=" + MainForm.APIKey);
+                        test = string.Format("https://api.torn.com/company/?selections=" + fields + "&key=" + MainForm1.APIKey);
                         break;
                     case 5:
-                        test = string.Format("https://api.torn.com/market/?selections=" + fields + "&key=" + MainForm.APIKey);
+                        test = string.Format("https://api.torn.com/market/?selections=" + fields + "&key=" + MainForm1.APIKey);
                         break;
                     case 6:
-                        test = test = string.Format("https://api.torn.com/torn/?selections=" + fields + "&key=" + MainForm.APIKey);
+                        test = test = string.Format("https://api.torn.com/torn/?selections=" + fields + "&key=" + MainForm1.APIKey);
                         break;
                     case 7:
                         test = string.Format("https://yata.alwaysdata.net/loot/timings/");                       
@@ -109,7 +135,7 @@ namespace TornMainForm
 
             public static DialogResult APIErrorChecks() //Function to check if api returns errors
             {
-                WebRequest RequestBasic = WebRequest.Create("https://api.torn.com/user/?selections=basic&key=" + MainForm.APIKey);
+                WebRequest RequestBasic = WebRequest.Create("https://api.torn.com/user/?selections=basic&key=" + MainForm1.APIKey);
                 RequestBasic.Method = "GET";
                 HttpWebResponse ResponseBasic = null;
                 ResponseBasic = (HttpWebResponse)RequestBasic.GetResponse();
@@ -133,6 +159,8 @@ namespace TornMainForm
 
             public static void TimerCountdownWithTicks(JToken JsonFrom, Label YourLabal, string JsonStringdataname)
             {
+                try
+                {
                 if (Convert.ToInt32(JsonFrom[JsonStringdataname]) > 1)
                 {
                     TimeSpan TimeTick = new TimeSpan();
@@ -140,6 +168,12 @@ namespace TornMainForm
                     string TickDown = Convert.ToString(Convert.ToInt32(JsonFrom[JsonStringdataname]) - 1);
                     TimeTick = TimeSpan.FromSeconds(Convert.ToInt32(TickDown));
                     YourLabal.Text = String.Format(Convert.ToString(TimeTick), "MM:ss");
+                    }
+                }
+                catch (Exception)
+                {
+
+                    
                 }
             }
             /// <summary>
@@ -194,7 +228,7 @@ namespace TornMainForm
         public class  YataDataClass
         {
              public static  string YataTimers = null;
-            public static JObject yataObject = null;
+            public static JObject LootTimers = null;
 
             public static JToken DukeData = null;
             public static JToken DukeTimingsForLevels = null;
@@ -205,7 +239,12 @@ namespace TornMainForm
             public static JToken LeslieTimingsForLevels = null;
             public static JToken LeslieDataForlevel4 = null;
             public static JToken LeslieTimerForlevel4 = null;
-          
+
+            public static JToken ScroogeData = null;
+            public static JToken ScroogeTimingsForLevels = null;
+            public static JToken ScroogeDataForlevel4 = null;
+            public static JToken ScroogeTimerForlevel4 = null;
+
         }
 
         public class FileReadWriteLocations
@@ -256,6 +295,7 @@ namespace TornMainForm
             public static string Stock23 = null;    public static string Stock24 = null;          public static string Stock25 = null;
             public static string Stock26 = null;    public static string Stock27 = null;          public static string Stock28 = null;
             public static string Stock29 = null;    public static string Stock30 = null;
+           
 
         }
 
@@ -300,15 +340,16 @@ namespace TornMainForm
         {
               try
               {
-            if (UserData.TimerAble == 0) // stops timer if exception occured. although if api is fixed within its interval will continue as normal or untill clicked again.
+                
+                if (UserData.TimerAble == 0) // stops timer if exception occured. although if api is fixed within its interval will continue as normal or untill clicked again.
             {
                 Refreshtimer.Stop();
             }
             if (APIKey.Length == 16)
             {
                 APILengthWarning.Visible = false; // turn off API warning label 
-
-                ButtonLimittimer.Start();
+                    RefreshValuelbl.ForeColor = Color.FromName("green");
+                    ButtonLimittimer.Start();
                 GetDatabtn.Enabled = false; // makes button non clickable
 
                 OneSecondtimer.Start();
@@ -317,21 +358,21 @@ namespace TornMainForm
                 UserData.Basic = MyFunctions.FetchUserData(1, "basic,profile,bars,money,cooldowns,notifications,travel,events,education", UserData.Basic); // Fields to fetch
 
                 UserData.User = JObject.Parse(UserData.Basic); // parse to fetchable jtoken data.
-                var details = JObject.Parse(UserData.Basic); // makes json string data callable. 
+                JObject details = JObject.Parse(UserData.Basic); // makes json string data callable. 
                      
                     UserData.Educationtimeleft = Convert.ToString(details["education_timeleft"]);
                    
 
-                lvlValuelbl.Text = UserData.SetValue(UserData.Basic, UserData.level, "level");
-                GenderValuelbl.Text = UserData.SetValue(UserData.Basic, UserData.gender, "gender");
+           //     lvlValuelbl.Text = UserData.SetValue(UserData.Basic, UserData.level, "level");
+             //   GenderValuelbl.Text = UserData.SetValue(UserData.Basic, UserData.gender, "gender");
                 NameValuelbl.Text = Convert.ToString(details["name"]);
                 IDValuelbl.Text = Convert.ToString(details["player_id"]);
                 TornData.TornTime = Convert.ToString(details["server_time"]);
                 UserData.ChainCooldowns = Convert.ToString(details["cooldowns"]); 
 
-                string status = Convert.ToString(details["status"]).Trim(new char[] { '[', ']', ' ', ',', '"', '.' }).Replace("\"", string.Empty).Replace(",", string.Empty);
-
-                Statuslbl.Text = "Status: " + status;
+                JObject status = JObject.Parse(Convert.ToString( details["status"]));
+                    JToken state =  status["description"];
+                Statuslbl.Text = "Status: " + Convert.ToString( state).Trim(new char[] { '[', ']', ' ', ',', '"', '.' }).Replace("\"", string.Empty).Replace(",", string.Empty); ;
                 UserData.Lifejson = details["life"]; LifeValue.Text = Convert.ToString(UserData.Lifejson["current"] + " / " + UserData.Lifejson["maximum"]);
                 UserData.Energyjson = details["energy"]; EnergyValuelbl.Text = Convert.ToString(UserData.Energyjson["current"] + " / " + UserData.Energyjson["maximum"]);
                 UserData.Nervejson = details["nerve"]; NerveValuelbl.Text = Convert.ToString(UserData.Nervejson["current"] + " / " + UserData.Nervejson["maximum"]);
@@ -350,7 +391,6 @@ namespace TornMainForm
                 CityBankValuelbl.Text = "Money in Bank: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.Bank["amount"]));
                 CoolDownValuelbl.Text = Convert.ToString(UserData.Chainjson["cooldown"]);
                 UserData.DBMCooldowns = details["cooldowns"];
-
                     
              
                 UserData.Notifications = details["notifications"];
@@ -365,9 +405,13 @@ namespace TornMainForm
 
                 // throw new Exception();
 
-                //Event page 
+                //Event page               
+
                 List<string> EventId = new List<string>();
                 List<string> EventEvent = new List<string>();
+                    EventId.Clear();
+                    EventEvent.Clear();
+                    richTextBox1.Clear();
                 UserData.Events = UserData.User["events"];
                 var LS = JsonConvert.SerializeObject(UserData.Events);
                 JObject tfe = JObject.Parse(LS);
@@ -386,7 +430,7 @@ namespace TornMainForm
                             JToken Idcontent = UserData.Events[resultString];
                             string AcEvent = Convert.ToString(Idcontent["event"]);
                             // making events neater
-                            AcEvent = AcEvent.Trim(new Char[] { ' ', '*', '<', '>', '[', ']', '^', '/', '\\', 'a', '=' });
+                            AcEvent = AcEvent.Trim(new Char[] {'*', '<', '>', '[', ']', '^', '/', '\\', 'a', '=' });
                             AcEvent = AcEvent.Replace("href", "");                          
                             AcEvent = AcEvent.Replace("</a>", "");
                             AcEvent = AcEvent.Replace("<b>", "");
@@ -395,6 +439,9 @@ namespace TornMainForm
                            
                             AcEvent = Regex.Replace(AcEvent, "XID", " ");
                             AcEvent = Regex.Replace(AcEvent, @"[^0-9a-zA-Z:,. ]+", "");
+                         
+
+                            
                             //removal of links
                             AcEvent = Regex.Replace(AcEvent, "http:www.torn.comprofiles.php?", " ");
                             AcEvent = Regex.Replace(AcEvent, "http:www.torn.comstockexchange.php", " ");
@@ -403,11 +450,14 @@ namespace TornMainForm
                             AcEvent = Regex.Replace(AcEvent, "sidracingtablograce", " ");
                             AcEvent = Regex.Replace(AcEvent, "http:www.torn.comjoblist.phppcorpinfoID", " ");
                             AcEvent = Regex.Replace(AcEvent, "http: www.torn.comjoblist.phppcorpinfoID", " ");
-                            AcEvent = Regex.Replace(AcEvent, "http:www.torn.combank.php", " ");                      
-
-
-                        AcEvent = AcEvent.Replace("view"," ");
+                            AcEvent = Regex.Replace(AcEvent, "http:www.torn.combank.php", " ");
+                            AcEvent = AcEvent.Replace("http:www.torn.comtrade.phpstep", " ");
+                            
+                            
+                            AcEvent = AcEvent.Replace("view"," ");
                             AcEvent = AcEvent.Replace("View", " ");
+                            AcEvent = AcEvent.Replace("Please click here to continue", " "); 
+
 
                             AcEvent = AcEvent.Replace("1stb", "1st ");
                             AcEvent = AcEvent.Replace("2ndb", "2nd ");
@@ -418,7 +468,9 @@ namespace TornMainForm
                             AcEvent = AcEvent.Replace("7thb", "7th ");
                             AcEvent = AcEvent.Replace("8thb", "8th ");
                             AcEvent = AcEvent.Replace("9thb", "9th "); 
-                                 AcEvent = AcEvent.Replace("classh", " ");
+                            AcEvent = AcEvent.Replace("classh", " ");
+                            AcEvent = AcEvent.Replace("classtblue", " ");
+
 
                             AcEvent = AcEvent.Replace("sid", " sid ");
                             AcEvent = AcEvent.Replace(" sid", " ");
@@ -426,6 +478,8 @@ namespace TornMainForm
                             AcEvent = AcEvent.Replace("attackLogID", " attackLogID: ");
                             AcEvent = AcEvent.Replace("ID", " ID: ");
                             AcEvent = AcEvent.Replace(" a ", " ");
+                            AcEvent = AcEvent.Replace("    ", " ");
+                            AcEvent = AcEvent.Replace("   ", " ");
                             AcEvent = AcEvent.Replace("  ", " ");
 
                             if (item.Contains("the") & item.Contains("details") & item.Contains("here"))
@@ -435,7 +489,7 @@ namespace TornMainForm
                                 AcEvent = AcEvent.Replace("here", "");
                             }
 
-                            AcEvent = Regex.Replace(AcEvent," [\\w]{ 0, 2}", " ");
+                      //      AcEvent = Regex.Replace(AcEvent," [\\w]{ 0, 2}", " ");
                         
                             // AcEvent = Regex.Replace(AcEvent, " [\\w]{ 18, 26}", " ");
                             AcEvent = AcEvent.TrimStart(' ');
@@ -445,7 +499,6 @@ namespace TornMainForm
                         }
                         catch (Exception)
                         {
-
                             continue;
                         }
         }                              
@@ -475,6 +528,7 @@ namespace TornMainForm
                 {
                                    
                 MyFunctions.APIErrorChecks();
+                    Refreshtimer.Stop();
                 }
                 catch (Exception)
                 {
@@ -524,8 +578,10 @@ namespace TornMainForm
             MyFunctions.TimerCountdownWithTicks(UserData.DBMCooldowns, BoosterCdValuelbl, "booster");
             MyFunctions.TimerCountdownWithTicks(UserData.Chainjson, CoolDownValuelbl, "cooldown");
             MyFunctions.TimerCountdownWithTicks(UserData.Bank, BankTimeLeftValuelbl, "time_left");
-                    
-            
+
+            try
+            {
+
             if (Convert.ToInt32(UserData.Educationtimeleft) > 1)
             {
                 EducationLengthlbl.Visible = true;
@@ -537,6 +593,11 @@ namespace TornMainForm
                 EducationLengthValuelbl.Text = String.Format(Convert.ToString(TimeTick), "MM:ss");
             }
 
+            }
+            catch (Exception)
+            {
+           
+            }
 
             if (Convert.ToInt32(UserData.travel["time_left"]) > 1 )
             {
@@ -552,19 +613,43 @@ namespace TornMainForm
 
             if (Statuslbl.Text.Contains('<')) // shortens status attacking info to link to attackers profile.
             {
+                try
+                {              
                 string statusBegin = Statuslbl.Text.Split('<')[0];
                 string statusend = Statuslbl.Text.Split('\\')[1];
-                Statuslbl.Text = statusBegin;
+                Statuslbl.Text = statusBegin + ": ";
 
                 UserData.StatusLink = "https://www.torn.com/" + statusend;
                 StatusLinkProfileValuelbl.Text = statusend;
                
                 StatusLinkProfileValuelbl.Visible = true;
+                }
+                catch (Exception)
+                {
+                    try
+                    {
+                        string statusBegin = Statuslbl.Text.Split('<')[0];
+                        string statusend = Statuslbl.Text.Replace('\\',' ');
+                        Statuslbl.Text = statusBegin + "Someone";                      
+                       
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }                    
+                }
             }
-            
+            try
+            {
+
             
            RefreshValuelbl.Text = Convert.ToString(Convert.ToInt32(RefreshValuelbl.Text) - 1); // decrease refresh value by 1 per timer tick which should be 1 second.
+            }
+            catch (Exception)
+            {
 
+                
+            }
             try
             { // setting torn time
                 DateTime begginingoftime = new DateTime(1970, 01, 01);
@@ -649,7 +734,7 @@ namespace TornMainForm
                  }
                catch (Exception)
                {
-                   MessageBox.Show("Error Report:300");
+                   MessageBox.Show("Get Api data first");
                }
 
           }).Start();
@@ -687,7 +772,7 @@ namespace TornMainForm
                      try
                     {
 
-                if (MainForm.APIKey != "" & MainForm.APIKey.Length == 16)// create file if it does not exsist
+                if (MainForm1.APIKey != "" & MainForm1.APIKey.Length == 16)// create file if it does not exsist
                     {
                         MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1003); //fetch items and add to dict
                         TornData.ItemIdList = TornData.ItemsIdAndName.Keys.ToList();
@@ -790,7 +875,7 @@ namespace TornMainForm
             {           
             SettingsAPIKeyValuetxtbox.Text = Settings.APIKey.Trim(' ');
             TornAPIKey.Text = Settings.APIKey.Trim(' ');
-            MainForm.APIKey = SettingsAPIKeyValuetxtbox.Text.Trim(' ');
+            MainForm1.APIKey = SettingsAPIKeyValuetxtbox.Text.Trim(' ');
                 if (Settings.APIKey != "")
                 {
                     ApiKeyLockcbx.Checked = true;
@@ -822,35 +907,39 @@ namespace TornMainForm
             {
                 SettingsAPIKeyValuetxtbox.ReadOnly = false;
             }
-
             
                 YataDataClass.YataTimers = MyFunctions.FetchUserData(7, null, YataDataClass.YataTimers);
 
-            // fetch data 
+            // fetch api data for npc loot timings
             try
             {            
-                YataDataClass.yataObject = JObject.Parse(YataDataClass.YataTimers);
-                YataDataClass.DukeData = YataDataClass.yataObject["4"];
+                YataDataClass.LootTimers = JObject.Parse(YataDataClass.YataTimers);
+
+                YataDataClass.DukeData = YataDataClass.LootTimers["4"];
                 YataDataClass.DukeTimingsForLevels = YataDataClass.DukeData["timings"];
                 YataDataClass.DukeDataForlevel4 = YataDataClass.DukeTimingsForLevels["4"];
                 YataDataClass.DukeTimingsForLevels = YataDataClass.DukeDataForlevel4["due"];
-                YataDataClass.LeslieData = YataDataClass.yataObject["15"];
+
+                YataDataClass.LeslieData = YataDataClass.LootTimers["15"];
                 YataDataClass.LeslieTimingsForLevels = YataDataClass.LeslieData["timings"];
                 YataDataClass.LeslieDataForlevel4 = YataDataClass.LeslieTimingsForLevels["4"];
                 YataDataClass.LeslieTimerForlevel4 = YataDataClass.LeslieDataForlevel4["due"];
 
+                YataDataClass.ScroogeData = YataDataClass.LootTimers["10"];
+                YataDataClass.ScroogeTimingsForLevels = YataDataClass.ScroogeData["timings"];
+                YataDataClass.ScroogeDataForlevel4 = YataDataClass.ScroogeTimingsForLevels["4"];
+                YataDataClass.ScroogeTimerForlevel4 = YataDataClass.ScroogeDataForlevel4["due"];
+                
 
             //start timers
             RefreshTrueDataForLoots.Start();
             }
             catch (Exception)
             {
-
                 
             }
-            LeslieDukeTimersCountDown.Start();
-               
-           
+            RefreshTrueDataForLoots.Start();
+            LeslieDukeTimersCountDown.Start();          
          
         }
         
@@ -883,8 +972,7 @@ namespace TornMainForm
                 ItemCombobox.Items.Add(item);
             }            
 
-            FetchItemsTimer.Stop();
-           
+            FetchItemsTimer.Stop();           
         }
 
         private void ItemSearchbtn_Click(object sender, EventArgs e)
@@ -987,50 +1075,188 @@ namespace TornMainForm
         {
 
             try
-            {
-
-          
+            {                          
 
             MyFunctions.TimerCountdownWithTicks(YataDataClass.DukeDataForlevel4, DukeTimerlbl, "due");               
                     
             MyFunctions.TimerCountdownWithTicks(YataDataClass.LeslieDataForlevel4, LeslieTimerValuelbl, "due");
+
+                try
+                {
+                    MyFunctions.TimerCountdownWithTicks(YataDataClass.ScroogeDataForlevel4, ScroogeTimertolvl4lbl, "due");
+                }
+                catch (Exception)
+                {
+                    ScroogeTimertolvl4lbl.Text = "";
+                    
+                }         
+
             }
             catch (Exception)
             {
-
-                throw;
+                LeslieDukeTimersCountDown.Stop();
             }
-
-
-
+            
         }
 
-        private void RefreshTrueDataForLoots_Tick(object sender, EventArgs e)
+        private void RefreshTrueDataForLoots_Tick(object sender, EventArgs e) // gets the loot data every tick to updata to its real time incase timers become to quick / slow
         {
             try
             {
 
             YataDataClass.YataTimers = MyFunctions.FetchUserData(7, null, YataDataClass.YataTimers);
 
+            YataDataClass.LootTimers = JObject.Parse(YataDataClass.YataTimers);
 
-            YataDataClass.yataObject = JObject.Parse(YataDataClass.YataTimers);
-            YataDataClass.DukeData = YataDataClass.yataObject["4"];
-            YataDataClass.DukeTimingsForLevels = YataDataClass.DukeData["timings"];
-            YataDataClass.DukeDataForlevel4 = YataDataClass.DukeTimingsForLevels["4"];
-            YataDataClass.DukeTimingsForLevels = YataDataClass.DukeDataForlevel4["due"];
+                YataDataClass.DukeData = YataDataClass.LootTimers["4"];
+                YataDataClass.DukeTimingsForLevels = YataDataClass.DukeData["timings"];
+                YataDataClass.DukeDataForlevel4 = YataDataClass.DukeTimingsForLevels["4"];
+                YataDataClass.DukeTimingsForLevels = YataDataClass.DukeDataForlevel4["due"];
 
-            YataDataClass.LeslieData = YataDataClass.yataObject["15"];
-            YataDataClass.LeslieTimingsForLevels = YataDataClass.LeslieData["timings"];
-            YataDataClass.LeslieDataForlevel4 = YataDataClass.LeslieTimingsForLevels["4"];
-            YataDataClass.LeslieTimerForlevel4 = YataDataClass.LeslieDataForlevel4["due"];
+                YataDataClass.LeslieData = YataDataClass.LootTimers["15"];
+                YataDataClass.LeslieTimingsForLevels = YataDataClass.LeslieData["timings"];
+                YataDataClass.LeslieDataForlevel4 = YataDataClass.LeslieTimingsForLevels["4"];
+                YataDataClass.LeslieTimerForlevel4 = YataDataClass.LeslieDataForlevel4["due"];
+
+                YataDataClass.ScroogeData = YataDataClass.LootTimers["10"];
+                YataDataClass.ScroogeTimingsForLevels = YataDataClass.ScroogeData["timings"];
+                YataDataClass.ScroogeDataForlevel4 = YataDataClass.ScroogeTimingsForLevels["4"];
+                YataDataClass.ScroogeTimerForlevel4 = YataDataClass.ScroogeDataForlevel4["due"];                                
+                
+                LeslieDukeTimersCountDown.Start();
 
             }
             catch (Exception)
             {
-                
-            }
-            
+                LeslieDukeTimersCountDown.Start();
+            }            
+        }               
+        
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=15");
         }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=4");
+        }
+
+        private void StopRefreshingbtn_Click(object sender, EventArgs e)
+        {
+
+            Refreshtimer.Stop();
+            RefreshValuelbl.ForeColor = Color.FromName("red");
+            RefreshValuelbl.Text = "Paused";
+        }
+
+        private void Scroogenamelbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=10");
+        }
+
+        private void linkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/lolkoglol/TornAPIDesktopRefresh");        
+        }
+
+        private void DarkModechkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DarkModechkbox.Checked == true)
+            {                
+                Form gee = MainForm1.ActiveForm;
+                gee.BackColor = Color.FromName("black");
+
+                TornCityTimelbl.ForeColor = Color.FromName("white");                             
+               
+                MyFunctions.RichtxtBoxColour(richTextBox1, "white", "black");
+                MyFunctions.RichtxtBoxColour(richTextBox2, "white", "black");
+
+                MyFunctions.TabColour(tabPage1, "white", "black");
+                MyFunctions.TabColour(tabPage2, "white", "black");
+                MyFunctions.TabColour(tabPage3, "white", "black");
+                MyFunctions.TabColour(tabPage4, "white", "black");
+                MyFunctions.TabColour(tabPage5, "white", "black");
+                MyFunctions.TabColour(tabPage6, "white", "black");
+                MyFunctions.TabColour(tabPage7, "white", "black");
+                MyFunctions.TabColour(tabPage8, "white", "black");
+                MyFunctions.TabColour(tabPage9, "white", "black");
+                MyFunctions.TabColour(tabPage10, "white", "black");
+                MyFunctions.TabColour(tabPage11, "white", "black");
+                MyFunctions.TabColour(tabPage12, "white", "black");
+                MyFunctions.TabColour(tabPage13, "white", "black");                           
+           
+                MyFunctions.comboboxcolour(ItemCombobox, "white", "black");
+                MyFunctions.comboboxcolour(UserInfoTextColour,"white","black");
+
+                MyFunctions.Textboxcolour(SettingsAPIKeyValuetxtbox, "white", "black");
+                MyFunctions.Textboxcolour(TornAPIKey, "white", "black");
+
+                MyFunctions.ButtonColour(StopRefreshingbtn, "white", "black");
+                MyFunctions.ButtonColour(GetDatabtn, "white", "black");
+                MyFunctions.ButtonColour(SetUserInfoTextColourbtn, "white", "black");
+                MyFunctions.ButtonColour(GetItemNamesAndIdbtn, "white", "black");
+                MyFunctions.ButtonColour(ItemSearchbtn, "white", "black");
+                MyFunctions.ButtonColour(StockGetDatabtn, "white", "black");
+                MyFunctions.ButtonColour(SaveSettingsbtn, "white", "black");
+
+                
+                Creatorlinklabel.LinkColor = Color.FromArgb(133, 133, 133);
+                linkLabel1.LinkColor = Color.FromArgb(133, 133, 133);
+                Scroogenamelbl.LinkColor = Color.FromArgb(133, 133, 133);
+                LeslieLinkLootlbl.LinkColor = Color.FromArgb(133, 133, 133);
+                Dukelootlinklabel.LinkColor = Color.FromArgb(133, 133, 133);
+                VisitTornlbl.LinkColor = Color.FromArgb(133, 133, 133);
+            }
+
+            if (DarkModechkbox.Checked == false)
+            {
+                Form gee = MainForm1.ActiveForm;
+                gee.BackColor = Color.FromName("white");
+                TornCityTimelbl.ForeColor = Color.FromName("black");
+
+                MyFunctions.TabColour(tabPage1, "black", "white");
+                MyFunctions.TabColour(tabPage2, "black", "white");
+                MyFunctions.TabColour(tabPage3, "black", "white");
+                MyFunctions.TabColour(tabPage4, "black", "white");
+                MyFunctions.TabColour(tabPage5, "black", "white");
+                MyFunctions.TabColour(tabPage6, "black", "white");
+                MyFunctions.TabColour(tabPage7, "black", "white");
+                MyFunctions.TabColour(tabPage8, "black", "white");
+                MyFunctions.TabColour(tabPage9, "black", "white");
+                MyFunctions.TabColour(tabPage10, "black", "white");
+                MyFunctions.TabColour(tabPage11, "black", "white");
+                MyFunctions.TabColour(tabPage12, "black", "white");
+                MyFunctions.TabColour(tabPage13, "black", "white");
+
+                MyFunctions.ButtonColour(StopRefreshingbtn, "black", "Transparent");
+                MyFunctions.ButtonColour(GetDatabtn, "black", "Transparent");
+                MyFunctions.ButtonColour(SetUserInfoTextColourbtn, "black", "Transparent");
+                MyFunctions.ButtonColour(GetItemNamesAndIdbtn, "black", "Transparent");
+                MyFunctions.ButtonColour(ItemSearchbtn, "black", "Transparent");
+                MyFunctions.ButtonColour(StockGetDatabtn, "black", "Transparent");
+                MyFunctions.ButtonColour(SaveSettingsbtn, "black", "Transparent");
+
+                MyFunctions.RichtxtBoxColour(richTextBox1, "black", "white");
+                MyFunctions.RichtxtBoxColour(richTextBox2, "black", "white");
+
+                MyFunctions.comboboxcolour(ItemCombobox, "black", "white");
+                MyFunctions.comboboxcolour(UserInfoTextColour, "black", "white");
+
+                MyFunctions.Textboxcolour(SettingsAPIKeyValuetxtbox, "black", "white");
+                MyFunctions.Textboxcolour(TornAPIKey, "black", "white");
+
+                Creatorlinklabel.LinkColor = Color.FromArgb(0, 0, 255);
+                linkLabel1.LinkColor = Color.FromArgb(0, 0, 255);
+                Scroogenamelbl.LinkColor = Color.FromArgb(0, 0, 255);
+                LeslieLinkLootlbl.LinkColor = Color.FromArgb(0, 0, 255);
+                Dukelootlinklabel.LinkColor = Color.FromArgb(0, 0, 255);
+                VisitTornlbl.LinkColor = Color.FromArgb(0, 0, 255);
+            }
+
+        }
+
+        
     }
     
 }
