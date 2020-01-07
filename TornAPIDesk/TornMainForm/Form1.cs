@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
-
+using System.Globalization;
 
 namespace TornMainForm
 {
@@ -45,29 +45,29 @@ namespace TornMainForm
         }
 
         public static class MyFunctions
-        {           
-               public static void TabColour(TabPage TargetObj , string forecolour, string backcolour)
+        {
+            public static void TabColour(TabPage TargetObj, string forecolour, string backcolour)
             {
                 TargetObj.ForeColor = Color.FromName(forecolour);
                 TargetObj.BackColor = Color.FromName(backcolour);
             }
-            public static void RichtxtBoxColour(RichTextBox targteobj, string forecolor , string backcolour)
+            public static void RichtxtBoxColour(RichTextBox targteobj, string forecolor, string backcolour)
             {
                 targteobj.BackColor = Color.FromName(backcolour);
                 targteobj.ForeColor = Color.FromName(forecolor);
             }
-            public static void ButtonColour(Button targetbutton,string forecolour, string backcolour)
+            public static void ButtonColour(Button targetbutton, string forecolour, string backcolour)
             {
                 targetbutton.BackColor = Color.FromName(backcolour);
                 targetbutton.ForeColor = Color.FromName(forecolour);
             }
 
-            public static void comboboxcolour(ComboBox target , string forecolour, string backcolour)
+            public static void comboboxcolour(ComboBox target, string forecolour, string backcolour)
             {
                 target.BackColor = Color.FromName(backcolour);
                 target.ForeColor = Color.FromName(forecolour);
             }
-            public static void Textboxcolour(TextBox target, string forcolour, string backcolour )
+            public static void Textboxcolour(TextBox target, string forcolour, string backcolour)
             {
                 target.BackColor = Color.FromName(backcolour);
                 target.ForeColor = Color.FromName(forcolour);
@@ -80,7 +80,7 @@ namespace TornMainForm
             /// <param name="switchOption"></param>
             /// <param name="feilds"></param>
             /// <returns></returns>
-            public static string FetchUserData(int switchOption, string fields,string VarToPlaceData) // function to request and receive API data.
+            public static string FetchUserData(int switchOption, string fields, string VarToPlaceData) // function to request and receive API data.
             {
                 string test = null;
                 switch (switchOption)
@@ -104,7 +104,7 @@ namespace TornMainForm
                         test = test = string.Format("https://api.torn.com/torn/?selections=" + fields + "&key=" + MainForm1.APIKey);
                         break;
                     case 7:
-                        test = string.Format("https://yata.alwaysdata.net/loot/timings/");                       
+                        test = string.Format("https://yata.alwaysdata.net/loot/timings/");
                         break;
                 }
 
@@ -124,12 +124,12 @@ namespace TornMainForm
                     return strresulttest;
                 }
             }
-            public static void ChangeTabForeColour(TabPage NameofTab,ComboBox ComboBoxOfColours,string NameofColour)
+            public static void ChangeTabForeColour(TabPage NameofTab, ComboBox ComboBoxOfColours, string NameofColour)
             {
                 if (ComboBoxOfColours.Text == NameofColour)
                 {
                     NameofTab.ForeColor = Color.FromName(NameofColour);
-                }              
+                }
 
             }
 
@@ -144,15 +144,15 @@ namespace TornMainForm
                 using (Stream stream = ResponseBasic.GetResponseStream())
                 {
                     StreamReader sr = new StreamReader(stream);
-                     strresulttest = sr.ReadToEnd();                   
+                    strresulttest = sr.ReadToEnd();
                     sr.Close();
 
                     string feedback = strresulttest;
                     var JJJ = JObject.Parse(feedback);
                     var sss = JObject.Parse(Convert.ToString(JJJ));
                     var aaa = JObject.Parse(Convert.ToString(sss["error"]));
-                  //  var Error = JObject.Parse(Convert.ToString(aaa["error"]));
-                    return MessageBox.Show(Convert.ToString(aaa));                   
+                    //  var Error = JObject.Parse(Convert.ToString(aaa["error"]));
+                    return MessageBox.Show(Convert.ToString(aaa));
 
                 }
             }
@@ -161,19 +161,19 @@ namespace TornMainForm
             {
                 try
                 {
-                if (Convert.ToInt32(JsonFrom[JsonStringdataname]) > 1)
-                {
-                    TimeSpan TimeTick = new TimeSpan();
-                    JsonFrom[JsonStringdataname] = Convert.ToInt32(JsonFrom[JsonStringdataname]) - 1;
-                    string TickDown = Convert.ToString(Convert.ToInt32(JsonFrom[JsonStringdataname]) - 1);
-                    TimeTick = TimeSpan.FromSeconds(Convert.ToInt32(TickDown));
-                    YourLabal.Text = String.Format(Convert.ToString(TimeTick), "MM:ss");
+                    if (Convert.ToInt32(JsonFrom[JsonStringdataname]) > 1)
+                    {
+                        TimeSpan TimeTick = new TimeSpan();
+                        JsonFrom[JsonStringdataname] = Convert.ToInt32(JsonFrom[JsonStringdataname]) - 1;
+                        string TickDown = Convert.ToString(Convert.ToInt32(JsonFrom[JsonStringdataname]) - 1);
+                        TimeTick = TimeSpan.FromSeconds(Convert.ToInt32(TickDown));
+                        YourLabal.Text = String.Format(Convert.ToString(TimeTick), "MM:ss");
                     }
                 }
                 catch (Exception)
                 {
 
-                    
+
                 }
             }
             /// <summary>
@@ -205,6 +205,7 @@ namespace TornMainForm
                     }
                 }
             }
+           /*
             /// <summary>
             /// a1 = Name a2 = Available Shares a3 = Current Price a4 = ForeCast a5 = Demand.
             /// </summary>
@@ -217,12 +218,43 @@ namespace TornMainForm
             /// <returns></returns>
             public static string StockInfoAsString(List<string> Name, List<string> AvailableShare, List<string> CurrentPrice, List<string> ForeCast, List<string> Demand, int index)
             {
-                
-                string Output = " Name: " + Name[index] + Environment.NewLine + " Available Shares: " +  AvailableShare[index] + Environment.NewLine
-                       + " Current Price: " + String.Format("{0:c}", CurrentPrice[index]) + Environment.NewLine
-                       + " forecast: " + ForeCast[index] + Environment.NewLine +  " Demand: " + Demand[index];
+
+                string Output = " Name: " + Name[index] + Environment.NewLine + " Available Shares: " + string.Format("{0:#,##0.##}", Convert.ToInt64(AvailableShare[index])) + Environment.NewLine
+                       + " Current Price: " + CurrentPrice[index] + Environment.NewLine
+                       + " forecast: " + ForeCast[index] + Environment.NewLine + " Demand: " + Demand[index];
                 return Output;
+            }*/
+
+            public static StocksClass SetStockValues(StocksClass NameOfStockID, List<string> Name, List<string> acronym, List<string> AvailableShare, List<string> CurrentPrice, List<string> ForeCast, List<string> Demand, int index)
+            {
+                NameOfStockID.NameOfStock = Name[index];
+                NameOfStockID.AcronymOfStock = acronym[index];
+                NameOfStockID.SharesAvailable = string.Format("{0:#,##0.##}", Convert.ToInt64(AvailableShare[index]));
+                NameOfStockID.PriceOfStock = Convert.ToDouble(CurrentPrice[index]);
+                NameOfStockID.Forecast = ForeCast[index];
+                NameOfStockID.Demand = Demand[index];
+                return NameOfStockID;
             }
+            public static void SetLabelToStockValue(StocksClass StockToFetch, Label LabelToSet) // set lable to stock object values
+            {
+                try
+                {
+                  string output = " Name: " + StockToFetch.NameOfStock + Environment.NewLine
+                        + " Acronym: " + StockToFetch.AcronymOfStock + Environment.NewLine 
+                        + " Price: "+ StockToFetch.PriceOfStock + Environment.NewLine
+                        + " Available Shares: " + StockToFetch.SharesAvailable + Environment.NewLine
+                        + " ForeCast: " + StockToFetch.Forecast + Environment.NewLine
+                        + " Demand: " + StockToFetch.Demand + Environment.NewLine;
+
+                  LabelToSet.Text = output;
+
+                }
+                catch (Exception)
+                {
+                   
+                }
+            }
+
         }
 
         public class  YataDataClass
@@ -284,19 +316,32 @@ namespace TornMainForm
             public static List<string> name = null;
             public static List<string> acronym = null;
             public static bool StockTimerActive = false;
-            public static string Stock0 = null;     public static string Stock1 = null;          public static string Stock2 = null;
+
+            // old variables for old stock system
+          /*  public static string Stock0 = null;     public static string Stock1 = null;          public static string Stock2 = null;
             public static string Stock3 = null;     public static string Stock4 = null;          public static string Stock5 = null;
             public static string Stock6 = null;     public static string Stock7 = null;          public static string Stock8 = null;
-            public static string Stock9 = null;     public static string Stock10 = null;
-            public static string Stock11 = null;    public static string Stock12 = null;          public static string Stock13 = null;
+            public static string Stock9 = null;     public static string Stock10 = null;         public static string Stock11 = null;
+            public static string Stock12 = null;    public static string Stock13 = null;
             public static string Stock14 = null;    public static string Stock15 = null;          public static string Stock16 = null;
             public static string Stock17 = null;    public static string Stock18 = null;          public static string Stock19 = null;
             public static string Stock20 = null;    public static string Stock21 = null;          public static string Stock22 = null;
             public static string Stock23 = null;    public static string Stock24 = null;          public static string Stock25 = null;
             public static string Stock26 = null;    public static string Stock27 = null;          public static string Stock28 = null;
-            public static string Stock29 = null;    public static string Stock30 = null;
-           
+            public static string Stock29 = null;    public static string Stock30 = null;*/
 
+                //newer stock values
+            public static StocksClass Stock00 = new StocksClass();     public static StocksClass Stock01 = new StocksClass();    public static StocksClass Stock02 = new StocksClass();
+            public static StocksClass Stock03 = new StocksClass();     public static StocksClass Stock04 = new StocksClass();    public static StocksClass Stock05 = new StocksClass();
+            public static StocksClass Stock06 = new StocksClass();     public static StocksClass Stock07 = new StocksClass();    public static StocksClass Stock08 = new StocksClass();
+            public static StocksClass Stock09 = new StocksClass();     public static StocksClass Stock010 = new StocksClass();   public static StocksClass Stock011 = new StocksClass();
+            public static StocksClass Stock012 = new StocksClass();    public static StocksClass Stock013 = new StocksClass();   public static StocksClass Stock014 = new StocksClass();
+            public static StocksClass Stock015 = new StocksClass();    public static StocksClass Stock016 = new StocksClass();   public static StocksClass Stock017 = new StocksClass();
+            public static StocksClass Stock018 = new StocksClass();    public static StocksClass Stock019 = new StocksClass();   public static StocksClass Stock020 = new StocksClass();
+            public static StocksClass Stock021 = new StocksClass();    public static StocksClass Stock022 = new StocksClass();   public static StocksClass Stock023 = new StocksClass();
+            public static StocksClass Stock024 = new StocksClass();    public static StocksClass Stock025 = new StocksClass();   public static StocksClass Stock026 = new StocksClass();
+            public static StocksClass Stock027 = new StocksClass();    public static StocksClass Stock028 = new StocksClass();   public static StocksClass Stock029 = new StocksClass();
+            public static StocksClass Stock030 = new StocksClass();
         }
 
         public class UserData // variables to store Data obtained from user API
@@ -385,7 +430,7 @@ namespace TornMainForm
                 // Points, money values
                 PointsValuelbl.Text = "Points " + Convert.ToString(String.Format("{0:n0}", UserData.User["points"]));
                 MoneyOnHandlbl.Text = "Money on hand: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.User["money_onhand"]));
-                MoneyInVaultlbl.Text = "Money in Vault: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.User["vault_amount"]));
+                MoneyInVaultlbl.Text =  Convert.ToString("$" + String.Format("{0:n0}", UserData.User["vault_amount"]));
                 CaymanbankValuelbl.Text = "Money in Cayman's: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.User["cayman_bank"]));
                 UserData.Bank = UserData.User["city_bank"]; // bank values 
                 CityBankValuelbl.Text = "Money in Bank: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.Bank["amount"]));
@@ -438,8 +483,7 @@ namespace TornMainForm
                             AcEvent = AcEvent.Replace("<//b>", "");                                                     
                            
                             AcEvent = Regex.Replace(AcEvent, "XID", " ");
-                            AcEvent = Regex.Replace(AcEvent, @"[^0-9a-zA-Z:,. ]+", "");
-                         
+                            AcEvent = Regex.Replace(AcEvent, @"[^0-9a-zA-Z:,. ]+", "");                        
 
                             
                             //removal of links
@@ -452,9 +496,10 @@ namespace TornMainForm
                             AcEvent = Regex.Replace(AcEvent, "http: www.torn.comjoblist.phppcorpinfoID", " ");
                             AcEvent = Regex.Replace(AcEvent, "http:www.torn.combank.php", " ");
                             AcEvent = AcEvent.Replace("http:www.torn.comtrade.phpstep", " ");
-                            
-                            
-                            AcEvent = AcEvent.Replace("view"," ");
+                            AcEvent = AcEvent.Replace("http:www.torn.compoints.php", " ");                      
+
+
+                         AcEvent = AcEvent.Replace("view"," ");
                             AcEvent = AcEvent.Replace("View", " ");
                             AcEvent = AcEvent.Replace("Please click here to continue", " "); 
 
@@ -641,13 +686,11 @@ namespace TornMainForm
             }
             try
             {
-
             
-           RefreshValuelbl.Text = Convert.ToString(Convert.ToInt32(RefreshValuelbl.Text) - 1); // decrease refresh value by 1 per timer tick which should be 1 second.
+                 RefreshValuelbl.Text = Convert.ToString(Convert.ToInt32(RefreshValuelbl.Text) - 1); // decrease refresh value by 1 per timer tick which should be 1 second.
             }
             catch (Exception)
             {
-
                 
             }
             try
@@ -677,8 +720,8 @@ namespace TornMainForm
         {
             new Thread(() => // new thread is used for more cpu intense tasks. this will allow the user constant app use as its main thread will not be too busy.
           {
-              try
-              {
+             try
+           {
                   TornData.TornJsonFetchedInfo = MyFunctions.FetchUserData(6, "stocks,items", TornData.TornJsonFetchedInfo);                    
                   
              if (TornData.StocksIDandNames.ContainsKey("1") == false) // once information is feteched there is no need to update it as it stays constant.
@@ -687,18 +730,60 @@ namespace TornMainForm
                 TornData.acronym = TornData.StockIdandacronym.Values.ToList(); 
               MyFunctions.AddJsonDataToDictionary(TornData.StocksIDandNames, "stocks", "name", TornData.TornJsonFetchedInfo, 33);
                 TornData.name = TornData.StocksIDandNames.Values.ToList();  
-          }
+          }       //CurrentPrice      
+                  TornData.StockIDandCurrentPrice.Clear();
     MyFunctions.AddJsonDataToDictionary(TornData.StockIDandCurrentPrice, "stocks", "current_price", TornData.TornJsonFetchedInfo, 33);
                   List<string> CurrentPrices = TornData.StockIDandCurrentPrice.Values.ToList();
+                  //Shares
+                  TornData.StockIDandAvailableshares.Clear();
     MyFunctions.AddJsonDataToDictionary(TornData.StockIDandAvailableshares, "stocks", "available_shares", TornData.TornJsonFetchedInfo, 33);
-              List<string> AvailableShares = TornData.StockIDandAvailableshares.Values.ToList();                          
+              List<string> AvailableShares = TornData.StockIDandAvailableshares.Values.ToList();
+                  //ForeCast
+                  TornData.StockIdandForecast.Clear();
     MyFunctions.AddJsonDataToDictionary(TornData.StockIdandForecast, "stocks", "forecast", TornData.TornJsonFetchedInfo, 33);
                   List<string> forecast = TornData.StockIdandForecast.Values.ToList();
     Task.Delay(50);
+                  //Demand
+                  TornData.StockIdandDemand.Clear();
             MyFunctions.AddJsonDataToDictionary(TornData.StockIdandDemand, "stocks", "demand", TornData.TornJsonFetchedInfo, 33);
                   List<string> demand = TornData.StockIdandDemand.Values.ToList();
-            //Values for globals which hold stock information
-              TornData.Stock0 = MyFunctions.StockInfoAsString(TornData.name, AvailableShares, CurrentPrices, forecast, demand, 0);
+                  //Values for globals which hold stock information
+                  
+                  TornData.Stock00 = MyFunctions.SetStockValues(TornData.Stock00, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 0);
+
+                  TornData.Stock01 = MyFunctions.SetStockValues(TornData.Stock01, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 1);
+                  TornData.Stock02 = MyFunctions.SetStockValues(TornData.Stock02, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 2);
+                  TornData.Stock03 = MyFunctions.SetStockValues(TornData.Stock03, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 3);
+                  TornData.Stock04 = MyFunctions.SetStockValues(TornData.Stock04, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 4);
+                  TornData.Stock05 = MyFunctions.SetStockValues(TornData.Stock05, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 5);
+                  TornData.Stock06 = MyFunctions.SetStockValues(TornData.Stock06, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 6);
+                  TornData.Stock07 = MyFunctions.SetStockValues(TornData.Stock07, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 7);
+                  TornData.Stock08 = MyFunctions.SetStockValues(TornData.Stock08, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 8);
+                  TornData.Stock09 = MyFunctions.SetStockValues(TornData.Stock09, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 9);
+                  TornData.Stock010 = MyFunctions.SetStockValues(TornData.Stock010, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 10);
+                  TornData.Stock011 = MyFunctions.SetStockValues(TornData.Stock011, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 11);
+                  TornData.Stock012 = MyFunctions.SetStockValues(TornData.Stock012, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 12);
+                  TornData.Stock013 = MyFunctions.SetStockValues(TornData.Stock013, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 13);
+                  TornData.Stock014 = MyFunctions.SetStockValues(TornData.Stock014, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 14);
+                  TornData.Stock015 = MyFunctions.SetStockValues(TornData.Stock015, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 15);
+                  TornData.Stock016 = MyFunctions.SetStockValues(TornData.Stock016, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 16);
+                  TornData.Stock017 = MyFunctions.SetStockValues(TornData.Stock017, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 17);
+                  TornData.Stock018 = MyFunctions.SetStockValues(TornData.Stock018, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 18);
+                  TornData.Stock019 = MyFunctions.SetStockValues(TornData.Stock019, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 19);
+                  TornData.Stock020 = MyFunctions.SetStockValues(TornData.Stock020, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 20);
+                  TornData.Stock021 = MyFunctions.SetStockValues(TornData.Stock021, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 21);
+                  TornData.Stock022 = MyFunctions.SetStockValues(TornData.Stock022, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 22);
+                  TornData.Stock023 = MyFunctions.SetStockValues(TornData.Stock023, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 23);
+                  TornData.Stock024 = MyFunctions.SetStockValues(TornData.Stock024, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 24);
+                  TornData.Stock025 = MyFunctions.SetStockValues(TornData.Stock025, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 25);
+                  TornData.Stock026 = MyFunctions.SetStockValues(TornData.Stock026, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 26);
+                  TornData.Stock027 = MyFunctions.SetStockValues(TornData.Stock027, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 27);
+                  TornData.Stock028 = MyFunctions.SetStockValues(TornData.Stock028, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 28);
+                  TornData.Stock029 = MyFunctions.SetStockValues(TornData.Stock029, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 29);
+                  TornData.Stock030 = MyFunctions.SetStockValues(TornData.Stock030, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 30);
+                  
+              //old stock system
+           /*                     TornData.Stock0 = MyFunctions.StockInfoAsString(TornData.name, AvailableShares, CurrentPrices, forecast, demand, 0);
               TornData.Stock1 = MyFunctions.StockInfoAsString(TornData.name, AvailableShares, CurrentPrices, forecast, demand, 1);
               TornData.Stock2 = MyFunctions.StockInfoAsString(TornData.name, AvailableShares, CurrentPrices, forecast, demand,2 );
               TornData.Stock3 = MyFunctions.StockInfoAsString(TornData.name, AvailableShares, CurrentPrices, forecast, demand, 3);
@@ -728,13 +813,14 @@ namespace TornMainForm
               TornData.Stock27 = MyFunctions.StockInfoAsString(TornData.name, AvailableShares, CurrentPrices, forecast, demand, 27);
               TornData.Stock28 = MyFunctions.StockInfoAsString(TornData.name, AvailableShares, CurrentPrices, forecast, demand, 28);
               TornData.Stock29 = MyFunctions.StockInfoAsString(TornData.name, AvailableShares, CurrentPrices, forecast, demand, 29);
-              TornData.Stock30 = MyFunctions.StockInfoAsString(TornData.name, AvailableShares, CurrentPrices, forecast, demand, 30);                         
+              TornData.Stock30 = MyFunctions.StockInfoAsString(TornData.name, AvailableShares, CurrentPrices, forecast, demand, 30);*/
+                                         
 
               TornData.StockTimerActive = true; // this will active timer to update info when button stock is pressed. is turned off by itself when activated.
-                 }
-               catch (Exception)
+                }
+              catch (Exception)
                {
-                   MessageBox.Show("Get Api data first");
+                  MessageBox.Show("Get Api data first");
                }
 
           }).Start();
@@ -744,6 +830,7 @@ namespace TornMainForm
                 TornData.StockTimerActive = true;
                 StockActivateTimer.Start();
                 StockInfoRefreshLimit.Start();
+
             }
             catch (Exception)
             {
@@ -774,7 +861,7 @@ namespace TornMainForm
 
                 if (MainForm1.APIKey != "" & MainForm1.APIKey.Length == 16)// create file if it does not exsist
                     {
-                        MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1003); //fetch items and add to dict
+                        MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1030); //fetch items and add to dict
                         TornData.ItemIdList = TornData.ItemsIdAndName.Keys.ToList();
                         TornData.ItemNamesList = TornData.ItemsIdAndName.Values.ToList();                    
                
@@ -799,7 +886,7 @@ namespace TornMainForm
                 }
                 if (File.Exists(Settings.ItemFileName) == true & TornData.ItemLoaded == false) 
                     {
-                    MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1025);
+                    MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1050);
                     TornData.NameThenIDofItems = File.ReadAllText(Settings.ItemFileName);
                                       
                     // TornData.TornItemNames = Convert.ToString(JObject.Parse(TornData.NameThenIDofItems));                 
@@ -813,7 +900,6 @@ namespace TornMainForm
                   MessageBox.Show("Is your executable in a file you have read and write permissions?, api key correct?");
                }
                 TornData.ReadytoFetchitems = true;
-
               
                 FetchItemsTimer.Start();
             }).Start();
@@ -879,7 +965,17 @@ namespace TornMainForm
                 if (Settings.APIKey != "")
                 {
                     ApiKeyLockcbx.Checked = true;
+                    try
+                    {
+                        MainForm1.APIKey = Settings.APIKey;
+                    }
+                    catch (Exception)
+                    {
+
+                    }
                 }
+              
+               
             }
             catch (Exception)
             {
@@ -928,8 +1024,7 @@ namespace TornMainForm
                 YataDataClass.ScroogeData = YataDataClass.LootTimers["10"];
                 YataDataClass.ScroogeTimingsForLevels = YataDataClass.ScroogeData["timings"];
                 YataDataClass.ScroogeDataForlevel4 = YataDataClass.ScroogeTimingsForLevels["4"];
-                YataDataClass.ScroogeTimerForlevel4 = YataDataClass.ScroogeDataForlevel4["due"];
-                
+                YataDataClass.ScroogeTimerForlevel4 = YataDataClass.ScroogeDataForlevel4["due"];                
 
             //start timers
             RefreshTrueDataForLoots.Start();
@@ -950,8 +1045,27 @@ namespace TornMainForm
 
         private void StockActivateTimer_Tick(object sender, EventArgs e) // stock values
         {
-            TornCityStockExchangelbl.Text = TornData.Stock0;
-            StockInfo2lbl.Text = TornData.Stock1;            StockInfo3lbl.Text = TornData.Stock2;            Stockinfo4lbl.Text = TornData.Stock3;
+             MyFunctions.SetLabelToStockValue(TornData.Stock00, TornCityStockExchangelbl);         
+          
+            MyFunctions.SetLabelToStockValue(TornData.Stock01, StockInfo2lbl);             MyFunctions.SetLabelToStockValue(TornData.Stock02, StockInfo3lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock03, Stockinfo4lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock04, StockInfo5lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock05, StockInfo6lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock06, StockInfo7lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock07, StockInfo8lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock08, StockInfo9lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock09, StockInfo10lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock010, StockInfo11lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock011, StockInfo12lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock012, StockInfo13lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock013, StockInfo14lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock014, StockInfo15lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock015, StockInfo16lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock016, StockInfo17lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock017, StockInfo18lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock018, StockInfo19lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock019, StockInfo20lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock020, StockInfo21lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock021, StockInfo22lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock022, StockInfo23lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock023, StockInfo24lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock024, StockInfo25lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock025, StockInfo26lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock026, StockInfo27lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock027, StockInfo28lbl);            MyFunctions.SetLabelToStockValue(TornData.Stock028, StockInfo29lbl);
+            MyFunctions.SetLabelToStockValue(TornData.Stock029, StockInfo30lbl);
+
+            //    TornCityStockExchangelbl.Text = TornData.Stock0;
+
+          /*  StockInfo2lbl.Text = TornData.Stock1;            StockInfo3lbl.Text = TornData.Stock2;            Stockinfo4lbl.Text = TornData.Stock3;
             StockInfo5lbl.Text = TornData.Stock4;            StockInfo6lbl.Text = TornData.Stock5;            StockInfo7lbl.Text = TornData.Stock6;
             StockInfo8lbl.Text = TornData.Stock7;            StockInfo9lbl.Text = TornData.Stock8;            StockInfo10lbl.Text = TornData.Stock9;
             StockInfo11lbl.Text = TornData.Stock10;            StockInfo12lbl.Text = TornData.Stock11;            StockInfo13lbl.Text = TornData.Stock12;
@@ -960,7 +1074,7 @@ namespace TornMainForm
             StockInfo20lbl.Text = TornData.Stock19;            StockInfo21lbl.Text = TornData.Stock20;            StockInfo22lbl.Text = TornData.Stock21;
             StockInfo23lbl.Text = TornData.Stock22;            StockInfo24lbl.Text = TornData.Stock23;            StockInfo25lbl.Text = TornData.Stock24;
             StockInfo26lbl.Text = TornData.Stock25;            StockInfo27lbl.Text = TornData.Stock26;            StockInfo28lbl.Text = TornData.Stock27;
-            StockInfo29lbl.Text = TornData.Stock28;            StockInfo30lbl.Text = TornData.Stock29;            StockInfo31lbl.Text = TornData.Stock30;
+            StockInfo29lbl.Text = TornData.Stock28;            StockInfo30lbl.Text = TornData.Stock29;            StockInfo31lbl.Text = TornData.Stock30;*/
 
             TornData.StockTimerActive = false; // change value so timer does not re active.                             
         }
@@ -1121,8 +1235,12 @@ namespace TornMainForm
                 YataDataClass.ScroogeData = YataDataClass.LootTimers["10"];
                 YataDataClass.ScroogeTimingsForLevels = YataDataClass.ScroogeData["timings"];
                 YataDataClass.ScroogeDataForlevel4 = YataDataClass.ScroogeTimingsForLevels["4"];
-                YataDataClass.ScroogeTimerForlevel4 = YataDataClass.ScroogeDataForlevel4["due"];                                
-                
+                YataDataClass.ScroogeTimerForlevel4 = YataDataClass.ScroogeDataForlevel4["due"];
+                //show values if api fetch has worked. Scrooge is only active during december. if more seasonal npc are made make above code into functions.
+                ScroogeTimertolvl4lbl.Visible = true;
+                Scroogenamelbl.Visible = true;
+
+
                 LeslieDukeTimersCountDown.Start();
 
             }
@@ -1144,7 +1262,6 @@ namespace TornMainForm
 
         private void StopRefreshingbtn_Click(object sender, EventArgs e)
         {
-
             Refreshtimer.Stop();
             RefreshValuelbl.ForeColor = Color.FromName("red");
             RefreshValuelbl.Text = "Paused";
@@ -1199,7 +1316,6 @@ namespace TornMainForm
                 MyFunctions.ButtonColour(ItemSearchbtn, "white", "black");
                 MyFunctions.ButtonColour(StockGetDatabtn, "white", "black");
                 MyFunctions.ButtonColour(SaveSettingsbtn, "white", "black");
-
                 
                 Creatorlinklabel.LinkColor = Color.FromArgb(133, 133, 133);
                 linkLabel1.LinkColor = Color.FromArgb(133, 133, 133);
@@ -1207,6 +1323,11 @@ namespace TornMainForm
                 LeslieLinkLootlbl.LinkColor = Color.FromArgb(133, 133, 133);
                 Dukelootlinklabel.LinkColor = Color.FromArgb(133, 133, 133);
                 VisitTornlbl.LinkColor = Color.FromArgb(133, 133, 133);
+                Yatalinklbl.LinkColor = Color.FromArgb(133, 133, 133);
+                TornApiLinklbl.LinkColor = Color.FromArgb(133, 133, 133);
+                TornStatslinklbl.LinkColor = Color.FromArgb(133, 133, 133);
+                VaultLinklbl.LinkColor = Color.FromArgb(133, 133, 133);
+                CalcLink.LinkColor = Color.FromArgb(133, 133, 133);
             }
 
             if (DarkModechkbox.Checked == false)
@@ -1252,11 +1373,38 @@ namespace TornMainForm
                 LeslieLinkLootlbl.LinkColor = Color.FromArgb(0, 0, 255);
                 Dukelootlinklabel.LinkColor = Color.FromArgb(0, 0, 255);
                 VisitTornlbl.LinkColor = Color.FromArgb(0, 0, 255);
+                Yatalinklbl.LinkColor = Color.FromArgb(0, 0, 255);
+                TornApiLinklbl.LinkColor = Color.FromArgb(0, 0, 255);
+                TornStatslinklbl.LinkColor = Color.FromArgb(0, 0, 255);
+                VaultLinklbl.LinkColor = Color.FromArgb(0, 0, 255);
+                CalcLink.LinkColor = Color.FromArgb(0, 0, 255);
             }
-
         }
 
-        
+        private void Yatalinklbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://yata.alwaysdata.net/");        
+        }
+
+        private void TornApiLinklbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.torn.com/api.html#");
+        }
+
+        private void TornStatslinklbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.tornstats.com/");
+        }
+
+        private void VaultLinklbl_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.torn.com/properties.php#/p=options&tab=vault");
+        }
+
+        private void CalcLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("calc.exe");
+        }
     }
     
 }

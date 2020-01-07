@@ -35,6 +35,7 @@
             this.ApiKeyLockcbx = new System.Windows.Forms.CheckBox();
             this.MainTabBar = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.VaultLinklbl = new System.Windows.Forms.LinkLabel();
             this.Scroogenamelbl = new System.Windows.Forms.LinkLabel();
             this.ScroogeTimertolvl4lbl = new System.Windows.Forms.Label();
             this.StopRefreshingbtn = new System.Windows.Forms.Button();
@@ -98,6 +99,7 @@
             this.ItemCombobox = new System.Windows.Forms.ComboBox();
             this.GetItemNamesAndIdbtn = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.StockInfoLbl = new System.Windows.Forms.Label();
             this.TCStockExchangetab = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.Stockinfo4lbl = new System.Windows.Forms.Label();
@@ -141,6 +143,10 @@
             this.StockInfo29lbl = new System.Windows.Forms.Label();
             this.StockGetDatabtn = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.TornApiLinklbl = new System.Windows.Forms.LinkLabel();
+            this.Yatalinklbl = new System.Windows.Forms.LinkLabel();
+            this.TornStatslinklbl = new System.Windows.Forms.LinkLabel();
             this.DarkModechkbox = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.UserInfoTextColour = new System.Windows.Forms.ComboBox();
@@ -162,6 +168,7 @@
             this.LoadItemRefreshLimiter = new System.Windows.Forms.Timer(this.components);
             this.LeslieDukeTimersCountDown = new System.Windows.Forms.Timer(this.components);
             this.RefreshTrueDataForLoots = new System.Windows.Forms.Timer(this.components);
+            this.CalcLink = new System.Windows.Forms.LinkLabel();
             this.MainTabBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -218,6 +225,7 @@
             this.MainTabBar.Controls.Add(this.tabPage5);
             this.MainTabBar.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MainTabBar.Location = new System.Drawing.Point(0, 0);
+            this.MainTabBar.Margin = new System.Windows.Forms.Padding(0);
             this.MainTabBar.Name = "MainTabBar";
             this.MainTabBar.Padding = new System.Drawing.Point(0, 0);
             this.MainTabBar.SelectedIndex = 0;
@@ -227,6 +235,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.VaultLinklbl);
             this.tabPage1.Controls.Add(this.Scroogenamelbl);
             this.tabPage1.Controls.Add(this.ScroogeTimertolvl4lbl);
             this.tabPage1.Controls.Add(this.StopRefreshingbtn);
@@ -287,31 +296,45 @@
             this.tabPage1.Controls.Add(this.TornAPIKey);
             this.tabPage1.ForeColor = System.Drawing.Color.Black;
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(648, 382);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "UserInfo";
             // 
+            // VaultLinklbl
+            // 
+            this.VaultLinklbl.AutoSize = true;
+            this.VaultLinklbl.Location = new System.Drawing.Point(428, 197);
+            this.VaultLinklbl.Name = "VaultLinklbl";
+            this.VaultLinklbl.Size = new System.Drawing.Size(81, 13);
+            this.VaultLinklbl.TabIndex = 71;
+            this.VaultLinklbl.TabStop = true;
+            this.VaultLinklbl.Text = "Money In Vault:";
+            this.VaultLinklbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.VaultLinklbl_LinkClicked_1);
+            // 
             // Scroogenamelbl
             // 
             this.Scroogenamelbl.AutoSize = true;
-            this.Scroogenamelbl.Location = new System.Drawing.Point(3, 104);
+            this.Scroogenamelbl.Location = new System.Drawing.Point(5, 134);
             this.Scroogenamelbl.Name = "Scroogenamelbl";
             this.Scroogenamelbl.Size = new System.Drawing.Size(83, 13);
             this.Scroogenamelbl.TabIndex = 70;
             this.Scroogenamelbl.TabStop = true;
             this.Scroogenamelbl.Text = "Scrooge Loot 4:";
+            this.Scroogenamelbl.Visible = false;
             this.Scroogenamelbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.Scroogenamelbl_LinkClicked);
             // 
             // ScroogeTimertolvl4lbl
             // 
             this.ScroogeTimertolvl4lbl.AutoSize = true;
-            this.ScroogeTimertolvl4lbl.Location = new System.Drawing.Point(132, 104);
+            this.ScroogeTimertolvl4lbl.Location = new System.Drawing.Point(134, 134);
             this.ScroogeTimertolvl4lbl.Name = "ScroogeTimertolvl4lbl";
             this.ScroogeTimertolvl4lbl.Size = new System.Drawing.Size(49, 13);
             this.ScroogeTimertolvl4lbl.TabIndex = 69;
             this.ScroogeTimertolvl4lbl.Text = "00:00:00";
+            this.ScroogeTimertolvl4lbl.Visible = false;
             // 
             // StopRefreshingbtn
             // 
@@ -328,7 +351,7 @@
             // Dukelootlinklabel
             // 
             this.Dukelootlinklabel.AutoSize = true;
-            this.Dukelootlinklabel.Location = new System.Drawing.Point(3, 134);
+            this.Dukelootlinklabel.Location = new System.Drawing.Point(5, 104);
             this.Dukelootlinklabel.Name = "Dukelootlinklabel";
             this.Dukelootlinklabel.Size = new System.Drawing.Size(69, 13);
             this.Dukelootlinklabel.TabIndex = 67;
@@ -359,7 +382,7 @@
             // DukeTimerlbl
             // 
             this.DukeTimerlbl.AutoSize = true;
-            this.DukeTimerlbl.Location = new System.Drawing.Point(132, 134);
+            this.DukeTimerlbl.Location = new System.Drawing.Point(134, 104);
             this.DukeTimerlbl.Name = "DukeTimerlbl";
             this.DukeTimerlbl.Size = new System.Drawing.Size(49, 13);
             this.DukeTimerlbl.TabIndex = 64;
@@ -599,11 +622,12 @@
             // MoneyInVaultlbl
             // 
             this.MoneyInVaultlbl.AutoSize = true;
-            this.MoneyInVaultlbl.Location = new System.Drawing.Point(428, 197);
+            this.MoneyInVaultlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MoneyInVaultlbl.Location = new System.Drawing.Point(515, 197);
             this.MoneyInVaultlbl.Name = "MoneyInVaultlbl";
-            this.MoneyInVaultlbl.Size = new System.Drawing.Size(80, 13);
+            this.MoneyInVaultlbl.Size = new System.Drawing.Size(19, 13);
             this.MoneyInVaultlbl.TabIndex = 37;
-            this.MoneyInVaultlbl.Text = "Money in Vault:";
+            this.MoneyInVaultlbl.Text = "$0";
             // 
             // MoneyOnHandlbl
             // 
@@ -861,7 +885,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(6, 6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(606, 353);
+            this.richTextBox1.Size = new System.Drawing.Size(639, 370);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -885,7 +909,7 @@
             this.richTextBox2.Location = new System.Drawing.Point(6, 137);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(606, 225);
+            this.richTextBox2.Size = new System.Drawing.Size(636, 237);
             this.richTextBox2.TabIndex = 4;
             this.richTextBox2.Text = "";
             // 
@@ -927,6 +951,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.BackColor = System.Drawing.Color.White;
+            this.tabPage4.Controls.Add(this.StockInfoLbl);
             this.tabPage4.Controls.Add(this.TCStockExchangetab);
             this.tabPage4.Controls.Add(this.StockGetDatabtn);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -935,7 +961,16 @@
             this.tabPage4.Size = new System.Drawing.Size(648, 382);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Stock Info";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // StockInfoLbl
+            // 
+            this.StockInfoLbl.AutoSize = true;
+            this.StockInfoLbl.Location = new System.Drawing.Point(115, 369);
+            this.StockInfoLbl.Name = "StockInfoLbl";
+            this.StockInfoLbl.Size = new System.Drawing.Size(436, 13);
+            this.StockInfoLbl.TabIndex = 2;
+            this.StockInfoLbl.Text = "API stock data updates every 1/4 hour.   It is also one 1/4 Hour behind real torn" +
+    " stock info.";
             // 
             // TCStockExchangetab
             // 
@@ -950,7 +985,7 @@
             this.TCStockExchangetab.Location = new System.Drawing.Point(6, 6);
             this.TCStockExchangetab.Name = "TCStockExchangetab";
             this.TCStockExchangetab.SelectedIndex = 0;
-            this.TCStockExchangetab.Size = new System.Drawing.Size(606, 324);
+            this.TCStockExchangetab.Size = new System.Drawing.Size(636, 339);
             this.TCStockExchangetab.TabIndex = 1;
             // 
             // tabPage6
@@ -962,7 +997,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(598, 298);
+            this.tabPage6.Size = new System.Drawing.Size(628, 313);
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "Page 1";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1012,7 +1047,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(598, 298);
+            this.tabPage7.Size = new System.Drawing.Size(628, 313);
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "Page 2";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -1062,7 +1097,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(598, 298);
+            this.tabPage8.Size = new System.Drawing.Size(628, 313);
             this.tabPage8.TabIndex = 2;
             this.tabPage8.Text = "Page 3";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -1070,7 +1105,7 @@
             // StockInfo12lbl
             // 
             this.StockInfo12lbl.AutoSize = true;
-            this.StockInfo12lbl.Location = new System.Drawing.Point(252, 123);
+            this.StockInfo12lbl.Location = new System.Drawing.Point(251, 123);
             this.StockInfo12lbl.Name = "StockInfo12lbl";
             this.StockInfo12lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo12lbl.TabIndex = 11;
@@ -1079,7 +1114,7 @@
             // StockInfo11lbl
             // 
             this.StockInfo11lbl.AutoSize = true;
-            this.StockInfo11lbl.Location = new System.Drawing.Point(18, 123);
+            this.StockInfo11lbl.Location = new System.Drawing.Point(17, 123);
             this.StockInfo11lbl.Name = "StockInfo11lbl";
             this.StockInfo11lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo11lbl.TabIndex = 10;
@@ -1088,7 +1123,7 @@
             // StockInfo10lbl
             // 
             this.StockInfo10lbl.AutoSize = true;
-            this.StockInfo10lbl.Location = new System.Drawing.Point(252, 16);
+            this.StockInfo10lbl.Location = new System.Drawing.Point(251, 16);
             this.StockInfo10lbl.Name = "StockInfo10lbl";
             this.StockInfo10lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo10lbl.TabIndex = 9;
@@ -1097,7 +1132,7 @@
             // StockInfo9lbl
             // 
             this.StockInfo9lbl.AutoSize = true;
-            this.StockInfo9lbl.Location = new System.Drawing.Point(18, 16);
+            this.StockInfo9lbl.Location = new System.Drawing.Point(17, 16);
             this.StockInfo9lbl.Name = "StockInfo9lbl";
             this.StockInfo9lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo9lbl.TabIndex = 8;
@@ -1112,7 +1147,7 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(598, 298);
+            this.tabPage9.Size = new System.Drawing.Size(628, 313);
             this.tabPage9.TabIndex = 3;
             this.tabPage9.Text = "Page 4";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -1120,7 +1155,7 @@
             // StockInfo16lbl
             // 
             this.StockInfo16lbl.AutoSize = true;
-            this.StockInfo16lbl.Location = new System.Drawing.Point(252, 123);
+            this.StockInfo16lbl.Location = new System.Drawing.Point(251, 123);
             this.StockInfo16lbl.Name = "StockInfo16lbl";
             this.StockInfo16lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo16lbl.TabIndex = 7;
@@ -1129,7 +1164,7 @@
             // StockInfo15lbl
             // 
             this.StockInfo15lbl.AutoSize = true;
-            this.StockInfo15lbl.Location = new System.Drawing.Point(18, 123);
+            this.StockInfo15lbl.Location = new System.Drawing.Point(17, 123);
             this.StockInfo15lbl.Name = "StockInfo15lbl";
             this.StockInfo15lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo15lbl.TabIndex = 6;
@@ -1138,7 +1173,7 @@
             // StockInfo14lbl
             // 
             this.StockInfo14lbl.AutoSize = true;
-            this.StockInfo14lbl.Location = new System.Drawing.Point(252, 16);
+            this.StockInfo14lbl.Location = new System.Drawing.Point(251, 16);
             this.StockInfo14lbl.Name = "StockInfo14lbl";
             this.StockInfo14lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo14lbl.TabIndex = 5;
@@ -1147,7 +1182,7 @@
             // StockInfo13lbl
             // 
             this.StockInfo13lbl.AutoSize = true;
-            this.StockInfo13lbl.Location = new System.Drawing.Point(18, 16);
+            this.StockInfo13lbl.Location = new System.Drawing.Point(17, 16);
             this.StockInfo13lbl.Name = "StockInfo13lbl";
             this.StockInfo13lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo13lbl.TabIndex = 4;
@@ -1162,7 +1197,7 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(598, 298);
+            this.tabPage10.Size = new System.Drawing.Size(628, 313);
             this.tabPage10.TabIndex = 4;
             this.tabPage10.Text = "Page 5";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -1170,7 +1205,7 @@
             // StockInfo20lbl
             // 
             this.StockInfo20lbl.AutoSize = true;
-            this.StockInfo20lbl.Location = new System.Drawing.Point(250, 123);
+            this.StockInfo20lbl.Location = new System.Drawing.Point(251, 123);
             this.StockInfo20lbl.Name = "StockInfo20lbl";
             this.StockInfo20lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo20lbl.TabIndex = 11;
@@ -1179,7 +1214,7 @@
             // StockInfo19lbl
             // 
             this.StockInfo19lbl.AutoSize = true;
-            this.StockInfo19lbl.Location = new System.Drawing.Point(16, 123);
+            this.StockInfo19lbl.Location = new System.Drawing.Point(17, 123);
             this.StockInfo19lbl.Name = "StockInfo19lbl";
             this.StockInfo19lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo19lbl.TabIndex = 10;
@@ -1188,7 +1223,7 @@
             // StockInfo18lbl
             // 
             this.StockInfo18lbl.AutoSize = true;
-            this.StockInfo18lbl.Location = new System.Drawing.Point(250, 16);
+            this.StockInfo18lbl.Location = new System.Drawing.Point(251, 16);
             this.StockInfo18lbl.Name = "StockInfo18lbl";
             this.StockInfo18lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo18lbl.TabIndex = 9;
@@ -1197,7 +1232,7 @@
             // StockInfo17lbl
             // 
             this.StockInfo17lbl.AutoSize = true;
-            this.StockInfo17lbl.Location = new System.Drawing.Point(16, 16);
+            this.StockInfo17lbl.Location = new System.Drawing.Point(17, 16);
             this.StockInfo17lbl.Name = "StockInfo17lbl";
             this.StockInfo17lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo17lbl.TabIndex = 8;
@@ -1212,7 +1247,7 @@
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(598, 298);
+            this.tabPage11.Size = new System.Drawing.Size(628, 313);
             this.tabPage11.TabIndex = 5;
             this.tabPage11.Text = "Page 6";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -1262,7 +1297,7 @@
             this.tabPage12.Location = new System.Drawing.Point(4, 22);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(598, 298);
+            this.tabPage12.Size = new System.Drawing.Size(628, 313);
             this.tabPage12.TabIndex = 6;
             this.tabPage12.Text = "Page 7";
             this.tabPage12.UseVisualStyleBackColor = true;
@@ -1270,7 +1305,7 @@
             // StockInfo28lbl
             // 
             this.StockInfo28lbl.AutoSize = true;
-            this.StockInfo28lbl.Location = new System.Drawing.Point(253, 122);
+            this.StockInfo28lbl.Location = new System.Drawing.Point(251, 123);
             this.StockInfo28lbl.Name = "StockInfo28lbl";
             this.StockInfo28lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo28lbl.TabIndex = 11;
@@ -1279,7 +1314,7 @@
             // StockInfo27lbl
             // 
             this.StockInfo27lbl.AutoSize = true;
-            this.StockInfo27lbl.Location = new System.Drawing.Point(19, 122);
+            this.StockInfo27lbl.Location = new System.Drawing.Point(17, 123);
             this.StockInfo27lbl.Name = "StockInfo27lbl";
             this.StockInfo27lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo27lbl.TabIndex = 10;
@@ -1288,7 +1323,7 @@
             // StockInfo26lbl
             // 
             this.StockInfo26lbl.AutoSize = true;
-            this.StockInfo26lbl.Location = new System.Drawing.Point(253, 15);
+            this.StockInfo26lbl.Location = new System.Drawing.Point(251, 16);
             this.StockInfo26lbl.Name = "StockInfo26lbl";
             this.StockInfo26lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo26lbl.TabIndex = 9;
@@ -1297,7 +1332,7 @@
             // StockInfo25lbl
             // 
             this.StockInfo25lbl.AutoSize = true;
-            this.StockInfo25lbl.Location = new System.Drawing.Point(19, 15);
+            this.StockInfo25lbl.Location = new System.Drawing.Point(17, 16);
             this.StockInfo25lbl.Name = "StockInfo25lbl";
             this.StockInfo25lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo25lbl.TabIndex = 8;
@@ -1312,7 +1347,7 @@
             this.tabPage13.Location = new System.Drawing.Point(4, 22);
             this.tabPage13.Name = "tabPage13";
             this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage13.Size = new System.Drawing.Size(598, 298);
+            this.tabPage13.Size = new System.Drawing.Size(628, 313);
             this.tabPage13.TabIndex = 7;
             this.tabPage13.Text = "Page 8";
             this.tabPage13.UseVisualStyleBackColor = true;
@@ -1320,7 +1355,7 @@
             // StockInfo32lbl
             // 
             this.StockInfo32lbl.AutoSize = true;
-            this.StockInfo32lbl.Location = new System.Drawing.Point(252, 123);
+            this.StockInfo32lbl.Location = new System.Drawing.Point(251, 123);
             this.StockInfo32lbl.Name = "StockInfo32lbl";
             this.StockInfo32lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo32lbl.TabIndex = 15;
@@ -1329,7 +1364,7 @@
             // StockInfo31lbl
             // 
             this.StockInfo31lbl.AutoSize = true;
-            this.StockInfo31lbl.Location = new System.Drawing.Point(18, 123);
+            this.StockInfo31lbl.Location = new System.Drawing.Point(17, 123);
             this.StockInfo31lbl.Name = "StockInfo31lbl";
             this.StockInfo31lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo31lbl.TabIndex = 14;
@@ -1338,7 +1373,7 @@
             // StockInfo30lbl
             // 
             this.StockInfo30lbl.AutoSize = true;
-            this.StockInfo30lbl.Location = new System.Drawing.Point(252, 16);
+            this.StockInfo30lbl.Location = new System.Drawing.Point(251, 16);
             this.StockInfo30lbl.Name = "StockInfo30lbl";
             this.StockInfo30lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo30lbl.TabIndex = 13;
@@ -1347,7 +1382,7 @@
             // StockInfo29lbl
             // 
             this.StockInfo29lbl.AutoSize = true;
-            this.StockInfo29lbl.Location = new System.Drawing.Point(18, 16);
+            this.StockInfo29lbl.Location = new System.Drawing.Point(17, 16);
             this.StockInfo29lbl.Name = "StockInfo29lbl";
             this.StockInfo29lbl.Size = new System.Drawing.Size(24, 13);
             this.StockInfo29lbl.TabIndex = 12;
@@ -1356,7 +1391,7 @@
             // StockGetDatabtn
             // 
             this.StockGetDatabtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.StockGetDatabtn.Location = new System.Drawing.Point(222, 336);
+            this.StockGetDatabtn.Location = new System.Drawing.Point(222, 346);
             this.StockGetDatabtn.Name = "StockGetDatabtn";
             this.StockGetDatabtn.Size = new System.Drawing.Size(207, 23);
             this.StockGetDatabtn.TabIndex = 0;
@@ -1366,6 +1401,11 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.CalcLink);
+            this.tabPage5.Controls.Add(this.label2);
+            this.tabPage5.Controls.Add(this.TornApiLinklbl);
+            this.tabPage5.Controls.Add(this.Yatalinklbl);
+            this.tabPage5.Controls.Add(this.TornStatslinklbl);
             this.tabPage5.Controls.Add(this.DarkModechkbox);
             this.tabPage5.Controls.Add(this.linkLabel1);
             this.tabPage5.Controls.Add(this.UserInfoTextColour);
@@ -1384,10 +1424,53 @@
             this.tabPage5.Text = "Settings";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(7, 183);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(91, 16);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Useful Sites";
+            // 
+            // TornApiLinklbl
+            // 
+            this.TornApiLinklbl.AutoSize = true;
+            this.TornApiLinklbl.Location = new System.Drawing.Point(7, 235);
+            this.TornApiLinklbl.Name = "TornApiLinklbl";
+            this.TornApiLinklbl.Size = new System.Drawing.Size(67, 13);
+            this.TornApiLinklbl.TabIndex = 16;
+            this.TornApiLinklbl.TabStop = true;
+            this.TornApiLinklbl.Text = "Try Torn API";
+            this.TornApiLinklbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.TornApiLinklbl_LinkClicked);
+            // 
+            // Yatalinklbl
+            // 
+            this.Yatalinklbl.AutoSize = true;
+            this.Yatalinklbl.Location = new System.Drawing.Point(7, 285);
+            this.Yatalinklbl.Name = "Yatalinklbl";
+            this.Yatalinklbl.Size = new System.Drawing.Size(35, 13);
+            this.Yatalinklbl.TabIndex = 15;
+            this.Yatalinklbl.TabStop = true;
+            this.Yatalinklbl.Text = "YATA";
+            this.Yatalinklbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.Yatalinklbl_LinkClicked);
+            // 
+            // TornStatslinklbl
+            // 
+            this.TornStatslinklbl.AutoSize = true;
+            this.TornStatslinklbl.Location = new System.Drawing.Point(7, 210);
+            this.TornStatslinklbl.Name = "TornStatslinklbl";
+            this.TornStatslinklbl.Size = new System.Drawing.Size(56, 13);
+            this.TornStatslinklbl.TabIndex = 14;
+            this.TornStatslinklbl.TabStop = true;
+            this.TornStatslinklbl.Text = "Torn Stats";
+            this.TornStatslinklbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.TornStatslinklbl_LinkClicked);
+            // 
             // DarkModechkbox
             // 
             this.DarkModechkbox.AutoSize = true;
-            this.DarkModechkbox.Location = new System.Drawing.Point(530, 195);
+            this.DarkModechkbox.Location = new System.Drawing.Point(531, 137);
             this.DarkModechkbox.Name = "DarkModechkbox";
             this.DarkModechkbox.Size = new System.Drawing.Size(79, 17);
             this.DarkModechkbox.TabIndex = 13;
@@ -1398,12 +1481,12 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(6, 306);
+            this.linkLabel1.Location = new System.Drawing.Point(7, 260);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(68, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(104, 13);
             this.linkLabel1.TabIndex = 12;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "GitHub Page";
+            this.linkLabel1.Text = "This Projects GitHub";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked_1);
             // 
             // UserInfoTextColour
@@ -1421,7 +1504,7 @@
             "Orange",
             "Purple",
             "Red"});
-            this.UserInfoTextColour.Location = new System.Drawing.Point(244, 193);
+            this.UserInfoTextColour.Location = new System.Drawing.Point(245, 135);
             this.UserInfoTextColour.Name = "UserInfoTextColour";
             this.UserInfoTextColour.Size = new System.Drawing.Size(121, 21);
             this.UserInfoTextColour.Sorted = true;
@@ -1430,7 +1513,7 @@
             // SetUserInfoTextColourbtn
             // 
             this.SetUserInfoTextColourbtn.ForeColor = System.Drawing.Color.Black;
-            this.SetUserInfoTextColourbtn.Location = new System.Drawing.Point(81, 193);
+            this.SetUserInfoTextColourbtn.Location = new System.Drawing.Point(82, 135);
             this.SetUserInfoTextColourbtn.Name = "SetUserInfoTextColourbtn";
             this.SetUserInfoTextColourbtn.Size = new System.Drawing.Size(146, 22);
             this.SetUserInfoTextColourbtn.TabIndex = 10;
@@ -1473,7 +1556,7 @@
             // SettingsAPIkeylbl
             // 
             this.SettingsAPIkeylbl.AutoSize = true;
-            this.SettingsAPIkeylbl.Location = new System.Drawing.Point(6, 159);
+            this.SettingsAPIkeylbl.Location = new System.Drawing.Point(7, 101);
             this.SettingsAPIkeylbl.Name = "SettingsAPIkeylbl";
             this.SettingsAPIkeylbl.Size = new System.Drawing.Size(69, 13);
             this.SettingsAPIkeylbl.TabIndex = 4;
@@ -1484,7 +1567,7 @@
             this.SettingsAPILockchkbox.AutoSize = true;
             this.SettingsAPILockchkbox.Checked = true;
             this.SettingsAPILockchkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.SettingsAPILockchkbox.Location = new System.Drawing.Point(530, 159);
+            this.SettingsAPILockchkbox.Location = new System.Drawing.Point(531, 101);
             this.SettingsAPILockchkbox.Name = "SettingsAPILockchkbox";
             this.SettingsAPILockchkbox.Size = new System.Drawing.Size(70, 17);
             this.SettingsAPILockchkbox.TabIndex = 5;
@@ -1494,7 +1577,7 @@
             // 
             // SettingsAPIKeyValuetxtbox
             // 
-            this.SettingsAPIKeyValuetxtbox.Location = new System.Drawing.Point(81, 156);
+            this.SettingsAPIKeyValuetxtbox.Location = new System.Drawing.Point(82, 98);
             this.SettingsAPIKeyValuetxtbox.MaxLength = 16;
             this.SettingsAPIKeyValuetxtbox.Name = "SettingsAPIKeyValuetxtbox";
             this.SettingsAPIKeyValuetxtbox.Size = new System.Drawing.Size(443, 20);
@@ -1559,6 +1642,17 @@
             this.RefreshTrueDataForLoots.Interval = 30000;
             this.RefreshTrueDataForLoots.Tick += new System.EventHandler(this.RefreshTrueDataForLoots_Tick);
             // 
+            // CalcLink
+            // 
+            this.CalcLink.AutoSize = true;
+            this.CalcLink.Location = new System.Drawing.Point(264, 210);
+            this.CalcLink.Name = "CalcLink";
+            this.CalcLink.Size = new System.Drawing.Size(54, 13);
+            this.CalcLink.TabIndex = 18;
+            this.CalcLink.TabStop = true;
+            this.CalcLink.Text = "Calculator";
+            this.CalcLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CalcLink_LinkClicked);
+            // 
             // MainForm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1580,6 +1674,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.TCStockExchangetab.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
@@ -1738,6 +1833,13 @@
         public System.Windows.Forms.CheckBox DarkModechkbox;
         private System.Windows.Forms.Timer Refreshtimer;
         private System.Windows.Forms.Button GetDatabtn;
+        private System.Windows.Forms.LinkLabel TornApiLinklbl;
+        private System.Windows.Forms.LinkLabel Yatalinklbl;
+        private System.Windows.Forms.LinkLabel TornStatslinklbl;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.LinkLabel VaultLinklbl;
+        private System.Windows.Forms.Label StockInfoLbl;
+        private System.Windows.Forms.LinkLabel CalcLink;
     }
 }
 
