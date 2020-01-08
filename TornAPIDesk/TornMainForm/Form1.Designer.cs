@@ -76,15 +76,10 @@
             this.RefreshValuelbl = new System.Windows.Forms.Label();
             this.VisitTornlbl = new System.Windows.Forms.LinkLabel();
             this.ChainValuelbl = new System.Windows.Forms.Label();
-            this.Chainlbl = new System.Windows.Forms.Label();
             this.HappyValuelbl = new System.Windows.Forms.Label();
-            this.Happylbl = new System.Windows.Forms.Label();
             this.NerveValuelbl = new System.Windows.Forms.Label();
-            this.Nervelbl = new System.Windows.Forms.Label();
             this.EnergyValuelbl = new System.Windows.Forms.Label();
-            this.Energylbl = new System.Windows.Forms.Label();
             this.LifeValue = new System.Windows.Forms.Label();
-            this.Hplbl = new System.Windows.Forms.Label();
             this.Statuslbl = new System.Windows.Forms.Label();
             this.IDValuelbl = new System.Windows.Forms.Label();
             this.idlbl = new System.Windows.Forms.Label();
@@ -141,8 +136,11 @@
             this.StockInfo31lbl = new System.Windows.Forms.Label();
             this.StockInfo30lbl = new System.Windows.Forms.Label();
             this.StockInfo29lbl = new System.Windows.Forms.Label();
+            this.tabPage14 = new System.Windows.Forms.TabPage();
+            this.RecentStocksAddedTxtbx = new System.Windows.Forms.RichTextBox();
             this.StockGetDatabtn = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.CalcLink = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.TornApiLinklbl = new System.Windows.Forms.LinkLabel();
             this.Yatalinklbl = new System.Windows.Forms.LinkLabel();
@@ -168,7 +166,9 @@
             this.LoadItemRefreshLimiter = new System.Windows.Forms.Timer(this.components);
             this.LeslieDukeTimersCountDown = new System.Windows.Forms.Timer(this.components);
             this.RefreshTrueDataForLoots = new System.Windows.Forms.Timer(this.components);
-            this.CalcLink = new System.Windows.Forms.LinkLabel();
+            this.StockAutoReFresh15MinChecker = new System.Windows.Forms.Timer(this.components);
+            this.AutoRefreshStockschkbx = new System.Windows.Forms.CheckBox();
+            this.ClearTextRecentStockbtn = new System.Windows.Forms.Button();
             this.MainTabBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -183,6 +183,7 @@
             this.tabPage11.SuspendLayout();
             this.tabPage12.SuspendLayout();
             this.tabPage13.SuspendLayout();
+            this.tabPage14.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -276,15 +277,10 @@
             this.tabPage1.Controls.Add(this.RefreshValuelbl);
             this.tabPage1.Controls.Add(this.VisitTornlbl);
             this.tabPage1.Controls.Add(this.ChainValuelbl);
-            this.tabPage1.Controls.Add(this.Chainlbl);
             this.tabPage1.Controls.Add(this.HappyValuelbl);
-            this.tabPage1.Controls.Add(this.Happylbl);
             this.tabPage1.Controls.Add(this.NerveValuelbl);
-            this.tabPage1.Controls.Add(this.Nervelbl);
             this.tabPage1.Controls.Add(this.EnergyValuelbl);
-            this.tabPage1.Controls.Add(this.Energylbl);
             this.tabPage1.Controls.Add(this.LifeValue);
-            this.tabPage1.Controls.Add(this.Hplbl);
             this.tabPage1.Controls.Add(this.Statuslbl);
             this.tabPage1.Controls.Add(this.IDValuelbl);
             this.tabPage1.Controls.Add(this.idlbl);
@@ -565,7 +561,7 @@
             // 
             this.HappyTickValuelbl.AutoSize = true;
             this.HappyTickValuelbl.ForeColor = System.Drawing.Color.DarkOrange;
-            this.HappyTickValuelbl.Location = new System.Drawing.Point(132, 224);
+            this.HappyTickValuelbl.Location = new System.Drawing.Point(134, 224);
             this.HappyTickValuelbl.Name = "HappyTickValuelbl";
             this.HappyTickValuelbl.Size = new System.Drawing.Size(26, 13);
             this.HappyTickValuelbl.TabIndex = 43;
@@ -575,7 +571,7 @@
             // 
             this.LifeTickValuelbl.AutoSize = true;
             this.LifeTickValuelbl.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.LifeTickValuelbl.Location = new System.Drawing.Point(132, 254);
+            this.LifeTickValuelbl.Location = new System.Drawing.Point(134, 254);
             this.LifeTickValuelbl.Name = "LifeTickValuelbl";
             this.LifeTickValuelbl.Size = new System.Drawing.Size(26, 13);
             this.LifeTickValuelbl.TabIndex = 42;
@@ -585,7 +581,7 @@
             // 
             this.NerveTimerValuelbl.AutoSize = true;
             this.NerveTimerValuelbl.ForeColor = System.Drawing.Color.Red;
-            this.NerveTimerValuelbl.Location = new System.Drawing.Point(132, 194);
+            this.NerveTimerValuelbl.Location = new System.Drawing.Point(134, 194);
             this.NerveTimerValuelbl.Name = "NerveTimerValuelbl";
             this.NerveTimerValuelbl.Size = new System.Drawing.Size(26, 13);
             this.NerveTimerValuelbl.TabIndex = 41;
@@ -595,7 +591,7 @@
             // 
             this.EnergyIncrementlbl.AutoSize = true;
             this.EnergyIncrementlbl.ForeColor = System.Drawing.Color.Green;
-            this.EnergyIncrementlbl.Location = new System.Drawing.Point(132, 164);
+            this.EnergyIncrementlbl.Location = new System.Drawing.Point(134, 164);
             this.EnergyIncrementlbl.Name = "EnergyIncrementlbl";
             this.EnergyIncrementlbl.Size = new System.Drawing.Size(26, 13);
             this.EnergyIncrementlbl.TabIndex = 40;
@@ -652,7 +648,7 @@
             this.ChainTimeOutValuelbl.AutoSize = true;
             this.ChainTimeOutValuelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChainTimeOutValuelbl.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.ChainTimeOutValuelbl.Location = new System.Drawing.Point(176, 284);
+            this.ChainTimeOutValuelbl.Location = new System.Drawing.Point(180, 284);
             this.ChainTimeOutValuelbl.Name = "ChainTimeOutValuelbl";
             this.ChainTimeOutValuelbl.Size = new System.Drawing.Size(14, 13);
             this.ChainTimeOutValuelbl.TabIndex = 33;
@@ -663,7 +659,7 @@
             this.ChainTimeoutlbl.AutoSize = true;
             this.ChainTimeoutlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChainTimeoutlbl.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.ChainTimeoutlbl.Location = new System.Drawing.Point(94, 284);
+            this.ChainTimeoutlbl.Location = new System.Drawing.Point(98, 284);
             this.ChainTimeoutlbl.Name = "ChainTimeoutlbl";
             this.ChainTimeoutlbl.Size = new System.Drawing.Size(76, 13);
             this.ChainTimeoutlbl.TabIndex = 32;
@@ -705,44 +701,22 @@
             this.ChainValuelbl.AutoSize = true;
             this.ChainValuelbl.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChainValuelbl.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.ChainValuelbl.Location = new System.Drawing.Point(47, 284);
+            this.ChainValuelbl.Location = new System.Drawing.Point(3, 284);
             this.ChainValuelbl.Name = "ChainValuelbl";
             this.ChainValuelbl.Size = new System.Drawing.Size(30, 16);
             this.ChainValuelbl.TabIndex = 24;
             this.ChainValuelbl.Text = "N/A";
-            // 
-            // Chainlbl
-            // 
-            this.Chainlbl.AutoSize = true;
-            this.Chainlbl.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Chainlbl.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.Chainlbl.Location = new System.Drawing.Point(3, 284);
-            this.Chainlbl.Name = "Chainlbl";
-            this.Chainlbl.Size = new System.Drawing.Size(41, 16);
-            this.Chainlbl.TabIndex = 23;
-            this.Chainlbl.Text = "Chain:";
             // 
             // HappyValuelbl
             // 
             this.HappyValuelbl.AutoSize = true;
             this.HappyValuelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HappyValuelbl.ForeColor = System.Drawing.Color.DarkOrange;
-            this.HappyValuelbl.Location = new System.Drawing.Point(47, 224);
+            this.HappyValuelbl.Location = new System.Drawing.Point(3, 224);
             this.HappyValuelbl.Name = "HappyValuelbl";
             this.HappyValuelbl.Size = new System.Drawing.Size(30, 13);
             this.HappyValuelbl.TabIndex = 22;
             this.HappyValuelbl.Text = "N/A";
-            // 
-            // Happylbl
-            // 
-            this.Happylbl.AutoSize = true;
-            this.Happylbl.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Happylbl.ForeColor = System.Drawing.Color.DarkOrange;
-            this.Happylbl.Location = new System.Drawing.Point(3, 224);
-            this.Happylbl.Name = "Happylbl";
-            this.Happylbl.Size = new System.Drawing.Size(46, 16);
-            this.Happylbl.TabIndex = 21;
-            this.Happylbl.Text = "Happy:";
             // 
             // NerveValuelbl
             // 
@@ -750,66 +724,33 @@
             this.NerveValuelbl.BackColor = System.Drawing.Color.Transparent;
             this.NerveValuelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NerveValuelbl.ForeColor = System.Drawing.Color.Red;
-            this.NerveValuelbl.Location = new System.Drawing.Point(47, 194);
+            this.NerveValuelbl.Location = new System.Drawing.Point(3, 194);
             this.NerveValuelbl.Name = "NerveValuelbl";
             this.NerveValuelbl.Size = new System.Drawing.Size(30, 13);
             this.NerveValuelbl.TabIndex = 20;
             this.NerveValuelbl.Text = "N/A";
-            // 
-            // Nervelbl
-            // 
-            this.Nervelbl.AutoSize = true;
-            this.Nervelbl.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Nervelbl.ForeColor = System.Drawing.Color.Red;
-            this.Nervelbl.Location = new System.Drawing.Point(3, 194);
-            this.Nervelbl.Name = "Nervelbl";
-            this.Nervelbl.Size = new System.Drawing.Size(46, 16);
-            this.Nervelbl.TabIndex = 19;
-            this.Nervelbl.Text = "Nerve: ";
             // 
             // EnergyValuelbl
             // 
             this.EnergyValuelbl.AutoSize = true;
             this.EnergyValuelbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EnergyValuelbl.ForeColor = System.Drawing.Color.Green;
-            this.EnergyValuelbl.Location = new System.Drawing.Point(47, 164);
+            this.EnergyValuelbl.Location = new System.Drawing.Point(3, 164);
             this.EnergyValuelbl.Name = "EnergyValuelbl";
             this.EnergyValuelbl.Size = new System.Drawing.Size(30, 13);
             this.EnergyValuelbl.TabIndex = 18;
             this.EnergyValuelbl.Text = "N/A";
-            // 
-            // Energylbl
-            // 
-            this.Energylbl.AutoSize = true;
-            this.Energylbl.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Energylbl.ForeColor = System.Drawing.Color.Green;
-            this.Energylbl.Location = new System.Drawing.Point(3, 164);
-            this.Energylbl.Name = "Energylbl";
-            this.Energylbl.Size = new System.Drawing.Size(51, 16);
-            this.Energylbl.TabIndex = 17;
-            this.Energylbl.Text = "Energy: ";
             // 
             // LifeValue
             // 
             this.LifeValue.AutoSize = true;
             this.LifeValue.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LifeValue.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.LifeValue.Location = new System.Drawing.Point(47, 254);
+            this.LifeValue.Location = new System.Drawing.Point(3, 254);
             this.LifeValue.Name = "LifeValue";
             this.LifeValue.Size = new System.Drawing.Size(30, 16);
             this.LifeValue.TabIndex = 16;
             this.LifeValue.Text = "N/A";
-            // 
-            // Hplbl
-            // 
-            this.Hplbl.AutoSize = true;
-            this.Hplbl.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Hplbl.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Hplbl.Location = new System.Drawing.Point(3, 254);
-            this.Hplbl.Name = "Hplbl";
-            this.Hplbl.Size = new System.Drawing.Size(30, 16);
-            this.Hplbl.TabIndex = 15;
-            this.Hplbl.Text = "Life:";
             // 
             // Statuslbl
             // 
@@ -952,6 +893,7 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.White;
+            this.tabPage4.Controls.Add(this.AutoRefreshStockschkbx);
             this.tabPage4.Controls.Add(this.StockInfoLbl);
             this.tabPage4.Controls.Add(this.TCStockExchangetab);
             this.tabPage4.Controls.Add(this.StockGetDatabtn);
@@ -982,6 +924,7 @@
             this.TCStockExchangetab.Controls.Add(this.tabPage11);
             this.TCStockExchangetab.Controls.Add(this.tabPage12);
             this.TCStockExchangetab.Controls.Add(this.tabPage13);
+            this.TCStockExchangetab.Controls.Add(this.tabPage14);
             this.TCStockExchangetab.Location = new System.Drawing.Point(6, 6);
             this.TCStockExchangetab.Name = "TCStockExchangetab";
             this.TCStockExchangetab.SelectedIndex = 0;
@@ -1388,6 +1331,26 @@
             this.StockInfo29lbl.TabIndex = 12;
             this.StockInfo29lbl.Text = "n/a";
             // 
+            // tabPage14
+            // 
+            this.tabPage14.Controls.Add(this.ClearTextRecentStockbtn);
+            this.tabPage14.Controls.Add(this.RecentStocksAddedTxtbx);
+            this.tabPage14.Location = new System.Drawing.Point(4, 22);
+            this.tabPage14.Name = "tabPage14";
+            this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage14.Size = new System.Drawing.Size(628, 313);
+            this.tabPage14.TabIndex = 8;
+            this.tabPage14.Text = "Recently Stocks Added";
+            this.tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // RecentStocksAddedTxtbx
+            // 
+            this.RecentStocksAddedTxtbx.Location = new System.Drawing.Point(7, 7);
+            this.RecentStocksAddedTxtbx.Name = "RecentStocksAddedTxtbx";
+            this.RecentStocksAddedTxtbx.Size = new System.Drawing.Size(615, 300);
+            this.RecentStocksAddedTxtbx.TabIndex = 0;
+            this.RecentStocksAddedTxtbx.Text = "";
+            // 
             // StockGetDatabtn
             // 
             this.StockGetDatabtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -1423,6 +1386,17 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Settings";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // CalcLink
+            // 
+            this.CalcLink.AutoSize = true;
+            this.CalcLink.Location = new System.Drawing.Point(264, 210);
+            this.CalcLink.Name = "CalcLink";
+            this.CalcLink.Size = new System.Drawing.Size(54, 13);
+            this.CalcLink.TabIndex = 18;
+            this.CalcLink.TabStop = true;
+            this.CalcLink.Text = "Calculator";
+            this.CalcLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CalcLink_LinkClicked);
             // 
             // label2
             // 
@@ -1642,16 +1616,31 @@
             this.RefreshTrueDataForLoots.Interval = 30000;
             this.RefreshTrueDataForLoots.Tick += new System.EventHandler(this.RefreshTrueDataForLoots_Tick);
             // 
-            // CalcLink
+            // StockAutoReFresh15MinChecker
             // 
-            this.CalcLink.AutoSize = true;
-            this.CalcLink.Location = new System.Drawing.Point(264, 210);
-            this.CalcLink.Name = "CalcLink";
-            this.CalcLink.Size = new System.Drawing.Size(54, 13);
-            this.CalcLink.TabIndex = 18;
-            this.CalcLink.TabStop = true;
-            this.CalcLink.Text = "Calculator";
-            this.CalcLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CalcLink_LinkClicked);
+            this.StockAutoReFresh15MinChecker.Interval = 8000;
+            this.StockAutoReFresh15MinChecker.Tick += new System.EventHandler(this.StockAutoReFresh15MinChecker_Tick);
+            // 
+            // AutoRefreshStockschkbx
+            // 
+            this.AutoRefreshStockschkbx.AutoSize = true;
+            this.AutoRefreshStockschkbx.Location = new System.Drawing.Point(444, 347);
+            this.AutoRefreshStockschkbx.Name = "AutoRefreshStockschkbx";
+            this.AutoRefreshStockschkbx.Size = new System.Drawing.Size(165, 17);
+            this.AutoRefreshStockschkbx.TabIndex = 3;
+            this.AutoRefreshStockschkbx.Text = "Auto Refresh Stocks ~ 15min";
+            this.AutoRefreshStockschkbx.UseVisualStyleBackColor = true;
+            this.AutoRefreshStockschkbx.CheckedChanged += new System.EventHandler(this.AutoRefreshStockschkbx_CheckedChanged);
+            // 
+            // ClearTextRecentStockbtn
+            // 
+            this.ClearTextRecentStockbtn.Location = new System.Drawing.Point(537, 273);
+            this.ClearTextRecentStockbtn.Name = "ClearTextRecentStockbtn";
+            this.ClearTextRecentStockbtn.Size = new System.Drawing.Size(75, 23);
+            this.ClearTextRecentStockbtn.TabIndex = 1;
+            this.ClearTextRecentStockbtn.Text = "Clear Text";
+            this.ClearTextRecentStockbtn.UseVisualStyleBackColor = true;
+            this.ClearTextRecentStockbtn.Click += new System.EventHandler(this.ClearTextRecentStockbtn_Click);
             // 
             // MainForm1
             // 
@@ -1692,6 +1681,7 @@
             this.tabPage12.PerformLayout();
             this.tabPage13.ResumeLayout(false);
             this.tabPage13.PerformLayout();
+            this.tabPage14.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
@@ -1712,15 +1702,10 @@
         private System.Windows.Forms.Label idlbl;
         private System.Windows.Forms.Label Statuslbl;
         private System.Windows.Forms.Label LifeValue;
-        private System.Windows.Forms.Label Hplbl;
         private System.Windows.Forms.Label EnergyValuelbl;
-        private System.Windows.Forms.Label Energylbl;
         private System.Windows.Forms.Label NerveValuelbl;
-        private System.Windows.Forms.Label Nervelbl;
         private System.Windows.Forms.Label HappyValuelbl;
-        private System.Windows.Forms.Label Happylbl;
         private System.Windows.Forms.Label ChainValuelbl;
-        private System.Windows.Forms.Label Chainlbl;
         private System.Windows.Forms.LinkLabel VisitTornlbl;
         private System.Windows.Forms.Timer ButtonLimittimer;
         private System.Windows.Forms.Timer OneSecondtimer;
@@ -1764,7 +1749,6 @@
         private System.Windows.Forms.Label SettingsDescriptionlbl;
         private System.Windows.Forms.Button SaveSettingsbtn;
         private System.Windows.Forms.LinkLabel Creatorlinklabel;
-        private System.Windows.Forms.TabControl TCStockExchangetab;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.Label TornCityStockExchangelbl;
@@ -1840,6 +1824,12 @@
         private System.Windows.Forms.LinkLabel VaultLinklbl;
         private System.Windows.Forms.Label StockInfoLbl;
         private System.Windows.Forms.LinkLabel CalcLink;
+        private System.Windows.Forms.TabPage tabPage14;
+        public System.Windows.Forms.RichTextBox RecentStocksAddedTxtbx;
+        public System.Windows.Forms.TabControl TCStockExchangetab;
+        private System.Windows.Forms.Timer StockAutoReFresh15MinChecker;
+        private System.Windows.Forms.CheckBox AutoRefreshStockschkbx;
+        private System.Windows.Forms.Button ClearTextRecentStockbtn;
     }
 }
 

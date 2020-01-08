@@ -233,8 +233,31 @@ namespace TornMainForm
                 NameOfStockID.PriceOfStock = Convert.ToDouble(CurrentPrice[index]);
                 NameOfStockID.Forecast = ForeCast[index];
                 NameOfStockID.Demand = Demand[index];
-                return NameOfStockID;
+                
+                try
+                {
+                    if (Convert.ToInt64( NameOfStockID.SharesAvailable) == 0)
+                      {
+                         NameOfStockID.WhenSharesAreZero = true; // zero stocks detected. in future now if stocks > than 0 we will know some were added
+                      }
+                    if (NameOfStockID.WhenSharesAreZero == true && Convert.ToInt64( NameOfStockID.SharesAvailable) > 0) 
+                    {
+                        NameOfStockID.WhenSharesAreZero = false; // change value to false when shares are not zero
+                       TornData.NewStocksAdded.Add( TornData.TornTime + Environment.NewLine +
+                           NameOfStockID.NameOfStock + Environment.NewLine +
+                            NameOfStockID.AcronymOfStock + Environment.NewLine +
+                            NameOfStockID.SharesAvailable + Environment.NewLine);                        
+                    }
+
+                }
+                catch (Exception)
+                {
+                    
+                }
+               return NameOfStockID;
+
             }
+
             public static void SetLabelToStockValue(StocksClass StockToFetch, Label LabelToSet) // set lable to stock object values
             {
                 try
@@ -316,6 +339,8 @@ namespace TornMainForm
             public static List<string> name = null;
             public static List<string> acronym = null;
             public static bool StockTimerActive = false;
+            public static List<string> NewStocksAdded = new List<string>();
+            public static Int64 TornTimeSpanInSeconds = 0;
 
             // old variables for old stock system
           /*  public static string Stock0 = null;     public static string Stock1 = null;          public static string Stock2 = null;
@@ -418,11 +443,11 @@ namespace TornMainForm
                 JObject status = JObject.Parse(Convert.ToString( details["status"]));
                     JToken state =  status["description"];
                 Statuslbl.Text = "Status: " + Convert.ToString( state).Trim(new char[] { '[', ']', ' ', ',', '"', '.' }).Replace("\"", string.Empty).Replace(",", string.Empty); ;
-                UserData.Lifejson = details["life"]; LifeValue.Text = Convert.ToString(UserData.Lifejson["current"] + " / " + UserData.Lifejson["maximum"]);
-                UserData.Energyjson = details["energy"]; EnergyValuelbl.Text = Convert.ToString(UserData.Energyjson["current"] + " / " + UserData.Energyjson["maximum"]);
-                UserData.Nervejson = details["nerve"]; NerveValuelbl.Text = Convert.ToString(UserData.Nervejson["current"] + " / " + UserData.Nervejson["maximum"]);
-                UserData.Happyjson = details["happy"]; HappyValuelbl.Text = Convert.ToString(UserData.Happyjson["current"] + " / " + UserData.Happyjson["maximum"]);
-                UserData.Chainjson = details["chain"]; ChainValuelbl.Text = Convert.ToString(UserData.Chainjson["current"]);
+                UserData.Lifejson = details["life"]; LifeValue.Text = "Life: "  + Convert.ToString(UserData.Lifejson["current"] + " / " + UserData.Lifejson["maximum"]);
+                UserData.Energyjson = details["energy"]; EnergyValuelbl.Text = "Energy: " + Convert.ToString(UserData.Energyjson["current"] + " / " + UserData.Energyjson["maximum"]);
+                UserData.Nervejson = details["nerve"]; NerveValuelbl.Text = "Nerve: " + Convert.ToString(UserData.Nervejson["current"] + " / " + UserData.Nervejson["maximum"]);
+                UserData.Happyjson = details["happy"]; HappyValuelbl.Text = "Happy: " + Convert.ToString(UserData.Happyjson["current"] + " / " + UserData.Happyjson["maximum"]);
+                UserData.Chainjson = details["chain"]; ChainValuelbl.Text = "Chain: " + Convert.ToString(UserData.Chainjson["current"]);
                 UserData.factionjson = details["faction"];
                 UserData.companyJson = details["job"];
                 UserData.travel = details["travel"];
@@ -699,7 +724,10 @@ namespace TornMainForm
 
                 var details = JObject.Parse(Convert.ToString(UserData.User));
                 TornData.TornTime = Convert.ToString(Convert.ToInt64(TornData.TornTime) + 1);
+                TornData.TornTimeSpanInSeconds = Convert.ToInt64(TornData.TornTime);
+
                 TimeSpan torntime = TimeSpan.FromSeconds(Convert.ToUInt64(TornData.TornTime) + 1);
+               
                 begginingoftime = begginingoftime + torntime;
                 TornCityTimelbl.Text = Convert.ToString("TCT: " + begginingoftime);
             }
@@ -834,7 +862,7 @@ namespace TornMainForm
             }
             catch (Exception)
             {
-                MessageBox.Show("Error Report:100. message superduperpoor if this continues");
+                MessageBox.Show("Error Report:100. ");
             }
                
         }             
@@ -1404,6 +1432,41 @@ namespace TornMainForm
         private void CalcLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("calc.exe");
+        }
+
+        private void StockAutoReFresh15MinChecker_Tick(object sender, EventArgs e)
+        {
+            //  TimeSpan TimeInSeconds =  TornData.TornTime
+            if (TornData.TornTimeSpanInSeconds % 900 > 30 &TornData.TornTimeSpanInSeconds % 900 < 40) // this should be every 1/4 hour + 30-40 seconds. 
+                //StockAutoReFresh15MinChecker is < time difference between two values currently at 8
+            {
+                StockGetDatabtn.PerformClick();
+                
+                foreach (var item in TornData.NewStocksAdded)
+                {
+                    RecentStocksAddedTxtbx.Text = RecentStocksAddedTxtbx.Text + item;
+                }
+                MessageBox.Show("New Stocks Up for Sale");
+               
+            }
+           
+        }
+
+        private void AutoRefreshStockschkbx_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AutoRefreshStockschkbx.Checked == true)
+            {
+                StockAutoReFresh15MinChecker.Start();
+            }
+            if (AutoRefreshStockschkbx.Checked == false)
+            {
+                StockAutoReFresh15MinChecker.Stop();
+            }
+        }
+
+        private void ClearTextRecentStockbtn_Click(object sender, EventArgs e)
+        {
+            RecentStocksAddedTxtbx.Text = "";
         }
     }
     

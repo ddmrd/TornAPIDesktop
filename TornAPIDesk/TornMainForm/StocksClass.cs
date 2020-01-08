@@ -14,5 +14,9 @@ namespace TornMainForm
         public double PriceOfStock { get; set; }
         public string Forecast { get; set; }
         public string Demand { get; set; }
+        public bool WhenSharesAreZero { get; set; } // This value is for setting to 0 if ShareAvailable = 0. Then will be used to compare with
+     //   future ShareAvailable to alert the user if new shares were added.
+        
+
     }
 }
