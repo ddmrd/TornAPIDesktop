@@ -66,14 +66,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TornMainForm.exe" size="126432">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TornMainForm.exe" size="127456">
       <assemblyIdentity name="TornMainForm" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iZYWi1J2h0AoivzgpX6UKggWlUTq7LgBAXdBv7ANyuI=</dsig:DigestValue>
+        <dsig:DigestValue>jQEQY2g0820ZN2ruY+oV8caFvXg8qY5dvzrRrwA3VIA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -889,7 +889,8 @@ namespace TornMainForm
 
                 if (MainForm1.APIKey != "" & MainForm1.APIKey.Length == 16)// create file if it does not exsist
                     {
-                        MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1030); //fetch items and add to dict
+                        File.WriteAllText(Settings.ItemFileName, " ");
+                        MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1160); //fetch items and add to dict
                         TornData.ItemIdList = TornData.ItemsIdAndName.Keys.ToList();
                         TornData.ItemNamesList = TornData.ItemsIdAndName.Values.ToList();                    
                
@@ -914,7 +915,8 @@ namespace TornMainForm
                 }
                 if (File.Exists(Settings.ItemFileName) == true & TornData.ItemLoaded == false) 
                     {
-                    MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1050);
+                        File.AppendAllText(Settings.ItemFileName," ");
+                    MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1160);
                     TornData.NameThenIDofItems = File.ReadAllText(Settings.ItemFileName);
                                       
                     // TornData.TornItemNames = Convert.ToString(JObject.Parse(TornData.NameThenIDofItems));                 
