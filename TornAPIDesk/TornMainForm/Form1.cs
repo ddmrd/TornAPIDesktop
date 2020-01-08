@@ -1453,12 +1453,12 @@ namespace TornMainForm
             {
                 StockGetDatabtn.PerformClick();
                 
-                foreach (var item in TornData.NewStocksAdded)
+                foreach (var item in TornData.NewStocksAdded) // items in list of newstocksadded will be shown in the text box
                 {
                     RecentStocksAddedTxtbx.Text = RecentStocksAddedTxtbx.Text + item;
+                    MessageBox.Show("New Stocks Up for Sale");
                 }
-                MessageBox.Show("New Stocks Up for Sale");
-               
+                TornData.NewStocksAdded.Clear();               
             }
            
         }
