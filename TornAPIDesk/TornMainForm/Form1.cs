@@ -890,6 +890,7 @@ namespace TornMainForm
                 if (MainForm1.APIKey != "" & MainForm1.APIKey.Length == 16)// create file if it does not exsist
                     {
                         File.WriteAllText(Settings.ItemFileName, " ");
+                        
                         MyFunctions.AddJsonDataToDictionary(TornData.ItemsIdAndName, "items", "name", TornData.TornJsonFetchedInfo, 1160); //fetch items and add to dict
                         TornData.ItemIdList = TornData.ItemsIdAndName.Keys.ToList();
                         TornData.ItemNamesList = TornData.ItemsIdAndName.Values.ToList();                    
@@ -1318,6 +1319,8 @@ namespace TornMainForm
                
                 MyFunctions.RichtxtBoxColour(richTextBox1, "white", "black");
                 MyFunctions.RichtxtBoxColour(richTextBox2, "white", "black");
+                MyFunctions.RichtxtBoxColour(RecentStocksAddedTxtbx, "white", "black");
+                
 
                 MyFunctions.TabColour(tabPage1, "white", "black");
                 MyFunctions.TabColour(tabPage2, "white", "black");
@@ -1331,8 +1334,9 @@ namespace TornMainForm
                 MyFunctions.TabColour(tabPage10, "white", "black");
                 MyFunctions.TabColour(tabPage11, "white", "black");
                 MyFunctions.TabColour(tabPage12, "white", "black");
-                MyFunctions.TabColour(tabPage13, "white", "black");                           
-           
+                MyFunctions.TabColour(tabPage13, "white", "black");
+                MyFunctions.TabColour(tabPage14, "white", "black");
+
                 MyFunctions.comboboxcolour(ItemCombobox, "white", "black");
                 MyFunctions.comboboxcolour(UserInfoTextColour,"white","black");
 
@@ -1346,7 +1350,8 @@ namespace TornMainForm
                 MyFunctions.ButtonColour(ItemSearchbtn, "white", "black");
                 MyFunctions.ButtonColour(StockGetDatabtn, "white", "black");
                 MyFunctions.ButtonColour(SaveSettingsbtn, "white", "black");
-                
+                MyFunctions.ButtonColour(ClearTextRecentStockbtn, "white", "black");
+
                 Creatorlinklabel.LinkColor = Color.FromArgb(133, 133, 133);
                 linkLabel1.LinkColor = Color.FromArgb(133, 133, 133);
                 Scroogenamelbl.LinkColor = Color.FromArgb(133, 133, 133);
@@ -1379,6 +1384,7 @@ namespace TornMainForm
                 MyFunctions.TabColour(tabPage11, "black", "white");
                 MyFunctions.TabColour(tabPage12, "black", "white");
                 MyFunctions.TabColour(tabPage13, "black", "white");
+                MyFunctions.TabColour(tabPage14, "black", "white");
 
                 MyFunctions.ButtonColour(StopRefreshingbtn, "black", "Transparent");
                 MyFunctions.ButtonColour(GetDatabtn, "black", "Transparent");
@@ -1387,9 +1393,12 @@ namespace TornMainForm
                 MyFunctions.ButtonColour(ItemSearchbtn, "black", "Transparent");
                 MyFunctions.ButtonColour(StockGetDatabtn, "black", "Transparent");
                 MyFunctions.ButtonColour(SaveSettingsbtn, "black", "Transparent");
+                MyFunctions.ButtonColour(ClearTextRecentStockbtn, "black", "Transparent");
+                
 
                 MyFunctions.RichtxtBoxColour(richTextBox1, "black", "white");
                 MyFunctions.RichtxtBoxColour(richTextBox2, "black", "white");
+                MyFunctions.RichtxtBoxColour(RecentStocksAddedTxtbx, "black", "white");
 
                 MyFunctions.comboboxcolour(ItemCombobox, "black", "white");
                 MyFunctions.comboboxcolour(UserInfoTextColour, "black", "white");
