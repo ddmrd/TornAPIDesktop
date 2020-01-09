@@ -617,7 +617,9 @@ namespace TornMainForm
 
         private void Refreshtimer_Tick(object sender, EventArgs e)
         {
-            GetDatabtn.PerformClick();
+         //   GetDatabtn.PerformClick();
+            button1_Click(sender, e);
+            
         }
 
         private void ButtonLimittimer_Tick(object sender, EventArgs e)
@@ -1451,14 +1453,19 @@ namespace TornMainForm
             if (TornData.TornTimeSpanInSeconds % 900 > 30 &TornData.TornTimeSpanInSeconds % 900 < 40) // this should be every 1/4 hour + 30-40 seconds. 
                 //StockAutoReFresh15MinChecker is < time difference between two values currently at 8
             {
-                StockGetDatabtn.PerformClick();
-                
+             //   StockGetDatabtn.PerformClick();
+               
+               
+                StockGetDatabtn_Click(sender, e);
+
+
                 foreach (var item in TornData.NewStocksAdded) // items in list of newstocksadded will be shown in the text box
                 {
                     RecentStocksAddedTxtbx.Text = RecentStocksAddedTxtbx.Text + item;
                     MessageBox.Show("New Stocks Up for Sale");
                 }
-                TornData.NewStocksAdded.Clear();               
+                TornData.NewStocksAdded.Clear();            
+                   
             }
            
         }

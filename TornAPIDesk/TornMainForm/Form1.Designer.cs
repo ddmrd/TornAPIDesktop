@@ -94,6 +94,7 @@
             this.ItemCombobox = new System.Windows.Forms.ComboBox();
             this.GetItemNamesAndIdbtn = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.AutoRefreshStockschkbx = new System.Windows.Forms.CheckBox();
             this.StockInfoLbl = new System.Windows.Forms.Label();
             this.TCStockExchangetab = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
@@ -137,6 +138,7 @@
             this.StockInfo30lbl = new System.Windows.Forms.Label();
             this.StockInfo29lbl = new System.Windows.Forms.Label();
             this.tabPage14 = new System.Windows.Forms.TabPage();
+            this.ClearTextRecentStockbtn = new System.Windows.Forms.Button();
             this.RecentStocksAddedTxtbx = new System.Windows.Forms.RichTextBox();
             this.StockGetDatabtn = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -167,8 +169,6 @@
             this.LeslieDukeTimersCountDown = new System.Windows.Forms.Timer(this.components);
             this.RefreshTrueDataForLoots = new System.Windows.Forms.Timer(this.components);
             this.StockAutoReFresh15MinChecker = new System.Windows.Forms.Timer(this.components);
-            this.AutoRefreshStockschkbx = new System.Windows.Forms.CheckBox();
-            this.ClearTextRecentStockbtn = new System.Windows.Forms.Button();
             this.MainTabBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -904,6 +904,17 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Stock Info";
             // 
+            // AutoRefreshStockschkbx
+            // 
+            this.AutoRefreshStockschkbx.AutoSize = true;
+            this.AutoRefreshStockschkbx.Location = new System.Drawing.Point(444, 347);
+            this.AutoRefreshStockschkbx.Name = "AutoRefreshStockschkbx";
+            this.AutoRefreshStockschkbx.Size = new System.Drawing.Size(165, 17);
+            this.AutoRefreshStockschkbx.TabIndex = 3;
+            this.AutoRefreshStockschkbx.Text = "Auto Refresh Stocks ~ 15min";
+            this.AutoRefreshStockschkbx.UseVisualStyleBackColor = true;
+            this.AutoRefreshStockschkbx.CheckedChanged += new System.EventHandler(this.AutoRefreshStockschkbx_CheckedChanged);
+            // 
             // StockInfoLbl
             // 
             this.StockInfoLbl.AutoSize = true;
@@ -1340,13 +1351,24 @@
             this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage14.Size = new System.Drawing.Size(628, 313);
             this.tabPage14.TabIndex = 8;
-            this.tabPage14.Text = "Recently Stocks Added";
+            this.tabPage14.Text = "Recent Stocks Added";
             this.tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // ClearTextRecentStockbtn
+            // 
+            this.ClearTextRecentStockbtn.Location = new System.Drawing.Point(537, 273);
+            this.ClearTextRecentStockbtn.Name = "ClearTextRecentStockbtn";
+            this.ClearTextRecentStockbtn.Size = new System.Drawing.Size(75, 23);
+            this.ClearTextRecentStockbtn.TabIndex = 1;
+            this.ClearTextRecentStockbtn.Text = "Clear Text";
+            this.ClearTextRecentStockbtn.UseVisualStyleBackColor = true;
+            this.ClearTextRecentStockbtn.Click += new System.EventHandler(this.ClearTextRecentStockbtn_Click);
             // 
             // RecentStocksAddedTxtbx
             // 
             this.RecentStocksAddedTxtbx.Location = new System.Drawing.Point(7, 7);
             this.RecentStocksAddedTxtbx.Name = "RecentStocksAddedTxtbx";
+            this.RecentStocksAddedTxtbx.ReadOnly = true;
             this.RecentStocksAddedTxtbx.Size = new System.Drawing.Size(615, 300);
             this.RecentStocksAddedTxtbx.TabIndex = 0;
             this.RecentStocksAddedTxtbx.Text = "";
@@ -1621,27 +1643,6 @@
             this.StockAutoReFresh15MinChecker.Interval = 8000;
             this.StockAutoReFresh15MinChecker.Tick += new System.EventHandler(this.StockAutoReFresh15MinChecker_Tick);
             // 
-            // AutoRefreshStockschkbx
-            // 
-            this.AutoRefreshStockschkbx.AutoSize = true;
-            this.AutoRefreshStockschkbx.Location = new System.Drawing.Point(444, 347);
-            this.AutoRefreshStockschkbx.Name = "AutoRefreshStockschkbx";
-            this.AutoRefreshStockschkbx.Size = new System.Drawing.Size(165, 17);
-            this.AutoRefreshStockschkbx.TabIndex = 3;
-            this.AutoRefreshStockschkbx.Text = "Auto Refresh Stocks ~ 15min";
-            this.AutoRefreshStockschkbx.UseVisualStyleBackColor = true;
-            this.AutoRefreshStockschkbx.CheckedChanged += new System.EventHandler(this.AutoRefreshStockschkbx_CheckedChanged);
-            // 
-            // ClearTextRecentStockbtn
-            // 
-            this.ClearTextRecentStockbtn.Location = new System.Drawing.Point(537, 273);
-            this.ClearTextRecentStockbtn.Name = "ClearTextRecentStockbtn";
-            this.ClearTextRecentStockbtn.Size = new System.Drawing.Size(75, 23);
-            this.ClearTextRecentStockbtn.TabIndex = 1;
-            this.ClearTextRecentStockbtn.Text = "Clear Text";
-            this.ClearTextRecentStockbtn.UseVisualStyleBackColor = true;
-            this.ClearTextRecentStockbtn.Click += new System.EventHandler(this.ClearTextRecentStockbtn_Click);
-            // 
             // MainForm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1694,7 +1695,6 @@
         private System.Windows.Forms.TextBox TornAPIKey;
         private System.Windows.Forms.Label APIkeylbl;
         private System.Windows.Forms.CheckBox ApiKeyLockcbx;
-        private System.Windows.Forms.TabControl MainTabBar;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label NameValuelbl;
         private System.Windows.Forms.Label Namelbl;
@@ -1732,7 +1732,6 @@
         private System.Windows.Forms.Label BoosterCdlbl;
         private System.Windows.Forms.LinkLabel StatusLinkProfileValuelbl;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button StockGetDatabtn;
         private System.Windows.Forms.Label CaymanbankValuelbl;
         private System.Windows.Forms.Label CityBankValuelbl;
         private System.Windows.Forms.Label BankTimeLeftValuelbl;
@@ -1816,7 +1815,6 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         public System.Windows.Forms.CheckBox DarkModechkbox;
         private System.Windows.Forms.Timer Refreshtimer;
-        private System.Windows.Forms.Button GetDatabtn;
         private System.Windows.Forms.LinkLabel TornApiLinklbl;
         private System.Windows.Forms.LinkLabel Yatalinklbl;
         private System.Windows.Forms.LinkLabel TornStatslinklbl;
@@ -1830,6 +1828,9 @@
         private System.Windows.Forms.Timer StockAutoReFresh15MinChecker;
         private System.Windows.Forms.CheckBox AutoRefreshStockschkbx;
         private System.Windows.Forms.Button ClearTextRecentStockbtn;
+        public System.Windows.Forms.Button StockGetDatabtn;
+        public System.Windows.Forms.Button GetDatabtn;
+        public System.Windows.Forms.TabControl MainTabBar;
     }
 }
 
