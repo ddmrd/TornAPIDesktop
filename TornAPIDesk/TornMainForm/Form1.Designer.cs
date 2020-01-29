@@ -801,7 +801,6 @@
             // GetDatabtn
             // 
             this.GetDatabtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GetDatabtn.ForeColor = System.Drawing.Color.Black;
             this.GetDatabtn.Location = new System.Drawing.Point(508, 340);
             this.GetDatabtn.Name = "GetDatabtn";
             this.GetDatabtn.Size = new System.Drawing.Size(112, 34);
@@ -1351,12 +1350,12 @@
             this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage14.Size = new System.Drawing.Size(628, 313);
             this.tabPage14.TabIndex = 8;
-            this.tabPage14.Text = "Recent Stocks Added";
+            this.tabPage14.Text = "Recent Stocks Added whilst stock was 0";
             this.tabPage14.UseVisualStyleBackColor = true;
             // 
             // ClearTextRecentStockbtn
             // 
-            this.ClearTextRecentStockbtn.Location = new System.Drawing.Point(537, 273);
+            this.ClearTextRecentStockbtn.Location = new System.Drawing.Point(524, 273);
             this.ClearTextRecentStockbtn.Name = "ClearTextRecentStockbtn";
             this.ClearTextRecentStockbtn.Size = new System.Drawing.Size(75, 23);
             this.ClearTextRecentStockbtn.TabIndex = 1;

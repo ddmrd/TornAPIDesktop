@@ -243,10 +243,10 @@ namespace TornMainForm
                     if (NameOfStockID.WhenSharesAreZero == true && Convert.ToInt64( NameOfStockID.SharesAvailable) > 0) 
                     {
                         NameOfStockID.WhenSharesAreZero = false; // change value to false when shares are not zero
-                       TornData.NewStocksAdded.Add( TornData.TornTime + Environment.NewLine +
-                           NameOfStockID.NameOfStock + Environment.NewLine +
-                            NameOfStockID.AcronymOfStock + Environment.NewLine +
-                            NameOfStockID.SharesAvailable + Environment.NewLine);                        
+                       TornData.NewStocksAdded.Add( TornData.begginingoftime + TimeSpan.FromSeconds(Convert.ToUInt64( TornData.TornTime)) + Environment.NewLine +
+                          "Name: " + NameOfStockID.NameOfStock + Environment.NewLine +
+                          "Acronym: " +  NameOfStockID.AcronymOfStock + Environment.NewLine +
+                          "Shares added: " +  NameOfStockID.SharesAvailable + Environment.NewLine);                        
                     }
 
                 }
@@ -341,6 +341,7 @@ namespace TornMainForm
             public static bool StockTimerActive = false;
             public static List<string> NewStocksAdded = new List<string>();
             public static Int64 TornTimeSpanInSeconds = 0;
+            public static DateTime begginingoftime = new DateTime(1970, 01, 01); 
 
             // old variables for old stock system
           /*  public static string Stock0 = null;     public static string Stock1 = null;          public static string Stock2 = null;
@@ -393,6 +394,7 @@ namespace TornMainForm
             public static JToken travel = null;
             public static JToken Events = null;
             public static string Educationtimeleft = null;
+            public static int StocksAddedCounter = 0;
 
             public static long TimerAble = 0; // when timerable is > 0 the refreshtimer will automate itself. when an exception occurs value is put to 0 which turns timer off.
             public static string StatusLink = null;
@@ -424,6 +426,7 @@ namespace TornMainForm
 
                 OneSecondtimer.Start();
                 GetDatabtn.Text = Convert.ToString(ButtonLimittimer.Interval / 1000);
+                   
 
                 UserData.Basic = MyFunctions.FetchUserData(1, "basic,profile,bars,money,cooldowns,notifications,travel,events,education", UserData.Basic); // Fields to fetch
 
@@ -508,10 +511,11 @@ namespace TornMainForm
                             AcEvent = AcEvent.Replace("<//b>", "");                                                     
                            
                             AcEvent = Regex.Replace(AcEvent, "XID", " ");
-                            AcEvent = Regex.Replace(AcEvent, @"[^0-9a-zA-Z:,. ]+", "");                        
+                            AcEvent = Regex.Replace(AcEvent, @"[^0-9a-zA-Z:,. ]+", "");
 
-                            
+
                             //removal of links
+                       //     AcEvent = Regex.Replace(AcEvent, @"https?:www\.?[A-Za-z0-9]?\.?[A-Za-z0-9]?\.?[A-Za-z0-9]?", " ");
                             AcEvent = Regex.Replace(AcEvent, "http:www.torn.comprofiles.php?", " ");
                             AcEvent = Regex.Replace(AcEvent, "http:www.torn.comstockexchange.php", " ");
                             AcEvent = Regex.Replace(AcEvent, "http:www.torn.comloader.php", " ");
@@ -526,10 +530,10 @@ namespace TornMainForm
 
                          AcEvent = AcEvent.Replace("view"," ");
                             AcEvent = AcEvent.Replace("View", " ");
-                            AcEvent = AcEvent.Replace("Please click here to continue", " "); 
+                            AcEvent = AcEvent.Replace("Please click here to continue", " ");
 
-
-                            AcEvent = AcEvent.Replace("1stb", "1st ");
+                         //   AcEvent = Regex.Replace(AcEvent, @"(\d{1}\w{1,2}(b{1}", "${1}"); // untested regex.
+                            AcEvent = AcEvent.Replace("1stb", "1st "); 
                             AcEvent = AcEvent.Replace("2ndb", "2nd ");
                             AcEvent = AcEvent.Replace("3rdb", "3rd ");
                             AcEvent = AcEvent.Replace("4thb", " 4th");
@@ -537,9 +541,29 @@ namespace TornMainForm
                             AcEvent = AcEvent.Replace("6thb", "6th ");
                             AcEvent = AcEvent.Replace("7thb", "7th ");
                             AcEvent = AcEvent.Replace("8thb", "8th ");
-                            AcEvent = AcEvent.Replace("9thb", "9th "); 
+                            AcEvent = AcEvent.Replace("9thb", "9th ");
+                             
                             AcEvent = AcEvent.Replace("classh", " ");
                             AcEvent = AcEvent.Replace("classtblue", " ");
+                            AcEvent = AcEvent.Replace(AcEvent, " " + AcEvent);
+
+                            // dc98de5eb6e1debccc53104649db4830       
+                            // a8e8eab06b99bc45327bfd1e1132bc0c9  
+                            // 2109584f390d9546306f279c5fa671771   
+                            // 555580d5e2ea01cea323423423rf34t4
+                            // a1b465ec0b84dc30e52b38e4c124cee1 
+                            // e4405be3454d01827e265d873f6c6646 
+                            // 321f65a718504d709d7bbe537bc41f63 
+                            // 64405be3454d01827e265d873f6c6646
+
+
+                            // regex needs to ignore above examples but split below exammples from number to end of number/begin of string to end of string
+
+                            // 1546842nam-*()e^!"$))*&^!notid
+                            // 1546842namenotid
+                            // 6521retg551olktr33
+                            // 1gssrs4gsg
+                            // 91555555555888888888888888888888888888888888888888888888888888888888888888855gggggggggggggggggggggeeeeeeeeeeeeeeeee55555555555534gswoinjso
 
 
                             AcEvent = AcEvent.Replace("sid", " sid ");
@@ -551,6 +575,16 @@ namespace TornMainForm
                             AcEvent = AcEvent.Replace("    ", " ");
                             AcEvent = AcEvent.Replace("   ", " ");
                             AcEvent = AcEvent.Replace("  ", " ");
+                            // \s\d{1,7}[A-Za-z0-9-*()^!"$&%£]{3,25}\s{1}
+                            AcEvent = Regex.Replace(AcEvent, @"(\s\d{1,7})([A-Za-z0-9-*()^!$&%£]{3,25})\s{1}", "${1} " + " " + "${2} "); //regex to seperate  Id and Names from each other. // currently also splits Log ID's which is not needed
+
+                       /*     if (AcEvent.Contains("attacked")) // need this function so that attack log id does not get split - currently incomplete
+                            {
+                           string a =   AcEvent.Split ("attacked"[0]);
+                                string b = Convert.ToString(AcEvent.Split("attacked"[1]));
+                                string replacement = Regex.Replace(a, @"(\d{2,7})([A-Za-z0-9]{0,22})", "${1} " + " " + "${2}");
+                                AcEvent = a.tos() + b.ToString();
+                            }*/
 
                             if (item.Contains("the") & item.Contains("details") & item.Contains("here"))
                             {
@@ -596,16 +630,16 @@ namespace TornMainForm
            {
                 try
                 {
-                                   
-                MyFunctions.APIErrorChecks();
                     Refreshtimer.Stop();
+                    MyFunctions.APIErrorChecks();
+                    
                 }
                 catch (Exception)
                 {
                     Refreshtimer.Stop();
                     MessageBox.Show("Error: Api did not work. Try again in 30 Seconds");               
                 }
-                OneSecondtimeTwo.Stop();
+              //  OneSecondtimeTwo.Stop();
                 UserData.TimerAble = 0; // when timerable is > 0 the refreshtimer will automate itself. when an exception occurs value is put to 0 which turns timer off. value is increased by button press
            }
         }
@@ -1462,10 +1496,14 @@ namespace TornMainForm
                 foreach (var item in TornData.NewStocksAdded) // items in list of newstocksadded will be shown in the text box
                 {
                     RecentStocksAddedTxtbx.Text = RecentStocksAddedTxtbx.Text + item;
-                    MessageBox.Show("New Stocks Up for Sale");
+                    //     MessageBox.Show("New Stocks Up for Sale");
+                    //     TornData.NewStocksAdded.Remove(item); // maybe not?
+                    UserData.StocksAddedCounter ++ ;
+                
                 }
-                TornData.NewStocksAdded.Clear();            
-                   
+                TornData.NewStocksAdded.Clear();
+                tabPage4.Text = "Stock Info [" + UserData.StocksAddedCounter +"]" ; 
+
             }
            
         }
@@ -1485,6 +1523,8 @@ namespace TornMainForm
         private void ClearTextRecentStockbtn_Click(object sender, EventArgs e)
         {
             RecentStocksAddedTxtbx.Text = "";
+            UserData.StocksAddedCounter = 0;
+            tabPage4.Text = "Stock Info [" + UserData.StocksAddedCounter + "]";
         }
     }
     
