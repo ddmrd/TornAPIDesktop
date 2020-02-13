@@ -7,24 +7,22 @@ To use this app place items.json, Newtonsoft.Json.dll, Newtonsoft.Json.xml, Sett
 
 This is a Desktop application so you don't need to share your api key with anyone else.
 
-The main page intends to auto refresh every 30 seconds with the option to manually request every 12 seconds. This helps limit the chance being temporarily banned. 
-
 # Purpose
- 
+  
 This is a desktop application that uses your Torn API key to fetch information about your account and updates it periodically to keep you up to date on typical information such as; cooldowns, energy timers, bank money, status and other in game features.
 
 An item search page is featured so you see the effect, market price, buy price, sale price, description and quantity of the item in circulation.
 
-<img src= "https://github.com/ddmrd/TornAPIDesktop/blob/master/UserInfo.png" alt = "api1"/>
+<img src= "https://github.com/lolkoglol/TornAPIDesktopRefresh/blob/master/Main.png" alt = "api1"/>
 
 
-<img src= "https://github.com/ddmrd/TornAPIDesktop/blob/master/ItemSearch.png" alt = "api2"/>
+<img src= "https://github.com/lolkoglol/TornAPIDesktopRefresh/blob/master/Item.png" alt = "api2"/>
 
-<img src= "https://github.com/ddmrd/TornAPIDesktop/blob/master/StockInfo.png" alt = "api3"/>
+<img src= "https://github.com/lolkoglol/TornAPIDesktopRefresh/blob/master/Stock.png" alt = "api3"/>
 
-Setting page allows you to save your api so you dont have to re-enter on app start up. Feature two allows you to change the text colour on the UserInfo page
+Setting page allows you to save your api so you dont have to re-enter on app start up. Feature two allows you to change the text colour on the UserInfo page or use dark mode.
 
-<img src= "https://github.com/ddmrd/TornAPIDesktop/blob/master/Settings.png" alt = "api4"/>
+<img src= "https://github.com/lolkoglol/TornAPIDesktopRefresh/blob/master/Settings.png" alt = "api4"/>
 
 
 
