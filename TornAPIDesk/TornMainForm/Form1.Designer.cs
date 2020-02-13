@@ -35,6 +35,7 @@
             this.ApiKeyLockcbx = new System.Windows.Forms.CheckBox();
             this.MainTabBar = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.FrontPageOnTopchbx = new System.Windows.Forms.CheckBox();
             this.VaultLinklbl = new System.Windows.Forms.LinkLabel();
             this.Scroogenamelbl = new System.Windows.Forms.LinkLabel();
             this.ScroogeTimertolvl4lbl = new System.Windows.Forms.Label();
@@ -142,6 +143,7 @@
             this.RecentStocksAddedTxtbx = new System.Windows.Forms.RichTextBox();
             this.StockGetDatabtn = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.TopCheckchkbx = new System.Windows.Forms.CheckBox();
             this.CalcLink = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.TornApiLinklbl = new System.Windows.Forms.LinkLabel();
@@ -169,6 +171,11 @@
             this.LeslieDukeTimersCountDown = new System.Windows.Forms.Timer(this.components);
             this.RefreshTrueDataForLoots = new System.Windows.Forms.Timer(this.components);
             this.StockAutoReFresh15MinChecker = new System.Windows.Forms.Timer(this.components);
+            this.StockFilterTAB = new System.Windows.Forms.TabPage();
+            this.OptionsForStockReturncmbx = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.FilterStockResultBoxrchtxbx = new System.Windows.Forms.RichTextBox();
+            this.FetchStockFilterDatabtn = new System.Windows.Forms.Button();
             this.MainTabBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -185,6 +192,7 @@
             this.tabPage13.SuspendLayout();
             this.tabPage14.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.StockFilterTAB.SuspendLayout();
             this.SuspendLayout();
             // 
             // TornAPIKey
@@ -236,6 +244,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.FrontPageOnTopchbx);
             this.tabPage1.Controls.Add(this.VaultLinklbl);
             this.tabPage1.Controls.Add(this.Scroogenamelbl);
             this.tabPage1.Controls.Add(this.ScroogeTimertolvl4lbl);
@@ -298,6 +307,17 @@
             this.tabPage1.Size = new System.Drawing.Size(648, 382);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "UserInfo";
+            // 
+            // FrontPageOnTopchbx
+            // 
+            this.FrontPageOnTopchbx.AutoSize = true;
+            this.FrontPageOnTopchbx.Location = new System.Drawing.Point(507, 0);
+            this.FrontPageOnTopchbx.Name = "FrontPageOnTopchbx";
+            this.FrontPageOnTopchbx.Size = new System.Drawing.Size(86, 17);
+            this.FrontPageOnTopchbx.TabIndex = 72;
+            this.FrontPageOnTopchbx.Text = "Stay On Top";
+            this.FrontPageOnTopchbx.UseVisualStyleBackColor = true;
+            this.FrontPageOnTopchbx.CheckedChanged += new System.EventHandler(this.FrontPageOnTopchbx_CheckedChanged);
             // 
             // VaultLinklbl
             // 
@@ -935,6 +955,7 @@
             this.TCStockExchangetab.Controls.Add(this.tabPage12);
             this.TCStockExchangetab.Controls.Add(this.tabPage13);
             this.TCStockExchangetab.Controls.Add(this.tabPage14);
+            this.TCStockExchangetab.Controls.Add(this.StockFilterTAB);
             this.TCStockExchangetab.Location = new System.Drawing.Point(6, 6);
             this.TCStockExchangetab.Name = "TCStockExchangetab";
             this.TCStockExchangetab.SelectedIndex = 0;
@@ -1350,7 +1371,7 @@
             this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage14.Size = new System.Drawing.Size(628, 313);
             this.tabPage14.TabIndex = 8;
-            this.tabPage14.Text = "Recent Stocks Added whilst stock was 0";
+            this.tabPage14.Text = "New Stock for sale";
             this.tabPage14.UseVisualStyleBackColor = true;
             // 
             // ClearTextRecentStockbtn
@@ -1385,6 +1406,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.TopCheckchkbx);
             this.tabPage5.Controls.Add(this.CalcLink);
             this.tabPage5.Controls.Add(this.label2);
             this.tabPage5.Controls.Add(this.TornApiLinklbl);
@@ -1407,6 +1429,17 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Settings";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // TopCheckchkbx
+            // 
+            this.TopCheckchkbx.AutoSize = true;
+            this.TopCheckchkbx.Location = new System.Drawing.Point(408, 343);
+            this.TopCheckchkbx.Name = "TopCheckchkbx";
+            this.TopCheckchkbx.Size = new System.Drawing.Size(225, 17);
+            this.TopCheckchkbx.TabIndex = 41;
+            this.TopCheckchkbx.Text = "Make Form be on top of other applications";
+            this.TopCheckchkbx.UseVisualStyleBackColor = true;
+            this.TopCheckchkbx.CheckedChanged += new System.EventHandler(this.TopCheckchkbx_CheckedChanged);
             // 
             // CalcLink
             // 
@@ -1642,6 +1675,70 @@
             this.StockAutoReFresh15MinChecker.Interval = 8000;
             this.StockAutoReFresh15MinChecker.Tick += new System.EventHandler(this.StockAutoReFresh15MinChecker_Tick);
             // 
+            // StockFilterTAB
+            // 
+            this.StockFilterTAB.Controls.Add(this.FetchStockFilterDatabtn);
+            this.StockFilterTAB.Controls.Add(this.FilterStockResultBoxrchtxbx);
+            this.StockFilterTAB.Controls.Add(this.label3);
+            this.StockFilterTAB.Controls.Add(this.OptionsForStockReturncmbx);
+            this.StockFilterTAB.Location = new System.Drawing.Point(4, 22);
+            this.StockFilterTAB.Name = "StockFilterTAB";
+            this.StockFilterTAB.Padding = new System.Windows.Forms.Padding(3);
+            this.StockFilterTAB.Size = new System.Drawing.Size(628, 313);
+            this.StockFilterTAB.TabIndex = 9;
+            this.StockFilterTAB.Text = "Filter find";
+            this.StockFilterTAB.UseVisualStyleBackColor = true;
+            // 
+            // OptionsForStockReturncmbx
+            // 
+            this.OptionsForStockReturncmbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.OptionsForStockReturncmbx.FormattingEnabled = true;
+            this.OptionsForStockReturncmbx.Items.AddRange(new object[] {
+            "Price Low - High",
+            "Price High - Low",
+            "Poor Forecast",
+            "Very Poor Forecast",
+            "Good Forecast",
+            "Very Good Forecast",
+            "Low Demand",
+            "Average Demand",
+            "High Demand",
+            "Shares For Sale Low - High",
+            "Shares For Sale High - Low"});
+            this.OptionsForStockReturncmbx.Location = new System.Drawing.Point(141, 14);
+            this.OptionsForStockReturncmbx.MaxDropDownItems = 11;
+            this.OptionsForStockReturncmbx.Name = "OptionsForStockReturncmbx";
+            this.OptionsForStockReturncmbx.Size = new System.Drawing.Size(121, 21);
+            this.OptionsForStockReturncmbx.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 17);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(120, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Return stocks based on";
+            // 
+            // FilterStockResultBoxrchtxbx
+            // 
+            this.FilterStockResultBoxrchtxbx.Location = new System.Drawing.Point(6, 41);
+            this.FilterStockResultBoxrchtxbx.Name = "FilterStockResultBoxrchtxbx";
+            this.FilterStockResultBoxrchtxbx.ReadOnly = true;
+            this.FilterStockResultBoxrchtxbx.Size = new System.Drawing.Size(616, 266);
+            this.FilterStockResultBoxrchtxbx.TabIndex = 2;
+            this.FilterStockResultBoxrchtxbx.Text = "";
+            // 
+            // FetchStockFilterDatabtn
+            // 
+            this.FetchStockFilterDatabtn.Location = new System.Drawing.Point(353, 12);
+            this.FetchStockFilterDatabtn.Name = "FetchStockFilterDatabtn";
+            this.FetchStockFilterDatabtn.Size = new System.Drawing.Size(143, 23);
+            this.FetchStockFilterDatabtn.TabIndex = 3;
+            this.FetchStockFilterDatabtn.Text = "Fetch Filter";
+            this.FetchStockFilterDatabtn.UseVisualStyleBackColor = true;
+            this.FetchStockFilterDatabtn.Click += new System.EventHandler(this.FetchStockFilterDatabtn_Click);
+            // 
             // MainForm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1684,6 +1781,8 @@
             this.tabPage14.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.StockFilterTAB.ResumeLayout(false);
+            this.StockFilterTAB.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1830,6 +1929,13 @@
         public System.Windows.Forms.Button StockGetDatabtn;
         public System.Windows.Forms.Button GetDatabtn;
         public System.Windows.Forms.TabControl MainTabBar;
+        private System.Windows.Forms.CheckBox TopCheckchkbx;
+        private System.Windows.Forms.CheckBox FrontPageOnTopchbx;
+        private System.Windows.Forms.TabPage StockFilterTAB;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox OptionsForStockReturncmbx;
+        private System.Windows.Forms.Button FetchStockFilterDatabtn;
+        private System.Windows.Forms.RichTextBox FilterStockResultBoxrchtxbx;
     }
 }
 
