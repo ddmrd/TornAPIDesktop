@@ -227,6 +227,9 @@
             // 
             // MainTabBar
             // 
+            this.MainTabBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.MainTabBar.Controls.Add(this.tabPage1);
             this.MainTabBar.Controls.Add(this.tabPage2);
             this.MainTabBar.Controls.Add(this.tabPage3);
@@ -238,7 +241,7 @@
             this.MainTabBar.Name = "MainTabBar";
             this.MainTabBar.Padding = new System.Drawing.Point(0, 0);
             this.MainTabBar.SelectedIndex = 0;
-            this.MainTabBar.Size = new System.Drawing.Size(656, 408);
+            this.MainTabBar.Size = new System.Drawing.Size(663, 408);
             this.MainTabBar.TabIndex = 3;
             // 
             // tabPage1
@@ -304,7 +307,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(648, 382);
+            this.tabPage1.Size = new System.Drawing.Size(655, 382);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "UserInfo";
             // 
@@ -631,9 +634,9 @@
             this.Cooldownlbl.AutoSize = true;
             this.Cooldownlbl.Location = new System.Drawing.Point(240, 284);
             this.Cooldownlbl.Name = "Cooldownlbl";
-            this.Cooldownlbl.Size = new System.Drawing.Size(57, 13);
+            this.Cooldownlbl.Size = new System.Drawing.Size(55, 13);
             this.Cooldownlbl.TabIndex = 38;
-            this.Cooldownlbl.Text = "Cooldown:";
+            this.Cooldownlbl.Text = "Chain CD:";
             // 
             // MoneyInVaultlbl
             // 
@@ -836,7 +839,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(648, 382);
+            this.tabPage2.Size = new System.Drawing.Size(655, 382);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Events";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -859,7 +862,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(648, 382);
+            this.tabPage3.Size = new System.Drawing.Size(655, 382);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "ItemSearch";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -920,7 +923,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(648, 382);
+            this.tabPage4.Size = new System.Drawing.Size(655, 382);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Stock Info";
             // 
@@ -1490,7 +1493,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(648, 382);
+            this.tabPage5.Size = new System.Drawing.Size(655, 382);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Settings";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1698,6 +1701,9 @@
             // 
             // TornCityTimelbl
             // 
+            this.TornCityTimelbl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TornCityTimelbl.AutoSize = true;
             this.TornCityTimelbl.Location = new System.Drawing.Point(445, 4);
             this.TornCityTimelbl.Name = "TornCityTimelbl";
@@ -1742,14 +1748,12 @@
             // 
             // MainForm1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(651, 408);
+            this.ClientSize = new System.Drawing.Size(658, 408);
             this.Controls.Add(this.TornCityTimelbl);
             this.Controls.Add(this.MainTabBar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm1";

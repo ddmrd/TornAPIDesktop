@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Globalization;
+using Tulpep.NotificationWindow;
 
 namespace TornMainForm
 {
@@ -107,7 +108,7 @@ namespace TornMainForm
                         test = string.Format("https://yata.alwaysdata.net/loot/timings/");
                         break;
                 }
-
+                
                 WebRequest RequestBasic = WebRequest.Create(test);
                 RequestBasic.Method = "GET";
                 HttpWebResponse ResponseBasic = null;
@@ -497,7 +498,7 @@ namespace TornMainForm
                             AcEvent = AcEvent.Replace("View", " ");
                             AcEvent = AcEvent.Replace("Please click here to continue", " ");
 
-                            //   AcEvent = Regex.Replace(AcEvent, @"(\d{1}\w{1,2}(b{1}", "${1}"); // untested regex.
+                            //   AcEvent = Regex.Replace(AcEvent, @"(\d{1})\w{1,2}\b{1}", "${1}"); // untested regex.
 
                             AcEvent = AcEvent.Replace("1stb", "1st ");
                             AcEvent = AcEvent.Replace("2ndb", "2nd ");
@@ -508,6 +509,8 @@ namespace TornMainForm
                             AcEvent = AcEvent.Replace("7thb", "7th ");
                             AcEvent = AcEvent.Replace("8thb", "8th ");
                             AcEvent = AcEvent.Replace("9thb", "9th ");
+                            // classtred  
+                                   AcEvent = Regex.Replace(AcEvent, "class[a-zA-Z0-9]+" ,"");
 
                             AcEvent = AcEvent.Replace("classh", " ");
                             AcEvent = AcEvent.Replace("classtblue", " ");
@@ -544,7 +547,7 @@ namespace TornMainForm
                             // \s\d{1,7}[A-Za-z0-9-*()^!"$&%£]{3,25}\s{1}
                             AcEvent = Regex.Replace(AcEvent, @"(\s\d{1,7})([A-Za-z0-9-*()^!$&%£]{3,25})\s{1}", "${1} " + " " + "${2} "); //regex to seperate  Id and Names from each other.                          
                             AcEvent = Regex.Replace(AcEvent, @"bold http:www.torn.com\w*\W*\w*", "");
-                            AcEvent = Regex.Replace(AcEvent, @"http:www.torn.com\w*\W*\w*", ""); //removes linkeds after other replacements 
+                            AcEvent = Regex.Replace(AcEvent, @"http:www.torn.com\w*\W*\w*", ""); //removes links after other replacements 
                             if (item.Contains("the") & item.Contains("details") & item.Contains("here"))
                             {
                                 AcEvent = AcEvent.Replace("the", "");
@@ -661,7 +664,7 @@ namespace TornMainForm
             TimeSpan torntime = TimeSpan.FromSeconds(Convert.ToUInt64(TornData.TornTime) + 1);
 
             begginingoftime = begginingoftime + torntime;
-            TornCityTimelbl.Text = Convert.ToString("TCT: " + begginingoftime);
+            TornCityTimelbl.Text = Convert.ToString("TC Time: " + begginingoftime);
             }
             catch (Exception)
             {
@@ -1222,6 +1225,41 @@ namespace TornMainForm
 
                 try
                 {
+                    if (Convert.ToInt32( YataDataClass.DukeDataForlevel4["due"]) < 300 )
+                    {
+                        if (Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) % 60 == 0)
+                        {
+                            PopupNotifier popupduke = new PopupNotifier();
+                            popupduke.Image = Properties.Resources.DukeImg;
+                            popupduke.TitleText = "Duke Loot IV in " + Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) + "  Seconds";
+                            popupduke.Popup();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    
+                }
+                try
+                {
+                    if (Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) < 300)
+                    {
+                        if (Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) % 60 == 0)
+                        {
+                            PopupNotifier popupleslie = new PopupNotifier();
+                            popupleslie.Image = Properties.Resources.LeslieImg;
+                            popupleslie.TitleText = "LesLie Loot IV in " + Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) + " Seconds";
+                            popupleslie.Popup();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+
+                try
+                {
                     MyFunctions.TimerCountdownWithTicks(YataDataClass.ScroogeDataForlevel4, ScroogeTimertolvl4lbl, "due");
                 }
                 catch (Exception)
@@ -1234,7 +1272,7 @@ namespace TornMainForm
             {
                 LeslieDukeTimersCountDown.Stop();
             }
-
+            
         }
 
         private void RefreshTrueDataForLoots_Tick(object sender, EventArgs e) // gets the loot data every tick to updata to its real time incase timers become to quick / slow
@@ -1452,11 +1490,9 @@ namespace TornMainForm
             if (TornData.TornTimeSpanInSeconds % 900 > 30 & TornData.TornTimeSpanInSeconds % 900 < 40) // this should be every 1/4 hour + 30-40 seconds. 
                                                                                                        //StockAutoReFresh15MinChecker is < time difference between two values currently at 8
             {
-                //   StockGetDatabtn.PerformClick();                       
-
+                //   StockGetDatabtn.PerformClick();              
 
                 StockGetDatabtn_Click(sender, e);
-
 
                 foreach (var item in TornData.NewStocksAdded) // items in list of newstocksadded will be shown in the text box
                 {
@@ -1464,11 +1500,9 @@ namespace TornMainForm
                     //     MessageBox.Show("New Stocks Up for Sale");
                     //     TornData.NewStocksAdded.Remove(item); // maybe not?
                     UserData.StocksAddedCounter++;
-
                 }
                 TornData.NewStocksAdded.Clear();
                 tabPage4.Text = "Stock Info [" + UserData.StocksAddedCounter + "]";
-
             }
 
         }
@@ -1691,6 +1725,7 @@ namespace TornMainForm
         {
 
         }
+        
     }
 
 }
