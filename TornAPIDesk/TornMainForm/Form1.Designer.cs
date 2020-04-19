@@ -241,7 +241,7 @@
             this.MainTabBar.Name = "MainTabBar";
             this.MainTabBar.Padding = new System.Drawing.Point(0, 0);
             this.MainTabBar.SelectedIndex = 0;
-            this.MainTabBar.Size = new System.Drawing.Size(663, 408);
+            this.MainTabBar.Size = new System.Drawing.Size(654, 408);
             this.MainTabBar.TabIndex = 3;
             // 
             // tabPage1
@@ -307,7 +307,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(655, 382);
+            this.tabPage1.Size = new System.Drawing.Size(646, 382);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "UserInfo";
             // 
@@ -543,6 +543,7 @@
             this.BoosterCdlbl.Size = new System.Drawing.Size(64, 13);
             this.BoosterCdlbl.TabIndex = 48;
             this.BoosterCdlbl.Text = "Booster CD:";
+            this.BoosterCdlbl.Click += new System.EventHandler(this.BoosterCdlbl_Click);
             // 
             // MedicalCooldownValue
             // 
@@ -561,6 +562,7 @@
             this.Medicallbl.Size = new System.Drawing.Size(65, 13);
             this.Medicallbl.TabIndex = 46;
             this.Medicallbl.Text = "Medical CD:";
+            this.Medicallbl.Click += new System.EventHandler(this.Medicallbl_Click);
             // 
             // DrugCdlbl
             // 
@@ -570,6 +572,7 @@
             this.DrugCdlbl.Size = new System.Drawing.Size(51, 13);
             this.DrugCdlbl.TabIndex = 45;
             this.DrugCdlbl.Text = "Drug CD:";
+            this.DrugCdlbl.Click += new System.EventHandler(this.DrugCdlbl_Click);
             // 
             // DrugCooldownValuelbl
             // 
@@ -665,6 +668,7 @@
             this.PointsValuelbl.Size = new System.Drawing.Size(39, 13);
             this.PointsValuelbl.TabIndex = 35;
             this.PointsValuelbl.Text = "Points:";
+            this.PointsValuelbl.Click += new System.EventHandler(this.PointsValuelbl_Click);
             // 
             // ChainTimeOutValuelbl
             // 
@@ -794,6 +798,7 @@
             this.IDValuelbl.Size = new System.Drawing.Size(27, 13);
             this.IDValuelbl.TabIndex = 12;
             this.IDValuelbl.Text = "N/A";
+            this.IDValuelbl.Click += new System.EventHandler(this.IDValuelbl_Click);
             // 
             // idlbl
             // 
@@ -839,7 +844,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(655, 382);
+            this.tabPage2.Size = new System.Drawing.Size(646, 382);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Events";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -849,7 +854,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(6, 6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(639, 370);
+            this.richTextBox1.Size = new System.Drawing.Size(633, 370);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -862,7 +867,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(655, 382);
+            this.tabPage3.Size = new System.Drawing.Size(646, 382);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "ItemSearch";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -873,7 +878,7 @@
             this.richTextBox2.Location = new System.Drawing.Point(6, 137);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(636, 237);
+            this.richTextBox2.Size = new System.Drawing.Size(633, 237);
             this.richTextBox2.TabIndex = 4;
             this.richTextBox2.Text = "";
             // 
@@ -923,7 +928,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(655, 382);
+            this.tabPage4.Size = new System.Drawing.Size(646, 382);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Stock Info";
             // 
@@ -1390,6 +1395,7 @@
             // 
             // RecentStocksAddedTxtbx
             // 
+            this.RecentStocksAddedTxtbx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.RecentStocksAddedTxtbx.Location = new System.Drawing.Point(7, 7);
             this.RecentStocksAddedTxtbx.Name = "RecentStocksAddedTxtbx";
             this.RecentStocksAddedTxtbx.ReadOnly = true;
@@ -1493,7 +1499,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(655, 382);
+            this.tabPage5.Size = new System.Drawing.Size(646, 382);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Settings";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1751,9 +1757,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(658, 408);
+            this.ClientSize = new System.Drawing.Size(655, 408);
             this.Controls.Add(this.TornCityTimelbl);
             this.Controls.Add(this.MainTabBar);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm1";

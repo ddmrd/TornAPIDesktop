@@ -1220,18 +1220,18 @@ namespace TornMainForm
             {
 
                 MyFunctions.TimerCountdownWithTicks(YataDataClass.DukeDataForlevel4, DukeTimerlbl, "due");
-
                 MyFunctions.TimerCountdownWithTicks(YataDataClass.LeslieDataForlevel4, LeslieTimerValuelbl, "due");
 
                 try
                 {
-                    if (Convert.ToInt32( YataDataClass.DukeDataForlevel4["due"]) < 300 )
+                    if (Convert.ToInt32( YataDataClass.DukeDataForlevel4["due"]) < 301 || Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) == 600)
                     {
                         if (Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) % 60 == 0)
                         {
                             PopupNotifier popupduke = new PopupNotifier();
                             popupduke.Image = Properties.Resources.DukeImg;
-                            popupduke.TitleText = "Duke Loot IV in " + Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) + "  Seconds";
+                            popupduke.TitleText = "Duke Loot IV in " + Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) / 60 + "  Minutes " ;
+                            popupduke.AnimationDuration = 3;                                              
                             popupduke.Popup();
                         }
                     }
@@ -1242,14 +1242,18 @@ namespace TornMainForm
                 }
                 try
                 {
-                    if (Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) < 300)
+                    if (Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) < 301 || Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) == 600)
                     {
                         if (Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) % 60 == 0)
                         {
                             PopupNotifier popupleslie = new PopupNotifier();
                             popupleslie.Image = Properties.Resources.LeslieImg;
-                            popupleslie.TitleText = "LesLie Loot IV in " + Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) + " Seconds";
+                            popupleslie.TitleText = "Leslie Loot IV in " + Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) / 60 + " Minutes "  ;                            
+                            popupleslie.AnimationDuration = 3;                      
                             popupleslie.Popup();
+                            
+
+
                         }
                     }
                 }
@@ -1257,6 +1261,7 @@ namespace TornMainForm
                 {
 
                 }
+
 
                 try
                 {
@@ -1273,6 +1278,15 @@ namespace TornMainForm
                 LeslieDukeTimersCountDown.Stop();
             }
             
+        }
+
+        private void popupleslie_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=15");
+        }
+        private void popupduke_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=4");
         }
 
         private void RefreshTrueDataForLoots_Tick(object sender, EventArgs e) // gets the loot data every tick to updata to its real time incase timers become to quick / slow
@@ -1351,6 +1365,7 @@ namespace TornMainForm
                 MyFunctions.RichtxtBoxColour(richTextBox1, "white", "black");
                 MyFunctions.RichtxtBoxColour(richTextBox2, "white", "black");
                 MyFunctions.RichtxtBoxColour(FilterStockResultBoxrchtxbx, "white", "black");
+                MyFunctions.RichtxtBoxColour(RecentStocksAddedTxtbx, "white", "black");
 
 
                 MyFunctions.TabColour(tabPage1, "white", "black");
@@ -1437,6 +1452,7 @@ namespace TornMainForm
                 MyFunctions.RichtxtBoxColour(richTextBox2, "black", "white");
                 MyFunctions.RichtxtBoxColour(RecentStocksAddedTxtbx, "black", "white");
                 MyFunctions.RichtxtBoxColour(FilterStockResultBoxrchtxbx, "black", "white");
+             
 
                 MyFunctions.comboboxcolour(ItemCombobox, "black", "white");
                 MyFunctions.comboboxcolour(UserInfoTextColour, "black", "white");
@@ -1725,7 +1741,34 @@ namespace TornMainForm
         {
 
         }
-        
+
+        private void DrugCdlbl_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.torn.com/item.php#drugs-items");  
+        }
+
+        private void BoosterCdlbl_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.torn.com/item.php#energy-d-items");
+        }
+
+        private void Medicallbl_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.torn.com/item.php#medical-items");
+        }
+
+        private void PointsValuelbl_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.torn.com/points.php");        
+        }
+
+        private void IDValuelbl_Click(object sender, EventArgs e)
+        {
+            if (IDValuelbl.Text != null || IDValuelbl.Text != "N/A")
+            { 
+            System.Diagnostics.Process.Start("https://www.torn.com/profiles.php?XID=" + IDValuelbl.Text);
+            }
+        }
     }
 
 }
