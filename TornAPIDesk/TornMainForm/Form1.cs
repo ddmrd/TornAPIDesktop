@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Globalization;
 using Tulpep.NotificationWindow;
+using System.Diagnostics;
 
 namespace TornMainForm
 {
@@ -439,8 +440,7 @@ namespace TornMainForm
                     MoneyInVaultlbl.Text = Convert.ToString("$" + String.Format("{0:n0}", UserData.User["vault_amount"]));
                     CaymanbankValuelbl.Text = "Money in Cayman's: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.User["cayman_bank"]));
                     UserData.Bank = UserData.User["city_bank"]; // bank values 
-                    CityBankValuelbl.Text = "Money in Bank: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.Bank["amount"]));
-                    CoolDownValuelbl.Text = Convert.ToString(UserData.Chainjson["cooldown"]);
+                    CityBankValuelbl.Text = "Money in Bank: " + Convert.ToString("$" + String.Format("{0:n0}", UserData.Bank["amount"]));                 
                     UserData.DBMCooldowns = details["cooldowns"];
 
 
@@ -1231,8 +1231,14 @@ namespace TornMainForm
                             PopupNotifier popupduke = new PopupNotifier();
                             popupduke.Image = Properties.Resources.DukeImg;
                             popupduke.TitleText = "Duke Loot IV in " + Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) / 60 + "  Minutes " ;
-                            popupduke.AnimationDuration = 3;                                              
+                            popupduke.ContentText = @"https://www.torn.com/loader.php?sid=attack&user2ID=4";
+                            popupduke.AnimationDuration = 3;
+                            popupduke.Click += delegate (object o, EventArgs ez)
+                            {
+                                Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=4");
+                            };
                             popupduke.Popup();
+                           
                         }
                     }
                 }
@@ -1242,26 +1248,28 @@ namespace TornMainForm
                 }
                 try
                 {
-                    if (Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) < 301 || Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) == 600)
+                    if (Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) < 301 || Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) == 600)
                     {
                         if (Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) % 60 == 0)
                         {
-                            PopupNotifier popupleslie = new PopupNotifier();
+                           PopupNotifier popupleslie = new PopupNotifier();
                             popupleslie.Image = Properties.Resources.LeslieImg;
-                            popupleslie.TitleText = "Leslie Loot IV in " + Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) / 60 + " Minutes "  ;                            
-                            popupleslie.AnimationDuration = 3;                      
-                            popupleslie.Popup();
-                            
-
-
-                        }
+                            popupleslie.TitleText = "Leslie Loot IV in " + Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) / 60 + " Minutes "  ;
+                            popupleslie.ContentText = "Attack Leslie";                           
+                            popupleslie.AnimationDuration = 3;                            
+                            popupleslie.Click += delegate (object o, EventArgs ez)
+                            {
+                               Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=15");
+                            };
+                            popupleslie.Popup();                               
+                       }
                     }
                 }
                 catch (Exception)
                 {
 
                 }
-
+                
 
                 try
                 {
@@ -1279,11 +1287,8 @@ namespace TornMainForm
             }
             
         }
-
-        private void popupleslie_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=15");
-        }
+       
+        
         private void popupduke_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=4");
@@ -1355,7 +1360,7 @@ namespace TornMainForm
 
         private void DarkModechkbox_CheckedChanged(object sender, EventArgs e)
         {
-            if (DarkModechkbox.Checked == true) // darkmode enabled
+            if (DarkModechkbox.Checked == true) // darkmode enabled options
             {
                 Form gee = MainForm1.ActiveForm;
                 gee.BackColor = Color.FromName("black");
@@ -1769,6 +1774,8 @@ namespace TornMainForm
             System.Diagnostics.Process.Start("https://www.torn.com/profiles.php?XID=" + IDValuelbl.Text);
             }
         }
+
+      
     }
 
 }

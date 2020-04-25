@@ -309,7 +309,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(646, 382);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "UserInfo";
+            this.tabPage1.Text = "UserInfo";           
             // 
             // FrontPageOnTopchbx
             // 
@@ -430,7 +430,7 @@
             // Traveltimelbl
             // 
             this.Traveltimelbl.AutoSize = true;
-            this.Traveltimelbl.Location = new System.Drawing.Point(379, 50);
+            this.Traveltimelbl.Location = new System.Drawing.Point(315, 44);
             this.Traveltimelbl.Name = "Traveltimelbl";
             this.Traveltimelbl.Size = new System.Drawing.Size(86, 13);
             this.Traveltimelbl.TabIndex = 59;
@@ -440,7 +440,7 @@
             // TravelTimeValuelbl
             // 
             this.TravelTimeValuelbl.AutoSize = true;
-            this.TravelTimeValuelbl.Location = new System.Drawing.Point(471, 50);
+            this.TravelTimeValuelbl.Location = new System.Drawing.Point(407, 44);
             this.TravelTimeValuelbl.Name = "TravelTimeValuelbl";
             this.TravelTimeValuelbl.Size = new System.Drawing.Size(35, 13);
             this.TravelTimeValuelbl.TabIndex = 58;
@@ -516,7 +516,7 @@
             // 
             this.StatusLinkProfileValuelbl.AutoSize = true;
             this.StatusLinkProfileValuelbl.LinkColor = System.Drawing.Color.Blue;
-            this.StatusLinkProfileValuelbl.Location = new System.Drawing.Point(463, 104);
+            this.StatusLinkProfileValuelbl.Location = new System.Drawing.Point(399, 98);
             this.StatusLinkProfileValuelbl.Name = "StatusLinkProfileValuelbl";
             this.StatusLinkProfileValuelbl.Size = new System.Drawing.Size(55, 13);
             this.StatusLinkProfileValuelbl.TabIndex = 50;
@@ -784,7 +784,7 @@
             // 
             this.Statuslbl.AutoSize = true;
             this.Statuslbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Statuslbl.Location = new System.Drawing.Point(379, 70);
+            this.Statuslbl.Location = new System.Drawing.Point(315, 64);
             this.Statuslbl.Name = "Statuslbl";
             this.Statuslbl.Size = new System.Drawing.Size(51, 16);
             this.Statuslbl.TabIndex = 13;
