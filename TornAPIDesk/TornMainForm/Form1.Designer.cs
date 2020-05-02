@@ -176,6 +176,7 @@
             this.LeslieDukeTimersCountDown = new System.Windows.Forms.Timer(this.components);
             this.RefreshTrueDataForLoots = new System.Windows.Forms.Timer(this.components);
             this.StockAutoReFresh15MinChecker = new System.Windows.Forms.Timer(this.components);
+            this.LootAlertsOnOffcckbox = new System.Windows.Forms.CheckBox();
             this.MainTabBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -309,7 +310,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(646, 382);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "UserInfo";           
+            this.tabPage1.Text = "UserInfo";
             // 
             // FrontPageOnTopchbx
             // 
@@ -1480,6 +1481,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.LootAlertsOnOffcckbox);
             this.tabPage5.Controls.Add(this.TopCheckchkbx);
             this.tabPage5.Controls.Add(this.CalcLink);
             this.tabPage5.Controls.Add(this.label2);
@@ -1518,7 +1520,7 @@
             // CalcLink
             // 
             this.CalcLink.AutoSize = true;
-            this.CalcLink.Location = new System.Drawing.Point(264, 210);
+            this.CalcLink.Location = new System.Drawing.Point(265, 169);
             this.CalcLink.Name = "CalcLink";
             this.CalcLink.Size = new System.Drawing.Size(54, 13);
             this.CalcLink.TabIndex = 18;
@@ -1530,7 +1532,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(7, 183);
+            this.label2.Location = new System.Drawing.Point(8, 142);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 16);
             this.label2.TabIndex = 17;
@@ -1539,7 +1541,7 @@
             // TornApiLinklbl
             // 
             this.TornApiLinklbl.AutoSize = true;
-            this.TornApiLinklbl.Location = new System.Drawing.Point(7, 235);
+            this.TornApiLinklbl.Location = new System.Drawing.Point(8, 194);
             this.TornApiLinklbl.Name = "TornApiLinklbl";
             this.TornApiLinklbl.Size = new System.Drawing.Size(67, 13);
             this.TornApiLinklbl.TabIndex = 16;
@@ -1550,7 +1552,7 @@
             // Yatalinklbl
             // 
             this.Yatalinklbl.AutoSize = true;
-            this.Yatalinklbl.Location = new System.Drawing.Point(7, 285);
+            this.Yatalinklbl.Location = new System.Drawing.Point(8, 244);
             this.Yatalinklbl.Name = "Yatalinklbl";
             this.Yatalinklbl.Size = new System.Drawing.Size(35, 13);
             this.Yatalinklbl.TabIndex = 15;
@@ -1561,7 +1563,7 @@
             // TornStatslinklbl
             // 
             this.TornStatslinklbl.AutoSize = true;
-            this.TornStatslinklbl.Location = new System.Drawing.Point(7, 210);
+            this.TornStatslinklbl.Location = new System.Drawing.Point(8, 169);
             this.TornStatslinklbl.Name = "TornStatslinklbl";
             this.TornStatslinklbl.Size = new System.Drawing.Size(56, 13);
             this.TornStatslinklbl.TabIndex = 14;
@@ -1572,7 +1574,7 @@
             // DarkModechkbox
             // 
             this.DarkModechkbox.AutoSize = true;
-            this.DarkModechkbox.Location = new System.Drawing.Point(531, 137);
+            this.DarkModechkbox.Location = new System.Drawing.Point(537, 71);
             this.DarkModechkbox.Name = "DarkModechkbox";
             this.DarkModechkbox.Size = new System.Drawing.Size(79, 17);
             this.DarkModechkbox.TabIndex = 13;
@@ -1583,7 +1585,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(7, 260);
+            this.linkLabel1.Location = new System.Drawing.Point(8, 219);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(104, 13);
             this.linkLabel1.TabIndex = 12;
@@ -1606,7 +1608,7 @@
             "Orange",
             "Purple",
             "Red"});
-            this.UserInfoTextColour.Location = new System.Drawing.Point(245, 135);
+            this.UserInfoTextColour.Location = new System.Drawing.Point(251, 69);
             this.UserInfoTextColour.Name = "UserInfoTextColour";
             this.UserInfoTextColour.Size = new System.Drawing.Size(121, 21);
             this.UserInfoTextColour.Sorted = true;
@@ -1615,7 +1617,7 @@
             // SetUserInfoTextColourbtn
             // 
             this.SetUserInfoTextColourbtn.ForeColor = System.Drawing.Color.Black;
-            this.SetUserInfoTextColourbtn.Location = new System.Drawing.Point(82, 135);
+            this.SetUserInfoTextColourbtn.Location = new System.Drawing.Point(88, 69);
             this.SetUserInfoTextColourbtn.Name = "SetUserInfoTextColourbtn";
             this.SetUserInfoTextColourbtn.Size = new System.Drawing.Size(146, 22);
             this.SetUserInfoTextColourbtn.TabIndex = 10;
@@ -1649,16 +1651,16 @@
             // SettingsDescriptionlbl
             // 
             this.SettingsDescriptionlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SettingsDescriptionlbl.Location = new System.Drawing.Point(22, 26);
+            this.SettingsDescriptionlbl.Location = new System.Drawing.Point(147, 3);
             this.SettingsDescriptionlbl.Name = "SettingsDescriptionlbl";
-            this.SettingsDescriptionlbl.Size = new System.Drawing.Size(474, 60);
+            this.SettingsDescriptionlbl.Size = new System.Drawing.Size(338, 22);
             this.SettingsDescriptionlbl.TabIndex = 6;
-            this.SettingsDescriptionlbl.Text = resources.GetString("SettingsDescriptionlbl.Text");
+            this.SettingsDescriptionlbl.Text = "Make Sure you have read  write permission for apps location\r\n";
             // 
             // SettingsAPIkeylbl
             // 
             this.SettingsAPIkeylbl.AutoSize = true;
-            this.SettingsAPIkeylbl.Location = new System.Drawing.Point(7, 101);
+            this.SettingsAPIkeylbl.Location = new System.Drawing.Point(13, 35);
             this.SettingsAPIkeylbl.Name = "SettingsAPIkeylbl";
             this.SettingsAPIkeylbl.Size = new System.Drawing.Size(69, 13);
             this.SettingsAPIkeylbl.TabIndex = 4;
@@ -1669,7 +1671,7 @@
             this.SettingsAPILockchkbox.AutoSize = true;
             this.SettingsAPILockchkbox.Checked = true;
             this.SettingsAPILockchkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.SettingsAPILockchkbox.Location = new System.Drawing.Point(531, 101);
+            this.SettingsAPILockchkbox.Location = new System.Drawing.Point(537, 35);
             this.SettingsAPILockchkbox.Name = "SettingsAPILockchkbox";
             this.SettingsAPILockchkbox.Size = new System.Drawing.Size(70, 17);
             this.SettingsAPILockchkbox.TabIndex = 5;
@@ -1679,7 +1681,7 @@
             // 
             // SettingsAPIKeyValuetxtbox
             // 
-            this.SettingsAPIKeyValuetxtbox.Location = new System.Drawing.Point(82, 98);
+            this.SettingsAPIKeyValuetxtbox.Location = new System.Drawing.Point(88, 32);
             this.SettingsAPIKeyValuetxtbox.MaxLength = 16;
             this.SettingsAPIKeyValuetxtbox.Name = "SettingsAPIKeyValuetxtbox";
             this.SettingsAPIKeyValuetxtbox.Size = new System.Drawing.Size(443, 20);
@@ -1751,6 +1753,16 @@
             // 
             this.StockAutoReFresh15MinChecker.Interval = 8000;
             this.StockAutoReFresh15MinChecker.Tick += new System.EventHandler(this.StockAutoReFresh15MinChecker_Tick);
+            // 
+            // LootAlertsOnOffcckbox
+            // 
+            this.LootAlertsOnOffcckbox.AutoSize = true;
+            this.LootAlertsOnOffcckbox.Location = new System.Drawing.Point(537, 106);
+            this.LootAlertsOnOffcckbox.Name = "LootAlertsOnOffcckbox";
+            this.LootAlertsOnOffcckbox.Size = new System.Drawing.Size(93, 17);
+            this.LootAlertsOnOffcckbox.TabIndex = 42;
+            this.LootAlertsOnOffcckbox.Text = "Loot Alerts On";
+            this.LootAlertsOnOffcckbox.UseVisualStyleBackColor = true;
             // 
             // MainForm1
             // 
@@ -1948,6 +1960,7 @@
         private System.Windows.Forms.ComboBox OptionsForStockReturncmbx;
         private System.Windows.Forms.Button FetchStockFilterDatabtn;
         private System.Windows.Forms.RichTextBox FilterStockResultBoxrchtxbx;
+        private System.Windows.Forms.CheckBox LootAlertsOnOffcckbox;
     }
 }
 

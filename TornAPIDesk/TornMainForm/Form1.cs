@@ -300,6 +300,7 @@ namespace TornMainForm
             public static int StockButtonTimerLimit = 12;
             public static int ItemRefreshLimit = 12;
             public static bool DarkMode;
+            public static bool AlertsOnOff;
 
 
         }
@@ -653,7 +654,6 @@ namespace TornMainForm
             // Torn Time
             try
             {
-
           
             DateTime begginingoftime = new DateTime(1970, 01, 01);
 
@@ -735,30 +735,12 @@ namespace TornMainForm
             }
             try
             {
-
                 RefreshValuelbl.Text = Convert.ToString(Convert.ToInt32(RefreshValuelbl.Text) - 1); // decrease refresh value by 1 per timer tick which should be 1 second.
             }
             catch (Exception)
             {
 
-            }
-            try
-            { // setting torn time
-              /*  DateTime begginingoftime = new DateTime(1970, 01, 01);
-
-                var details = JObject.Parse(Convert.ToString(UserData.User));
-                TornData.TornTime = Convert.ToString(Convert.ToInt64(TornData.TornTime) + 1);
-                TornData.TornTimeSpanInSeconds = Convert.ToInt64(TornData.TornTime);
-
-                TimeSpan torntime = TimeSpan.FromSeconds(Convert.ToUInt64(TornData.TornTime) + 1);
-
-                begginingoftime = begginingoftime + torntime;
-                TornCityTimelbl.Text = Convert.ToString("TCT: " + begginingoftime);*/
-            }
-            catch (Exception)
-            {
-              //  TornCityTimelbl.Text = "0";
-            }
+            }        
 
         }
 
@@ -834,7 +816,6 @@ namespace TornMainForm
                   TornData.Stock028 = MyFunctions.SetStockValues(TornData.Stock028, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 28);
                   TornData.Stock029 = MyFunctions.SetStockValues(TornData.Stock029, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 29);
                   TornData.Stock030 = MyFunctions.SetStockValues(TornData.Stock030, TornData.name, TornData.acronym, AvailableShares, CurrentPrices, forecast, demand, 30);
-
 
                   TornData.StockTimerActive = true; // this will active timer to update info when button stock is pressed. is turned off by itself when activated.
                   
@@ -976,6 +957,11 @@ namespace TornMainForm
                     {
                         f.DarkMode = true;
                     }
+
+                    if (LootAlertsOnOffcckbox.Checked == true)
+                    {
+                        f.Alerts = true;
+                    }
                 }
                 catch (Exception)
                 {
@@ -1015,6 +1001,12 @@ namespace TornMainForm
                     DarkModechkbox.Checked = true;
                     //   DarkModechkbox_CheckedChanged(sender, e);
                 }
+                if (Settings.AlertsOnOff == true)
+                {
+                    LootAlertsOnOffcckbox.Checked = true;
+                }
+
+               
 
             }
             catch (Exception)
@@ -1224,15 +1216,14 @@ namespace TornMainForm
 
                 try
                 {
-                    if (Convert.ToInt32( YataDataClass.DukeDataForlevel4["due"]) < 301 || Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) == 600)
-                    {
+                    if (Convert.ToInt32( YataDataClass.DukeDataForlevel4["due"]) < 301 & LootAlertsOnOffcckbox.Checked == true || Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) == 600 & LootAlertsOnOffcckbox.Checked == true )                   {
                         if (Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) % 60 == 0)
                         {
                             PopupNotifier popupduke = new PopupNotifier();
                             popupduke.Image = Properties.Resources.DukeImg;
                             popupduke.TitleText = "Duke Loot IV in " + Convert.ToInt32(YataDataClass.DukeDataForlevel4["due"]) / 60 + "  Minutes " ;
-                            popupduke.ContentText = @"https://www.torn.com/loader.php?sid=attack&user2ID=4";
-                            popupduke.AnimationDuration = 3;
+                            popupduke.ContentText = "Attack Duke";
+                            popupduke.AnimationDuration = 4;
                             popupduke.Click += delegate (object o, EventArgs ez)
                             {
                                 Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=4");
@@ -1248,7 +1239,7 @@ namespace TornMainForm
                 }
                 try
                 {
-                    if (Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) < 301 || Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) == 600)
+                    if (Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) < 301 & LootAlertsOnOffcckbox.Checked == true || Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) == 600 & LootAlertsOnOffcckbox.Checked == true )
                     {
                         if (Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) % 60 == 0)
                         {
@@ -1256,7 +1247,7 @@ namespace TornMainForm
                             popupleslie.Image = Properties.Resources.LeslieImg;
                             popupleslie.TitleText = "Leslie Loot IV in " + Convert.ToInt32(YataDataClass.LeslieDataForlevel4["due"]) / 60 + " Minutes "  ;
                             popupleslie.ContentText = "Attack Leslie";                           
-                            popupleslie.AnimationDuration = 3;                            
+                            popupleslie.AnimationDuration = 4;                            
                             popupleslie.Click += delegate (object o, EventArgs ez)
                             {
                                Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=15");
@@ -1268,8 +1259,7 @@ namespace TornMainForm
                 catch (Exception)
                 {
 
-                }
-                
+                }                
 
                 try
                 {
@@ -1774,7 +1764,6 @@ namespace TornMainForm
             System.Diagnostics.Process.Start("https://www.torn.com/profiles.php?XID=" + IDValuelbl.Text);
             }
         }
-
       
     }
 

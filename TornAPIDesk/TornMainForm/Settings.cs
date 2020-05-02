@@ -12,18 +12,25 @@ namespace TornMainForm
     public class AppSettings
     {
         public string APIkey { get; set; }
-        public string UserInfoForeGround { get; set; }
+        public string UserInfoForeGround { get; set; }      
+        public bool DarkMode { get; set; }
+        public bool Alerts { get; set; }
 
         public static AppSettings loadSettings()
         {
-            if (File.Exists(MainForm.Settings.SettingsFileName))
+            if (File.Exists(MainForm1.Settings.SettingsFileName))
             {
-                StreamReader sr = new StreamReader(MainForm.Settings.SettingsFileName);
+                StreamReader sr = new StreamReader(MainForm1.Settings.SettingsFileName);
                 AppSettings a = JsonConvert.DeserializeObject<AppSettings>(sr.ReadToEnd());
-                MainForm.Settings.APIKey = a.APIkey;
-                MainForm.Settings.UserInfoForeGround = a.UserInfoForeGround;
+                MainForm1.Settings.APIKey = a.APIkey;
+                MainForm1.Settings.UserInfoForeGround = a.UserInfoForeGround;
+                MainForm1.Settings.DarkMode = a.DarkMode;
+                MainForm1.Settings.AlertsOnOff = a.Alerts;                
+
                 sr.Close();
-                return a;
+                
+               return a;
+              
             }
             else
             {
@@ -34,7 +41,7 @@ namespace TornMainForm
         public  void saveSettings()
         {
             string json = JsonConvert.SerializeObject(this, Formatting.Indented);
-            StreamWriter sw = new StreamWriter(MainForm.Settings.SettingsFileName);
+            StreamWriter sw = new StreamWriter(MainForm1.Settings.SettingsFileName);
             sw.Write(json);
             sw.Close();
         }
