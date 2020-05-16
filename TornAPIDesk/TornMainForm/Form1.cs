@@ -75,6 +75,7 @@ namespace TornMainForm
                 target.ForeColor = Color.FromName(forcolour);
             }
 
+           
             /// <summary>
             /// switch options: 1 = user , 2 = property , 3 = faction , 4 = company , 5 = market , 6 = torn. fields = The api options (children) from the switch description option.
             /// 7 = Yata loot timers data
@@ -283,6 +284,10 @@ namespace TornMainForm
             public static JToken ScroogeTimingsForLevels = null;
             public static JToken ScroogeDataForlevel4 = null;
             public static JToken ScroogeTimerForlevel4 = null;
+
+            public static JToken JimmyTimerForLevel4 = null;
+            public static JToken JimmyDataForlevel4 = null;
+           
 
         }
 
@@ -1053,6 +1058,9 @@ namespace TornMainForm
                 YataDataClass.LeslieDataForlevel4 = YataDataClass.LeslieTimingsForLevels["4"];
                 YataDataClass.LeslieTimerForlevel4 = YataDataClass.LeslieDataForlevel4["due"];
 
+                YataDataClass.JimmyDataForlevel4 = YataDataClass.LootTimers["19"]["timings"]["4"];
+                YataDataClass.JimmyTimerForLevel4 = YataDataClass.LootTimers["19"]["timings"]["4"]["due"];
+
                 YataDataClass.ScroogeData = YataDataClass.LootTimers["10"];
                 YataDataClass.ScroogeTimingsForLevels = YataDataClass.ScroogeData["timings"];
                 YataDataClass.ScroogeDataForlevel4 = YataDataClass.ScroogeTimingsForLevels["4"];
@@ -1213,6 +1221,7 @@ namespace TornMainForm
 
                 MyFunctions.TimerCountdownWithTicks(YataDataClass.DukeDataForlevel4, DukeTimerlbl, "due");
                 MyFunctions.TimerCountdownWithTicks(YataDataClass.LeslieDataForlevel4, LeslieTimerValuelbl, "due");
+                MyFunctions.TimerCountdownWithTicks(YataDataClass.JimmyDataForlevel4, JimmyTimerValuelbl, "due");
 
                 try
                 {
@@ -1259,7 +1268,30 @@ namespace TornMainForm
                 catch (Exception)
                 {
 
-                }                
+                }
+                try
+                {
+                    if (Convert.ToInt32(YataDataClass.JimmyDataForlevel4["due"]) < 301 & LootAlertsOnOffcckbox.Checked == true || Convert.ToInt32(YataDataClass.JimmyDataForlevel4["due"]) == 600 & LootAlertsOnOffcckbox.Checked == true)
+                    {
+                        if (Convert.ToInt32(YataDataClass.JimmyDataForlevel4["due"]) % 60 == 0)
+                        {
+                            PopupNotifier popupJimmy = new PopupNotifier();
+                            popupJimmy.Image = Properties.Resources.JimmyImg;
+                            popupJimmy.TitleText = "-Jimmy Loot IV in " + Convert.ToInt32(YataDataClass.JimmyDataForlevel4["due"]) / 60 + "  Minutes ";
+                            popupJimmy.ContentText = "Attack Jimmy";
+                            popupJimmy.AnimationDuration = 4;
+                            popupJimmy.Click += delegate (object o, EventArgs ez)
+                            {
+                                Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=19");
+                            };
+                            popupJimmy.Popup();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
 
                 try
                 {
@@ -1303,11 +1335,14 @@ namespace TornMainForm
                 YataDataClass.LeslieDataForlevel4 = YataDataClass.LeslieTimingsForLevels["4"];
                 YataDataClass.LeslieTimerForlevel4 = YataDataClass.LeslieDataForlevel4["due"];
 
+                YataDataClass.JimmyDataForlevel4 = YataDataClass.LootTimers["19"]["timings"]["4"];
+                YataDataClass.JimmyTimerForLevel4 = YataDataClass.LootTimers["19"]["timings"]["4"]["due"];
+
                 YataDataClass.ScroogeData = YataDataClass.LootTimers["10"];
                 YataDataClass.ScroogeTimingsForLevels = YataDataClass.ScroogeData["timings"];
                 YataDataClass.ScroogeDataForlevel4 = YataDataClass.ScroogeTimingsForLevels["4"];
                 YataDataClass.ScroogeTimerForlevel4 = YataDataClass.ScroogeDataForlevel4["due"];
-                //show values if api fetch has worked. Scrooge is only active during december. if more seasonal npc are made make above code into functions.
+                //show values if api fetch has worked. Scrooge is only active during december. if more seasonal npc are made make above code into functions. else put scrooge last
                 ScroogeTimertolvl4lbl.Visible = true;
                 Scroogenamelbl.Visible = true;
 
@@ -1764,7 +1799,11 @@ namespace TornMainForm
             System.Diagnostics.Process.Start("https://www.torn.com/profiles.php?XID=" + IDValuelbl.Text);
             }
         }
-      
+
+        private void JimmyLootlnkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.torn.com/loader.php?sid=attack&user2ID=19");
+        }
     }
 
 }

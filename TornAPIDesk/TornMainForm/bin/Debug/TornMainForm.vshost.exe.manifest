@@ -66,17 +66,38 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TornMainForm.exe" size="127968">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TornMainForm.exe" size="231392">
       <assemblyIdentity name="TornMainForm" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MS4YPcXr07pjOuZin/9zPaKbDZlyHOqy12uJjwlxDFQ=</dsig:DigestValue>
+        <dsig:DigestValue>2Vy4aDY7gkK5+zr2uVNX+VVmCjsxedIgWIkh5rKsYTU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Tulpep.NotificationWindow.dll" size="29184">
+      <assemblyIdentity name="Tulpep.NotificationWindow" version="1.1.31.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>ohAJiYvaap/VmPNOUXetxgLPDXd7xImebBCy6UBmcUk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Properties\JimmyImg.png" size="27360">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>U7zjiT3cEMy7d/3o4mahjLZywUpH7JKF3HgF+2VH6i4=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="TornMainForm.exe.config" size="189">
     <hash>
       <dsig:Transforms>

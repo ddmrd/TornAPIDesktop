@@ -35,6 +35,8 @@
             this.ApiKeyLockcbx = new System.Windows.Forms.CheckBox();
             this.MainTabBar = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.JimmyTimerValuelbl = new System.Windows.Forms.Label();
+            this.JimmyLootlnkLbl = new System.Windows.Forms.LinkLabel();
             this.FrontPageOnTopchbx = new System.Windows.Forms.CheckBox();
             this.VaultLinklbl = new System.Windows.Forms.LinkLabel();
             this.Scroogenamelbl = new System.Windows.Forms.LinkLabel();
@@ -148,6 +150,7 @@
             this.OptionsForStockReturncmbx = new System.Windows.Forms.ComboBox();
             this.StockGetDatabtn = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.LootAlertsOnOffcckbox = new System.Windows.Forms.CheckBox();
             this.TopCheckchkbx = new System.Windows.Forms.CheckBox();
             this.CalcLink = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
@@ -176,7 +179,6 @@
             this.LeslieDukeTimersCountDown = new System.Windows.Forms.Timer(this.components);
             this.RefreshTrueDataForLoots = new System.Windows.Forms.Timer(this.components);
             this.StockAutoReFresh15MinChecker = new System.Windows.Forms.Timer(this.components);
-            this.LootAlertsOnOffcckbox = new System.Windows.Forms.CheckBox();
             this.MainTabBar.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -248,6 +250,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.JimmyTimerValuelbl);
+            this.tabPage1.Controls.Add(this.JimmyLootlnkLbl);
             this.tabPage1.Controls.Add(this.FrontPageOnTopchbx);
             this.tabPage1.Controls.Add(this.VaultLinklbl);
             this.tabPage1.Controls.Add(this.Scroogenamelbl);
@@ -312,6 +316,26 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "UserInfo";
             // 
+            // JimmyTimerValuelbl
+            // 
+            this.JimmyTimerValuelbl.AutoSize = true;
+            this.JimmyTimerValuelbl.Location = new System.Drawing.Point(134, 134);
+            this.JimmyTimerValuelbl.Name = "JimmyTimerValuelbl";
+            this.JimmyTimerValuelbl.Size = new System.Drawing.Size(49, 13);
+            this.JimmyTimerValuelbl.TabIndex = 74;
+            this.JimmyTimerValuelbl.Text = "00:00:00";
+            // 
+            // JimmyLootlnkLbl
+            // 
+            this.JimmyLootlnkLbl.AutoSize = true;
+            this.JimmyLootlnkLbl.Location = new System.Drawing.Point(5, 134);
+            this.JimmyLootlnkLbl.Name = "JimmyLootlnkLbl";
+            this.JimmyLootlnkLbl.Size = new System.Drawing.Size(71, 13);
+            this.JimmyLootlnkLbl.TabIndex = 73;
+            this.JimmyLootlnkLbl.TabStop = true;
+            this.JimmyLootlnkLbl.Text = "Jimmy Loot 4:";
+            this.JimmyLootlnkLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.JimmyLootlnkLbl_LinkClicked);
+            // 
             // FrontPageOnTopchbx
             // 
             this.FrontPageOnTopchbx.AutoSize = true;
@@ -337,7 +361,7 @@
             // Scroogenamelbl
             // 
             this.Scroogenamelbl.AutoSize = true;
-            this.Scroogenamelbl.Location = new System.Drawing.Point(5, 134);
+            this.Scroogenamelbl.Location = new System.Drawing.Point(240, 134);
             this.Scroogenamelbl.Name = "Scroogenamelbl";
             this.Scroogenamelbl.Size = new System.Drawing.Size(83, 13);
             this.Scroogenamelbl.TabIndex = 70;
@@ -349,7 +373,7 @@
             // ScroogeTimertolvl4lbl
             // 
             this.ScroogeTimertolvl4lbl.AutoSize = true;
-            this.ScroogeTimertolvl4lbl.Location = new System.Drawing.Point(134, 134);
+            this.ScroogeTimertolvl4lbl.Location = new System.Drawing.Point(329, 134);
             this.ScroogeTimertolvl4lbl.Name = "ScroogeTimertolvl4lbl";
             this.ScroogeTimertolvl4lbl.Size = new System.Drawing.Size(49, 13);
             this.ScroogeTimertolvl4lbl.TabIndex = 69;
@@ -393,7 +417,7 @@
             // LeslieTimerValuelbl
             // 
             this.LeslieTimerValuelbl.AutoSize = true;
-            this.LeslieTimerValuelbl.Location = new System.Drawing.Point(315, 104);
+            this.LeslieTimerValuelbl.Location = new System.Drawing.Point(329, 104);
             this.LeslieTimerValuelbl.Name = "LeslieTimerValuelbl";
             this.LeslieTimerValuelbl.Size = new System.Drawing.Size(49, 13);
             this.LeslieTimerValuelbl.TabIndex = 65;
@@ -1506,6 +1530,17 @@
             this.tabPage5.Text = "Settings";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // LootAlertsOnOffcckbox
+            // 
+            this.LootAlertsOnOffcckbox.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
+            this.LootAlertsOnOffcckbox.AutoSize = true;
+            this.LootAlertsOnOffcckbox.Location = new System.Drawing.Point(537, 106);
+            this.LootAlertsOnOffcckbox.Name = "LootAlertsOnOffcckbox";
+            this.LootAlertsOnOffcckbox.Size = new System.Drawing.Size(93, 17);
+            this.LootAlertsOnOffcckbox.TabIndex = 42;
+            this.LootAlertsOnOffcckbox.Text = "Loot Alerts On";
+            this.LootAlertsOnOffcckbox.UseVisualStyleBackColor = true;
+            // 
             // TopCheckchkbx
             // 
             this.TopCheckchkbx.AutoSize = true;
@@ -1754,16 +1789,6 @@
             this.StockAutoReFresh15MinChecker.Interval = 8000;
             this.StockAutoReFresh15MinChecker.Tick += new System.EventHandler(this.StockAutoReFresh15MinChecker_Tick);
             // 
-            // LootAlertsOnOffcckbox
-            // 
-            this.LootAlertsOnOffcckbox.AutoSize = true;
-            this.LootAlertsOnOffcckbox.Location = new System.Drawing.Point(537, 106);
-            this.LootAlertsOnOffcckbox.Name = "LootAlertsOnOffcckbox";
-            this.LootAlertsOnOffcckbox.Size = new System.Drawing.Size(93, 17);
-            this.LootAlertsOnOffcckbox.TabIndex = 42;
-            this.LootAlertsOnOffcckbox.Text = "Loot Alerts On";
-            this.LootAlertsOnOffcckbox.UseVisualStyleBackColor = true;
-            // 
             // MainForm1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1961,6 +1986,8 @@
         private System.Windows.Forms.Button FetchStockFilterDatabtn;
         private System.Windows.Forms.RichTextBox FilterStockResultBoxrchtxbx;
         private System.Windows.Forms.CheckBox LootAlertsOnOffcckbox;
+        private System.Windows.Forms.Label JimmyTimerValuelbl;
+        private System.Windows.Forms.LinkLabel JimmyLootlnkLbl;
     }
 }
 
